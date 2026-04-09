@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мемы на английском</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a2e;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #16213e;
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 2px solid #0f3460;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            color: #e94560;
+            font-size: 24px;
+        }
+
+        header p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .meme-card {
+            background: #16213e;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid #0f3460;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .meme-text-top {
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.5;
+            background: #fff;
+            color: #000;
+        }
+
+        .meme-image-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .meme-image-wrapper img {
+            width: 100%;
+            display: block;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .meme-image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .translation-block {
+            padding: 15px 20px;
+            background: #0f3460;
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            border-left: 3px solid #e94560;
+        }
+
+        .translation-block.loading {
+            color: #666;
+            font-style: italic;
+        }
+
+        .words-list {
+            padding: 10px 0;
+        }
+
+        .word-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid #0f3460;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .word-item:hover {
+            background: #0f3460;
+        }
+
+        .word-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .word-en {
+            font-weight: bold;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .word-ru {
+            font-size: 13px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .meme-tags {
+            padding: 10px 20px 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #e94560;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .load-more {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #e94560;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: opacity 0.2s;
+        }
+
+        .load-more:hover {
+            opacity: 0.85;
+        }
+
+        .saved-badge {
+            float: right;
+            background: transparent;
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .saved-badge.active {
+            background: #e94560;
+            color: #fff;
+        }
+
+        .meme-header {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #0f3460;
+        }
+
+        .meme-number {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .difficulty {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+
+        .easy { background: #166534; color: #4ade80; }
+        .medium { background: #854d0e; color: #fbbf24; }
+        .hard { background: #7f1d1d; color: #f87171; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🐸 Мемы на английском</h1>
+    <p>Учи английский через мемы</p>
+</header>
+
+<div class="container">
+    <div id="memes-container"></div>
+    <button class="load-more" onclick="loadMore()">Загрузить ещё мемы 🔄</button>
+</div>
+
+<script>
+// База мемов
+const memesDB = [
+    {
+        id: 1,
+        text: "Me in 2040: *Tells my son to remove games from his PC*\nHim: *Removes desktop icons*\nMe: Don't bullshit a bullshitter",
+        image: "https://i.imgflip.com/1bij.jpg",
+        difficulty: "medium",
+        words: [
+            { en: "to remove", ru: "удалять, устранять" },
+            { en: "PC (personal computer)", ru: "персональный компьютер" },
+            { en: "to tell", ru: "говорить, рассказывать" },
+            { en: "son", ru: "сын" },
+            { en: "desktop", ru: "рабочий стол" },
+            { en: "bullshitter", ru: "болтун, обманщик" }
+        ]
+    },
+    {
+        id: 2,
+        text: "Nobody:\nAbsolutely nobody:\nMe at 3am: I should learn how to play guitar",
+        image: "https://i.imgflip.com/4t0m5.jpg",
+        difficulty: "easy",
+        words: [
+            { en: "nobody", ru: "никто" },
+            { en: "absolutely", ru: "абсолютно, совершенно" },
+            { en: "to learn", ru: "учить, изучать" },
+            { en: "guitar", ru: "гитара" },
+            { en: "should", ru: "должен, следует" }
+        ]
+    },
+    {
+        id: 3,
+        text: "My brain during an exam:\nI don't know\nAfter the exam:\nThe answer was obviously 42",
+        image: "https://i.imgflip.com/26am.jpg",
+        difficulty: "easy",
+        words: [
+            { en: "brain", ru: "мозг" },
+            { en: "exam", ru: "экзамен" },
+            { en: "obviously", ru: "очевидно, явно" },
+            { en: "answer", ru: "ответ" },
+            { en: "during", ru: "во время" }
+        ]
+    },
+    {
+        id: 4,
+        text: "When your code finally works but you don't know why:\nDon't touch it. Don't even look at it.",
+        image: "https://i.imgflip.com/1otk96.jpg",
+        difficulty: "medium",
+        words: [
+            { en: "finally", ru: "наконец, в конце концов" },
+            { en: "to work", ru: "работать, функционировать" },
+            { en: "to touch", ru: "трогать, касаться" },
+            { en: "even", ru: "даже" },
+            { en: "code", ru: "код, программный код" }
+        ]
+    },
+    {
+        id: 5,
+        text: "Me: I'll go to sleep early tonight\nAlso me at 3am: searching for the best pizza recipes",
+        image: "https://i.imgflip.com/9vct.jpg",
+        difficulty: "easy",
+        words: [
+            { en: "sleep", ru: "сон, спать" },
+            { en: "early", ru: "рано, ранний" },
+            { en: "tonight", ru: "сегодня ночью/вечером" },
+            { en: "searching", ru: "ищу, поиск" },
+            { en: "recipe", ru: "рецепт" }
+        ]
+    },
+    {
+        id: 6,
+        text: "Teacher: The test will be very easy\nThe test: Explain the meaning of life in 3 words",
+        image: "https://i.imgflip.com/1bhk.jpg",
+        difficulty: "medium",
+        words: [
+            { en: "teacher", ru: "учитель, преподаватель" },
+            { en: "test", ru: "тест, контрольная" },
+            { en: "easy", ru: "лёгкий, простой" },
+            { en: "meaning", ru: "значение, смысл" },
+            { en: "explain", ru: "объяснять" },
+            { en: "life", ru: "жизнь" }
+        ]
+    },
+    {
+        id: 7,
+        text: "Plot twist: Your alarm clock actually believes in you",
+        image: "https://i.imgflip.com/30b1gx.jpg",
+        difficulty: "hard",
+        words: [
+            { en: "plot twist", ru: "неожиданный поворот" },
+            { en: "alarm clock", ru: "будильник" },
+            { en: "actually", ru: "на самом деле, фактически" },
+            { en: "to believe", ru: "верить, считать" }
+        ]
+    },
+    {
+        id: 8,
+        text: "Me: I need to save money\nAlso me: But this useless thing is on sale",
+        image: "https://i.imgflip.com/1g8my4.jpg",
+        difficulty: "easy",
+        words: [
+            { en: "to save", ru: "сберегать, экономить" },
+            { en: "money", ru: "деньги" },
+            { en: "useless", ru: "бесполезный" },
+            { en: "on sale", ru: "на распродаже, со скидкой" },
+            { en: "thing", ru: "вещь, штука" }
+        ]
+    }
+];
+
+let currentIndex = 0;
+const memesPerPage = 3;
+const savedMemes = new Set();
+
+// Функция перевода через неофициальный Google API
+async function translateText(text) {
+    try {
+        const encoded = encodeURIComponent(text);
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ru&dt=t&q=${encoded}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Собираем перевод из массива
+        let translation = '';
+        if (data && data[0]) {
+            data[0].forEach(item => {
+                if (item[0]) translation += item[0];
+            });
+        }
+        return translation;
+    } catch (error) {
+        return 'Перевод недоступен';
+    }
+}
+
+function getDifficultyLabel(level) {
+    const labels = {
+        easy: { text: 'Начинающий', class: 'easy' },
+        medium: { text: 'Средний', class: 'medium' },
+        hard: { text: 'Продвинутый', class: 'hard' }
+    };
+    return labels[level] || labels.easy;
+}
+
+function toggleSave(id, btn) {
+    if (savedMemes.has(id)) {
+        savedMemes.delete(id);
+        btn.textContent = '🔖 Сохранить';
+        btn.classList.remove('active');
+    } else {
+        savedMemes.add(id);
+        btn.textContent = '✅ Сохранено';
+        btn.classList.add('active');
+    }
+}
+
+async function createMemeCard(meme) {
+    const diff = getDifficultyLabel(meme.difficulty);
+    
+    // Форматируем текст
+    const formattedText = meme.text.replace(/\n/g, '<br>');
+    
+    // Создаём карточку
+    const card = document.createElement('div');
+    card.className = 'meme-card';
+    card.innerHTML = `
+        <div class="meme-header">
+            <span class="meme-number">#${meme.id}</span>
+            <span class="difficulty ${diff.class}">${diff.text}</span>
+            <button class="saved-badge" onclick="toggleSave(${meme.id}, this)">🔖 Сохранить</button>
+        </div>
+        
+        <div class="meme-text-top">${formattedText}</div>
+        
+        <div class="meme-image-wrapper">
+            <img src="${meme.image}" 
+                 alt="meme" 
+                 onerror="this.parentElement.innerHTML='<div class=\\'meme-image-placeholder\\'>🐸</div>'"
+            >
+        </div>
+        
+        <div class="translation-block loading" id="trans-${meme.id}">
+            ⏳ Загрузка перевода...
+        </div>
+        
+        <div class="words-list">
+            ${meme.words.map(word => `
+                <div class="word-item">
+                    <div class="word-dot"></div>
+                    <div>
+                        <div class="word-en">${word.en}</div>
+                        <div class="word-ru">${word.ru}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    document.getElementById('memes-container').appendChild(card);
+    
+    // Загружаем перевод асинхронно
+    const transEl = document.getElementById(`trans-${meme.id}`);
+    const translation = await translateText(meme.text);
+    transEl.textContent = '🇷🇺 ' + translation;
+    transEl.classList.remove('loading');
+}
+
+async function loadMore() {
+    const btn = document.querySelector('.load-more');
+    btn.textContent = '⏳ Загрузка...';
+    btn.disabled = true;
+    
+    const end = Math.min(currentIndex + memesPerPage, memesDB.length);
+    
+    for (let i = currentIndex; i < end; i++) {
+        await createMemeCard(memesDB[i]);
+    }
+    
+    currentIndex = end;
+    
+    if (currentIndex >= memesDB.length) {
+        btn.textContent = '🎉 Все мемы загружены!';
+    } else {
+        btn.textContent = 'Загрузить ещё мемы 🔄';
+        btn.disabled = false;
+    }
+}
+
+// Запуск
+loadMore();
+</script>
+
+</body>
+</html>
