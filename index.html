@@ -3,45 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO -->
-    <title>BeMemes — Учи английский через мемы | БиМем</title>
-    <meta name="description" content="BeMemes (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов, словарь, квиз. Bemem — запоминай слова играючи!">
-    <meta name="keywords" content="bememes, бимем, bemem, бимемес, учить английский мемы, мемы английский язык, английский через мемы, учи английский бесплатно, bememes английский">
-    <meta name="author" content="BeMemes">
+    <title>BeMem — Учи английский через мемы | БиМем</title>
+    <meta name="description" content="BeMem (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов с переводами, словарь и квиз. Bemem — запоминай слова играючи!">
+    <meta name="keywords" content="bemem, бимем, bememes, бимемес, учить английский мемы, мемы английский язык, английский через мемы, учи английский бесплатно, bemem английский">
+    <meta name="author" content="BeMem">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://bememes.ru/">
+    <link rel="canonical" href="https://bemem.ru/">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="BeMemes — Учи английский через мемы">
+    <meta property="og:title" content="BeMem — Учи английский через мемы">
     <meta property="og:description" content="БиМем — 300+ мемов для изучения английского. Словарь, квиз, переводы. Bemem это весело!">
-    <meta property="og:url" content="https://bememes.ru/">
+    <meta property="og:url" content="https://bemem.ru/">
     <meta property="og:locale" content="ru_RU">
-    <meta property="og:site_name" content="BeMemes">
+    <meta property="og:site_name" content="BeMem">
+    <meta property="og:image" content="https://bemem.ru/icon/icon-512.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BeMemes — Английский через мемы">
+    <meta name="twitter:title" content="BeMem — Английский через мемы">
     <meta name="twitter:description" content="БиМем — учи английский весело! 300+ мемов, словарь, квиз.">
+    <meta name="twitter:image" content="https://bemem.ru/icon/icon-512.png">
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0ea5e9">
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+
+    <!-- Apple / iOS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="BeMemes">
-    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="BeMem">
 
-    <!-- Structured Data для поиска -->
+    <!-- Android / PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0ea5e9">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="BeMem">
+     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "BeMemes",
-      "alternateName": ["БиМем", "Bemem", "БиМемес", "BeMem"],
+      "name": "BeMem",
+      "alternateName": ["БиМем", "Bememes", "БиМемес", "BeMemes"],
       "description": "Учи английский язык через мемы. 300+ мемов с переводами, словарь и квиз.",
-      "url": "https://bememes.ru",
+      "url": "https://bemem.ru",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "inLanguage": "ru",
@@ -49,6 +59,10 @@
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "RUB"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "BeMem"
       }
     }
     </script>
@@ -1489,22 +1503,21 @@
 <!-- HEADER -->
 <header>
     <div class="logo">
-        <div class="logo-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-            </svg>
-        </div>
-        <div class="logo-text">Be<span>Memes</span></div>
+    <div class="logo-icon" style="background:none; padding:0; overflow:hidden;">
+        <img 
+            src="/icon/icon-192.png" 
+            alt="BeMem" 
+            style="width:34px; height:34px; border-radius:10px; display:block; object-fit:cover;"
+        >
     </div>
+    <div class="logo-text">Be<span>Mem</span></div>
+</div>
     <!-- Кнопка доната в шапке -->
     <button class="header-donate-btn" onclick="openDonatePopup()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
-        Поддержать ❤️
+        Поддержать
     </button>
 </header>
 
