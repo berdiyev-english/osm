@@ -19,21 +19,21 @@
     <meta property="og:url" content="https://bemem.ru/">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="BeMem">
-    <meta property="og:image" content="https://bemem.ru/icon/icon-512.png">
+    <meta property="og:image" content="https://bemem.ru/icons/icon-512.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BeMem — Английский через мемы">
     <meta name="twitter:description" content="БиМем — учи английский весело! 300+ мемов, словарь, квиз.">
-    <meta name="twitter:image" content="https://bemem.ru/icon/icon-512.png">
+    <meta name="twitter:image" content="https://bemem.ru/icons/icon-512.png">
 
     <!-- Фавиконки -->
-    <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg">
-    <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
-    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
 
     <!-- Apple / iOS -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="BeMem">
@@ -1343,6 +1343,39 @@
             color: var(--text3);
             margin-top: 1px;
         }
+        
+        .speak-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    color: var(--text3);
+}
+
+.speak-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(14,165,233,0.1);
+}
+
+.speak-btn.playing {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(14,165,233,0.15);
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
 
         /* ── EMPTY STATE ── */
         .empty-state {
@@ -1505,7 +1538,7 @@
     <div class="logo">
     <div class="logo-icon" style="background:none; padding:0; overflow:hidden;">
         <img 
-            src="/icon/icon-192.png" 
+            src="/icons/icon-192.png" 
             alt="BeMem" 
             style="width:34px; height:34px; border-radius:10px; display:block; object-fit:cover;"
         >
@@ -1940,7 +1973,9 @@ function createCard(meme) {
             </div>
             <span class="diff-badge ${diff.cls}">${diff.label}</span>
         </div>
+
         <div class="meme-text">${formattedText}</div>
+
         <div class="meme-img-wrap">
             <img class="meme-img" src="${meme.image}" alt="meme"
                 onerror="this.style.display='none';this.nextElementSibling.classList.add('show')">
@@ -1951,6 +1986,7 @@ function createCard(meme) {
                 <small>Картинки могут долго загружаться</small>
             </div>
         </div>
+
         <div class="translation-block">
             <button class="trans-toggle" id="ttoggle-${meme.id}" onclick="toggleTrans(${meme.id})">
                 <div class="trans-toggle-left">
@@ -1969,6 +2005,7 @@ function createCard(meme) {
                 </div>
             </div>
         </div>
+
         <div class="words-section">
             <button class="words-toggle" id="wtoggle-${meme.id}" onclick="toggleWords(${meme.id})">
                 <div class="toggle-left">
@@ -1988,15 +2025,25 @@ function createCard(meme) {
                             <div class="word-en">${w.en}</div>
                             <div class="word-ru">${w.ru}</div>
                         </div>
-                        <button class="add-word-btn ${savedWords.has(w.id) ? 'added' : ''}"
-                            id="wbtn-${w.id}"
-                            onclick="toggleWord('${w.id}', ${meme.id})">
-                            ${savedWords.has(w.id) ? svgCheck() : svgPlus()}
-                        </button>
+                        <div style="display:flex;gap:6px;align-items:center;">
+                            <button
+                                class="speak-btn"
+                                onclick="speakWord('${w.en.replace(/'/g, "\\'")}')"
+                                title="Послушать произношение">
+                                ${svgSpeaker()}
+                            </button>
+                            <button
+                                class="add-word-btn ${savedWords.has(w.id) ? 'added' : ''}"
+                                id="wbtn-${w.id}"
+                                onclick="toggleWord('${w.id}', ${meme.id})">
+                                ${savedWords.has(w.id) ? svgCheck() : svgPlus()}
+                            </button>
+                        </div>
                     </div>
                 `).join('')}
             </div>
-        </div>`;
+        </div>
+    `;
 
     document.getElementById('feed-container').appendChild(card);
     viewedCount++;
@@ -2227,6 +2274,30 @@ function svgLock() {
 }
 function svgQuiz() {
     return `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+}
+function svgSpeaker() {
+    return `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>`;
+}
+
+function speakWord(word) {
+    const encoded = encodeURIComponent(word);
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=${encoded}`;
+
+    if (window._currentAudio) {
+        window._currentAudio.pause();
+        window._currentAudio = null;
+    }
+
+    const audio = new Audio(url);
+    window._currentAudio = audio;
+
+    audio.play().catch(() => {
+        showToast('🔇 Озвучка недоступна офлайн');
+    });
 }
 
 // ── СТАРТ ──
