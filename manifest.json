@@ -1,7 +1,7 @@
 {
-  "name": "BeMemes — Английский через мемы",
-  "short_name": "BeMemes",
-  "description": "Учи английский язык через мемы. БиМем — бесплатный тренажёр английского",
+  "name": "BeMem — Английский через мемы",
+  "short_name": "BeMem",
+  "description": "BeMem (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов, словарь, квиз.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f0f0f",
@@ -10,18 +10,50 @@
   "lang": "ru",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/icon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["education", "entertainment"],
-  "screenshots": []
+  "shortcuts": [
+    {
+      "name": "Квиз",
+      "short_name": "Квиз",
+      "description": "Проверь свои слова",
+      "url": "/?page=quiz",
+      "icons": [{ "src": "/icon/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Мои слова",
+      "short_name": "Слова",
+      "description": "Список сохранённых слов",
+      "url": "/?page=words",
+      "icons": [{ "src": "/icon/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
 }
