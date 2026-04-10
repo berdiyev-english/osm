@@ -5,7 +5,7 @@ const BASE3 = "https://berdiyev-english.github.io/osm/memes/"
 const MEMES_DB = [
     {
         id: 1,
-        image: BASE1 + "distracted-boyfriend.jpg",
+        image: BASE3 + "sad/cat is in tears eating.jpg",
         text: "Me: I'll start my diet on Monday\nAlso me on Monday: Next Monday for sure",
         translation: "Я: начну диету в понедельник\nЯ же в понедельник: точно со следующего понедельника",
         difficulty: "easy",
@@ -18,7 +18,7 @@ const MEMES_DB = [
     },
     {
         id: 2,
-        image: BASE1 + "hide-the-pain-harold.jpg",
+        image: BASE3 + "offend/come in.jpg",
         text: "Mom: Dinner is ready!\nMe: *already ate snacks and not hungry*\nMe anyway: Coming!",
         translation: "Мама: ужин готов!\nЯ: *уже поел перекусов и не голодный*\nЯ всё равно: иду!",
         difficulty: "easy",
@@ -32,7 +32,7 @@ const MEMES_DB = [
     },
     {
         id: 3,
-        image: BASE1 + "disaster-girl.jpg",
+        image: BASE3 + "sad/Angry Pakistani Fan.jpg",
         text: "When you clean your room and can't find anything anymore:\nThis is fine",
         translation: "Когда убрался в комнате и теперь ничего не можешь найти:\nВсё нормально",
         difficulty: "easy",
@@ -59,14 +59,14 @@ const MEMES_DB = [
     {
         id: 5,
         image: BASE1 + "drake-hotline-bling.jpg",
-        text: "Friend: just google it\nAlso that same friend: *calls me for every little thing*",
-        translation: "Друг: просто загугли\nОн же: *звонит мне по каждой мелочи*",
+        text: "Google something.\nAsk AI",
+        translation: "Загуглить что-то\nСпросить у искуственного интелекта",
         difficulty: "medium",
         words: [
             { id: "w5_1", en: "to google", ru: "гуглить, искать в интернете" },
-            { id: "w5_2", en: "same", ru: "тот же самый" },
-            { id: "w5_3", en: "every little thing", ru: "каждая мелочь" },
-            { id: "w5_4", en: "to call", ru: "звонить" }
+            { id: "w5_2", en: "ask", ru: "спросить" },
+            { id: "w5_3", en: "something", ru: "что-то" },
+            { id: "w5_4", en: "AI", ru: "искуственный интелект" }
         ]
     },
     {
@@ -273,7 +273,7 @@ const MEMES_DB = [
 },
 {
     id: 21,
-    image: BASE1 + "batman-slapping-robin.jpg",
+    image: BASE3 + "offend/grandpa uses phone.jpg",
     text: "Me: I'll just check my phone for 5 minutes\nAlso me: *2 hours later still scrolling*",
     translation: "Я: просто проверю телефон на 5 минут\nЯ же: *2 часа спустя всё ещё листаю*",
     difficulty: "easy",
@@ -3304,6 +3304,764 @@ const MEMES_DB = [
         { id: "w245_3", en: "freezing", ru: "замерзаю, очень холодно" },
         { id: "w245_4", en: "lied", ru: "солгал, соврал" },
         { id: "w245_5", en: "cold day", ru: "холодный день" }
+    ]
+},
+  {
+    id: 246,
+    image: BASE3 + "sad/Harold sad.jpg",
+    text: "Me: I'm fine\nAlso me at night:\n*staring at the ceiling\nthinking about everything*",
+    translation: "Я: я в порядке\nЯ же ночью:\n*смотрю в потолок\nдумая обо всём*",
+    difficulty: "medium",
+    words: [
+        { id: "w246_1", en: "fine", ru: "в порядке, нормально" },
+        { id: "w246_2", en: "staring", ru: "пристально смотрит, уставился" },
+        { id: "w246_3", en: "ceiling", ru: "потолок" },
+        { id: "w246_4", en: "thinking about", ru: "думая о, размышляя" },
+        { id: "w246_5", en: "everything", ru: "всё, обо всём" }
+    ]
+},
+{
+    id: 247,
+    image: BASE3 + "sad/Ah%20shit%20here%20we%20go%20again%20GTA.jpg",
+    text: "When you check your to-do list\nand realize you haven't done\na single thing all week:\nAh shit here we go again",
+    translation: "Когда смотришь на список дел\nи понимаешь что не сделал\nни одной вещи за всю неделю:\nАх чёрт ну вот опять",
+    difficulty: "medium",
+    words: [
+        { id: "w247_1", en: "to-do list", ru: "список дел" },
+        { id: "w247_2", en: "realize", ru: "осознавать, понимать" },
+        { id: "w247_3", en: "single thing", ru: "ни одной вещи, ничего" },
+        { id: "w247_4", en: "all week", ru: "всю неделю" },
+        { id: "w247_5", en: "here we go again", ru: "ну вот опять, снова за своё" }
+    ]
+},
+{
+    id: 248,
+    image: BASE3 + "sad/Not stonks.jpg",
+    text: "My bank account\nafter the weekend:\nNot stonks",
+    translation: "Мой банковский счёт\nпосле выходных:\nНе в гору",
+    difficulty: "easy",
+    words: [
+        { id: "w248_1", en: "bank account", ru: "банковский счёт" },
+        { id: "w248_2", en: "weekend", ru: "выходные" },
+        { id: "w248_3", en: "stonks", ru: "акции растут (мем про финансы)" },
+        { id: "w248_4", en: "not", ru: "не, нет" }
+    ]
+},
+{
+    id: 249,
+    image: BASE3 + "sad/Wojak crying under a smiling mask.jpg",
+    text: "Me in public: everything is great\nMe inside:\nI am barely holding it together",
+    translation: "Я на людях: всё отлично\nЯ внутри:\nЯ едва держусь",
+    difficulty: "hard",
+    words: [
+        { id: "w249_1", en: "in public", ru: "на людях, публично" },
+        { id: "w249_2", en: "inside", ru: "внутри, внутренне" },
+        { id: "w249_3", en: "barely", ru: "едва, с трудом" },
+        { id: "w249_4", en: "holding it together", ru: "держаться, не сдаваться" },
+        { id: "w249_5", en: "great", ru: "отлично, великолепно" }
+    ]
+},
+{
+    id: 250,
+    image: BASE3 + "sad/I know that feel bro.jpg",
+    text: "Someone: I'm having a rough day\nMe who always has a rough day:\nI know that feel bro",
+    translation: "Кто-то: у меня тяжёлый день\nЯ у которого каждый день тяжёлый:\nЯ знаю это чувство брат",
+    difficulty: "medium",
+    words: [
+        { id: "w250_1", en: "rough day", ru: "тяжёлый день, трудный день" },
+        { id: "w250_2", en: "I know that feel", ru: "я знаю это чувство" },
+        { id: "w250_3", en: "bro", ru: "брат, братан" },
+        { id: "w250_4", en: "having", ru: "иметь, переживать" }
+    ]
+},
+{
+    id: 251,
+    image: BASE3 + "sad/Kermit looking in the rainy window.jpg",
+    text: "Me on a rainy Sunday:\n*stares out the window*\n*thinks about every life decision*\n*orders pizza*",
+    translation: "Я в дождливое воскресенье:\n*смотрит в окно*\n*думает о каждом жизненном решении*\n*заказывает пиццу*",
+    difficulty: "medium",
+    words: [
+        { id: "w251_1", en: "rainy", ru: "дождливый" },
+        { id: "w251_2", en: "stares out", ru: "смотрит наружу, глядит в" },
+        { id: "w251_3", en: "decision", ru: "решение" },
+        { id: "w251_4", en: "orders", ru: "заказывает" },
+        { id: "w251_5", en: "life", ru: "жизнь, жизненный" }
+    ]
+},
+{
+    id: 252,
+    image: BASE3 + "sad/Smile through the pain.jpg",
+    text: "Me: how are you?\nAlso me: *smiling*\nI haven't slept in 3 days\nbut I'm fine",
+    translation: "Меня спрашивают: как дела?\nЯ: *улыбаюсь*\n(Я не спал 3 дня)",
+    difficulty: "medium",
+    words: [
+        { id: "w252_1", en: "smiling", ru: "улыбаясь, улыбается" },
+        { id: "w252_2", en: "haven't slept", ru: "не спал" },
+        { id: "w252_3", en: "pain", ru: "боль, страдание" },
+        { id: "w252_4", en: "through", ru: "сквозь, через" },
+        { id: "w252_5", en: "fine", ru: "в порядке, нормально" }
+    ]
+},
+{
+    id: 253,
+    image: BASE3 + "sad/Kermit holding his knees.jpg",
+    text: "Me: I just need 5 minutes alone\nto recharge\nAlso me after 5 minutes:\nokay I need 5 more hours",
+    translation: "Я: мне нужно всего 5 минут одному\nчтобы восстановиться\nЯ же через 5 минут:\nладно мне нужно ещё 5 часов",
+    difficulty: "medium",
+    words: [
+        { id: "w253_1", en: "alone", ru: "один, в одиночестве" },
+        { id: "w253_2", en: "recharge", ru: "восстановиться, перезарядиться" },
+        { id: "w253_3", en: "5 more hours", ru: "ещё 5 часов" },
+        { id: "w253_4", en: "need", ru: "нуждаться, нужно" },
+        { id: "w253_5", en: "okay", ru: "ладно, окей" }
+    ]
+},
+{
+    id: 254,
+    image: BASE3 + "sad/i_ve won, but at what cost.jpg",
+    text: "Me: finally finished all my tasks\nAlso me: *too tired to enjoy it*\nI've won\nbut at what cost",
+    translation: "Я: наконец закончил все дела\nЯ же: *слишком устал чтобы радоваться*\nЯ победил\nно какой ценой",
+    difficulty: "hard",
+    words: [
+        { id: "w254_1", en: "finally", ru: "наконец" },
+        { id: "w254_2", en: "finished", ru: "закончил, завершил" },
+        { id: "w254_3", en: "too tired", ru: "слишком устал" },
+        { id: "w254_4", en: "enjoy", ru: "наслаждаться, радоваться" },
+        { id: "w254_5", en: "at what cost", ru: "какой ценой" }
+    ]
+},
+{
+    id: 255,
+    image: BASE3 + "sad/cat in bed sad hugging toy.jpg",
+    text: "Me after a long hard day:\n*hugs pillow*\n*watches comfort show*\n*orders comfort food*\nThis is self care",
+    translation: "Я после долгого тяжёлого дня:\n*обнимает подушку*\n*смотрит любимый сериал*\n*заказывает любимую еду*\nЭто забота о себе",
+    difficulty: "medium",
+    words: [
+        { id: "w255_1", en: "hugs", ru: "обнимает" },
+        { id: "w255_2", en: "comfort", ru: "утешение, комфорт" },
+        { id: "w255_3", en: "self care", ru: "забота о себе" },
+        { id: "w255_4", en: "hard day", ru: "тяжёлый день" },
+        { id: "w255_5", en: "pillow", ru: "подушка" }
+    ]
+},
+{
+    id: 256,
+    image: BASE3 + "sad/Trauma intensifies.jpg",
+    text: "Me: I'm totally over it\nOne random memory:\n*appears out of nowhere*\nTrauma intensifies",
+    translation: "Я: я полностью пережил это\nОдно случайное воспоминание:\n*появляется ниоткуда*\nТравма усиливается",
+    difficulty: "hard",
+    words: [
+        { id: "w256_1", en: "totally over it", ru: "полностью пережил, забыл об этом" },
+        { id: "w256_2", en: "random", ru: "случайный, произвольный" },
+        { id: "w256_3", en: "memory", ru: "воспоминание, память" },
+        { id: "w256_4", en: "nowhere", ru: "ниоткуда, никуда" },
+        { id: "w256_5", en: "intensifies", ru: "усиливается, нарастает" }
+    ]
+},
+{
+    id: 257,
+    image: BASE3 + "sad/press f to pay respect.jpg",
+    text: "My motivation on Monday:\n*has left the chat*\nPress F to pay respect",
+    translation: "Моя мотивация в понедельник:\n*покинул чат*\nНажми F чтобы отдать дань уважения",
+    difficulty: "medium",
+    words: [
+        { id: "w257_1", en: "motivation", ru: "мотивация" },
+        { id: "w257_2", en: "has left the chat", ru: "покинул чат" },
+        { id: "w257_3", en: "press", ru: "нажать, нажимать" },
+        { id: "w257_4", en: "pay respect", ru: "отдать дань уважения" },
+        { id: "w257_5", en: "Monday", ru: "понедельник" }
+    ]
+},
+{
+    id: 258,
+    image: BASE3 + "sad/Pain 1.jpg",
+    text: "Me trying to explain\nwhy I'm sad\nbut I don't even know why:\nIt's just the vibe",
+    translation: "Я пытаюсь объяснить\nпочему мне грустно\nно сам не знаю почему:\nПросто такое настроение",
+    difficulty: "hard",
+    words: [
+        { id: "w258_1", en: "explain", ru: "объяснять, объяснить" },
+        { id: "w258_2", en: "sad", ru: "грустный, печальный" },
+        { id: "w258_3", en: "even", ru: "даже" },
+        { id: "w258_4", en: "vibe", ru: "настроение, атмосфера (сленг)" },
+        { id: "w258_5", en: "just", ru: "просто, только" }
+    ]
+},
+{
+    id: 259,
+    image: BASE3 + "sad/Pepe is hugging.jpg",
+    text: "When you need a hug\nbut you don't want to ask for one:\n*hugs self*\nThis will have to do",
+    translation: "Когда тебе нужны объятия\nно не хочешь просить об этом:\n*обнимает себя*\nПридётся довольствоваться этим",
+    difficulty: "hard",
+    words: [
+        { id: "w259_1", en: "hug", ru: "обнимать, объятие" },
+        { id: "w259_2", en: "ask for", ru: "просить о, попросить" },
+        { id: "w259_3", en: "this will have to do", ru: "придётся довольствоваться этим" },
+        { id: "w259_4", en: "need", ru: "нуждаться, нужно" },
+        { id: "w259_5", en: "self", ru: "себя, себе" }
+    ]
+},
+{
+    id: 260,
+    image: BASE3 + "sad/Sad gaming cat.jpg",
+    text: "Me at 11pm: I should sleep\nMe at 4am: *still gaming*\nWell I've made my choices\nand I regret all of them",
+    translation: "Я в 11 вечера: надо спать\nЯ в 4 утра: *всё ещё играю*\nЧто ж я сделал свой выбор\nи сожалею о каждом из них",
+    difficulty: "hard",
+    words: [
+        { id: "w260_1", en: "still", ru: "всё ещё, до сих пор" },
+        { id: "w260_2", en: "gaming", ru: "играть в игры, геймить" },
+        { id: "w260_3", en: "choices", ru: "выборы, решения" },
+        { id: "w260_4", en: "regret", ru: "сожалеть, сожаление" },
+        { id: "w260_5", en: "made", ru: "сделал, принял" }
+    ]
+},
+ {
+    id: 261,
+    image: BASE3 + "sad/cat is eating in tears.jpg",
+    text: "Me eating my feelings\nafter a rough day:\nThis is fine\nEverything is fine\n*eats entire fridge*",
+    translation: "Я заедаю свои чувства\nпосле тяжёлого дня:\nВсё нормально\nВсё хорошо\n*съедает весь холодильник*",
+    difficulty: "medium",
+    words: [
+        { id: "w261_1", en: "eating my feelings", ru: "заедать чувства, есть из-за стресса" },
+        { id: "w261_2", en: "rough day", ru: "тяжёлый день" },
+        { id: "w261_3", en: "entire", ru: "весь, целый" },
+        { id: "w261_4", en: "fridge", ru: "холодильник" },
+        { id: "w261_5", en: "feelings", ru: "чувства, эмоции" }
+    ]
+},
+{
+    id: 262,
+    image: BASE3 + "sad/Don_t give me hope.jpg",
+    text: "Me on Friday night:\nmaybe this weekend\nI'll finally be productive\nDon't give me hope",
+    translation: "Я в пятницу вечером:\nможет на этих выходных\nя наконец буду продуктивным\nНе давай мне надежду",
+    difficulty: "medium",
+    words: [
+        { id: "w262_1", en: "Friday night", ru: "пятница вечером" },
+        { id: "w262_2", en: "finally", ru: "наконец" },
+        { id: "w262_3", en: "productive", ru: "продуктивный" },
+        { id: "w262_4", en: "hope", ru: "надежда, надеяться" },
+        { id: "w262_5", en: "don't give me", ru: "не давай мне" }
+    ]
+},
+{
+    id: 263,
+    image: BASE3 + "sad/Homer.jpg",
+    text: "When you realize\nit's Sunday night\nand you did absolutely nothing\nyou planned to do",
+    translation: "Когда понимаешь\nчто уже воскресенье вечером\nи ты не сделал абсолютно ничего\nиз того что планировал",
+    difficulty: "medium",
+    words: [
+        { id: "w263_1", en: "realize", ru: "осознавать, понимать" },
+        { id: "w263_2", en: "absolutely nothing", ru: "абсолютно ничего" },
+        { id: "w263_3", en: "planned", ru: "планировал, запланировал" },
+        { id: "w263_4", en: "Sunday night", ru: "воскресенье вечером" },
+        { id: "w263_5", en: "did", ru: "сделал, делал" }
+    ]
+},
+{
+    id: 264,
+    image: BASE3 + "sad/black guy crying.jpg",
+    text: "Me watching a movie\nI've already seen 10 times:\n*cries at the same part again*\nEvery single time",
+    translation: "Я смотрю фильм\nкоторый уже видел 10 раз:\n*плачет на том же месте снова*\nКаждый раз без исключения",
+    difficulty: "medium",
+    words: [
+        { id: "w264_1", en: "already seen", ru: "уже видел" },
+        { id: "w264_2", en: "cries", ru: "плачет" },
+        { id: "w264_3", en: "same part", ru: "то же место, тот же момент" },
+        { id: "w264_4", en: "every single time", ru: "каждый раз без исключения" },
+        { id: "w264_5", en: "again", ru: "снова, опять" }
+    ]
+},
+{
+    id: 265,
+    image: BASE3 + "sad/Joker All I have are negative thoughts.jpg",
+    text: "Me trying to think positive:\nAll I have are negative thoughts",
+    translation: "Я пытаюсь думать позитивно:\nВсё что у меня есть это негативные мысли",
+    difficulty: "hard",
+    words: [
+        { id: "w265_1", en: "trying", ru: "пытаясь, стараясь" },
+        { id: "w265_2", en: "positive", ru: "позитивный, положительный" },
+        { id: "w265_3", en: "negative thoughts", ru: "негативные мысли" },
+        { id: "w265_4", en: "all I have", ru: "всё что у меня есть" }
+    ]
+},
+{
+    id: 266,
+    image: BASE3 + "sad/cat on scales fat.jpg",
+    text: "Me: I've been eating healthy\nand exercising all week\nThe scale:\nNo you haven't",
+    translation: "Я: я питался здорово\nи занимался спортом всю неделю\nВесы:\nНет не занимался",
+    difficulty: "medium",
+    words: [
+        { id: "w266_1", en: "scale", ru: "весы" },
+        { id: "w266_2", en: "exercising", ru: "заниматься спортом" },
+        { id: "w266_3", en: "all week", ru: "всю неделю" },
+        { id: "w266_4", en: "haven't", ru: "не делал, не занимался" },
+        { id: "w266_5", en: "healthy", ru: "здорово, полезно" }
+    ]
+},
+{
+    id: 267,
+    image: BASE3 + "sad/Sad party emoji.jpg",
+    text: "My birthday:\n*expects a huge celebration*\n*gets one message from mom*\nParty time I guess",
+    translation: "Мой день рождения:\n*ожидает большой праздник*\n*получает одно сообщение от мамы*\nВремя праздника наверное",
+    difficulty: "medium",
+    words: [
+        { id: "w267_1", en: "birthday", ru: "день рождения" },
+        { id: "w267_2", en: "expects", ru: "ожидает, рассчитывает" },
+        { id: "w267_3", en: "celebration", ru: "праздник, торжество" },
+        { id: "w267_4", en: "message", ru: "сообщение" },
+        { id: "w267_5", en: "I guess", ru: "наверное, полагаю" }
+    ]
+},
+{
+    id: 268,
+    image: BASE3 + "sad/You ok no.jpg",
+    text: "Friend: are you okay?\nMe: yeah totally fine\nInside: *no*",
+    translation: "Друг: ты в порядке?\nЯ: да всё отлично\nВнутри: *нет*",
+    difficulty: "easy",
+    words: [
+        { id: "w268_1", en: "okay", ru: "в порядке, окей" },
+        { id: "w268_2", en: "totally fine", ru: "всё отлично, всё нормально" },
+        { id: "w268_3", en: "inside", ru: "внутри,внутри себя" },
+        { id: "w268_4", en: "yeah", ru: "да, ага" }
+    ]
+},
+{
+    id: 269,
+    image: BASE3 + "sad/Give me a reason to live.jpg",
+    text: "Me: I'm going to be so productive today\nNothing works as planned:\nGive me a reason to continue",
+    translation: "Я: сегодня буду таким продуктивным\nНичего не идёт по плану:\nДайте мне причину продолжать",
+    difficulty: "hard",
+    words: [
+        { id: "w269_1", en: "productive", ru: "продуктивный" },
+        { id: "w269_2", en: "works as planned", ru: "идёт по плану" },
+        { id: "w269_3", en: "reason", ru: "причина, повод" },
+        { id: "w269_4", en: "continue", ru: "продолжать, продолжить" },
+        { id: "w269_5", en: "nothing", ru: "ничего, ничто" }
+    ]
+},
+{
+    id: 270,
+    image: BASE3 + "sad/Sad Spiderman.jpg",
+    text: "Me and my motivation\nwalking in opposite directions:\nWe don't talk anymore",
+    translation: "Я и моя мотивация\nидём в противоположных направлениях:\nМы больше не общаемся",
+    difficulty: "hard",
+    words: [
+        { id: "w270_1", en: "motivation", ru: "мотивация" },
+        { id: "w270_2", en: "opposite directions", ru: "противоположные направления" },
+        { id: "w270_3", en: "anymore", ru: "больше, уже" },
+        { id: "w270_4", en: "walking", ru: "идущий, идя" },
+        { id: "w270_5", en: "we don't talk", ru: "мы не общаемся, мы не разговариваем" }
+    ]
+},
+{
+    id: 271,
+    image: BASE3 + "sad/Doge triste.jpg",
+    text: "When you make plans\nwith yourself\nand even you cancel on yourself:\nSuch empty\nMany alone",
+    translation: "Когда строишь планы\nсам с собой\nи даже сам отменяешь их:\nТакая пустота\nМного одиночества",
+    difficulty: "medium",
+    words: [
+        { id: "w271_1", en: "make plans", ru: "строить планы" },
+        { id: "w271_2", en: "cancel", ru: "отменять" },
+        { id: "w271_3", en: "empty", ru: "пустой, пустота" },
+        { id: "w271_4", en: "alone", ru: "один, в одиночестве" },
+        { id: "w271_5", en: "even", ru: "даже" }
+    ]
+},
+{
+    id: 272,
+    image: BASE3 + "sad/cat is interviewed.jpg",
+    text: "Reporter: how do you feel today?\nMe: well I woke up\nthat's about it",
+    translation: "Репортёр: как вы себя чувствуете сегодня?\nЯ: ну я проснулся\nвот и всё пожалуй",
+    difficulty: "medium",
+    words: [
+        { id: "w272_1", en: "reporter", ru: "репортёр, журналист" },
+        { id: "w272_2", en: "feel", ru: "чувствовать, ощущать" },
+        { id: "w272_3", en: "woke up", ru: "проснулся" },
+        { id: "w272_4", en: "that's about it", ru: "вот и всё, на этом пожалуй всё" }
+    ]
+},
+{
+    id: 273,
+    image: BASE3 + "sad/Okay but it_s not what I wanted.jpg",
+    text: "Life giving me everything.\nMe anyways:\nOkay\nbut it's not what I wanted",
+    translation: "Жизнь даёт мне всё\nЯ все равно:\nЛадно\nно это не то чего я хотел",
+    difficulty: "hard",
+    words: [
+        { id: "w273_1", en: "giving", ru: "давая, давать" },
+        { id: "w273_2", en: "except", ru: "кроме, за исключением" },
+        { id: "w273_3", en: "actually", ru: "на самом деле, вообще-то" },
+        { id: "w273_4", en: "wanted", ru: "хотел, желал" },
+        { id: "w273_5", en: "life", ru: "жизнь" }
+    ]
+},
+{
+    id: 274,
+    image: BASE3 + "sad/Pain horse.jpg",
+    text: "Me: I can handle anything\nOne small inconvenience:\n*appears*\nI cannot handle anything",
+    translation: "Я: я могу справиться с чем угодно\nОдна маленькая неприятность:\n*появляется*\nЯ не могу справиться ни с чем",
+    difficulty: "hard",
+    words: [
+        { id: "w274_1", en: "handle", ru: "справляться, справиться" },
+        { id: "w274_2", en: "anything", ru: "что угодно, ничего" },
+        { id: "w274_3", en: "inconvenience", ru: "неудобство, неприятность" },
+        { id: "w274_4", en: "appears", ru: "появляется" },
+        { id: "w274_5", en: "cannot", ru: "не могу, не может" }
+    ]
+},
+{
+    id: 275,
+    image: BASE3 + "sad/I_m gonna have a breakdown breakdown.jpg",
+    text: "My plans for the week:be happy \nWhat actually happened:\nI'm gonna have a breakdown",
+    translation: "Мои планы на неделю:быть счастливым\nЧто реально произошло:\nУ меня будет срыв",
+    difficulty: "hard",
+    words: [
+        { id: "w275_1", en: "plans", ru: "планы" },
+        { id: "w275_2", en: "actually happened", ru: "реально произошло, на самом деле случилось" },
+        { id: "w275_3", en: "gonna have", ru: "будет, собираюсь иметь" },
+        { id: "w275_4", en: "breakdown", ru: "срыв, нервный срыв" },
+    ]
+},
+{
+    id: 276,
+    image: BASE3 + "offend/Mario working at pc and leaves.jpg",
+    text: "Me: *sends risky text*\nAlso me: *immediately wants to move\nto another country and change my name*",
+    translation: "Я: *отправляю рискованное сообщение*\nЯ же: *немедленно хочу переехать\nв другую страну и сменить имя*",
+    difficulty: "medium",
+    words: [
+        { id: "w276_1", en: "risky", ru: "рискованный, смелый" },
+        { id: "w276_2", en: "immediately", ru: "немедленно, сразу" },
+        { id: "w276_3", en: "move", ru: "переехать, переезжать" },
+        { id: "w276_4", en: "change", ru: "менять, изменить" },
+        { id: "w276_5", en: "name", ru: "имя, название" }
+    ]
+},
+{
+    id: 277,
+    image: BASE3 + "sad/Carlos loser.jpg",
+    text: "Me losing at a board game\nagainst a 7 year old:\nI let you win\nobviously\nI totally let you win",
+    translation: "Я проигрываю в настольную игру\n7-летнему ребёнку:\nЯ дал тебе выиграть\nочевидно\nЯ точно дал тебе выиграть",
+    difficulty: "medium",
+    words: [
+        { id: "w277_1", en: "losing", ru: "проигрывая, проигрывает" },
+        { id: "w277_2", en: "board game", ru: "настольная игра" },
+        { id: "w277_3", en: "let you win", ru: "дал тебе выиграть" },
+        { id: "w277_4", en: "obviously", ru: "очевидно, явно" },
+        { id: "w277_5", en: "totally", ru: "точно, абсолютно" }
+    ]
+},
+{
+    id: 278,
+    image: BASE3 + "sad/bob sitting in cafe sad.jpg",
+    text: "Me sitting in a cafe\nordering the same coffee\nfor the 47th time this month:\nYes this time my life will change",
+    translation: "Я сижу в кафе\nзаказываю тот же кофе\nв 47-й раз в этом месяце:\nДа на этот раз моя жизнь изменится",
+    difficulty: "medium",
+    words: [
+        { id: "w278_1", en: "ordering", ru: "заказывая, заказывает" },
+        { id: "w278_2", en: "same", ru: "тот же самый" },
+        { id: "w278_3", en: "this month", ru: "в этом месяце" },
+        { id: "w278_4", en: "this time", ru: "на этот раз" },
+        { id: "w278_5", en: "change", ru: "меняться, изменится" }
+    ]
+},
+{
+    id: 279,
+    image: BASE3 + "sad/Crying kid.jpg",
+    text: "Me when the pizza delivery\ntakes more than 30 minutes:\nI ordered this\nin another life",
+    translation: "Я когда доставка пиццы\nзанимает больше 30 минут:\nЯ заказал это\nв другой жизни",
+    difficulty: "easy",
+    words: [
+        { id: "w279_1", en: "pizza delivery", ru: "доставка пиццы" },
+        { id: "w279_2", en: "takes", ru: "занимает, требует" },
+        { id: "w279_3", en: "more than", ru: "больше чем, более" },
+        { id: "w279_4", en: "ordered", ru: "заказал, заказывал" },
+        { id: "w279_5", en: "another life", ru: "другая жизнь" }
+    ]
+},
+{
+    id: 280,
+    image: BASE3 + "sad/Not stonks.jpg",
+    text: "Me: spends money on coffee every day\nMy savings account:\nNot stonks\nDefinitely not stonks",
+    translation: "Я: трачу деньги на кофе каждый день\nМой сберегательный счёт:\nНе в гору\nОпределённо не в гору",
+    difficulty: "medium",
+    words: [
+        { id: "w280_1", en: "spends", ru: "тратит, расходует" },
+        { id: "w280_2", en: "savings account", ru: "сберегательный счёт" },
+        { id: "w280_3", en: "definitely", ru: "определённо, точно" },
+        { id: "w280_4", en: "every day", ru: "каждый день" },
+        { id: "w280_5", en: "stonks", ru: "акции растут (финансовый мем)" }
+    ]
+},
+{
+    id: 281,
+    image: BASE3 + "sad/Mama mia.jpg",
+    text: "Me checking my weight\nafter the holiday season:\nMama mia\nWhat have I done",
+    translation: "Я проверяю свой вес\nпосле праздничного сезона:\nМамия\nЧто я наделал",
+    difficulty: "easy",
+    words: [
+        { id: "w281_1", en: "checking", ru: "проверяя, проверить" },
+        { id: "w281_2", en: "weight", ru: "вес" },
+        { id: "w281_3", en: "holiday season", ru: "праздничный сезон" },
+        { id: "w281_4", en: "what have I done", ru: "что я наделал" }
+    ]
+},
+{
+    id: 282,
+    image: BASE3 + "sad/idk dude, that was kinda offensive.jpg",
+    text: "When your friend roasts you\nand everyone laughs\nbut it actually hit too close to home:\nIdk dude\nthat was kinda offensive",
+    translation: "Когда друг подшучивает над тобой\nи все смеются\nно это реально задело:\nНе знаю чувак\nэто было немного обидно",
+    difficulty: "hard",
+    words: [
+        { id: "w282_1", en: "roasts", ru: "подшучивает, троллит" },
+        { id: "w282_2", en: "hit too close to home", ru: "задело за живое" },
+        { id: "w282_3", en: "kinda", ru: "немного, как-то" },
+        { id: "w282_4", en: "offensive", ru: "обидный, оскорбительный" },
+        { id: "w282_5", en: "actually", ru: "реально, на самом деле" }
+    ]
+},
+{
+    id: 283,
+    image: BASE3 + "sad/Oh no.jpg",
+    text: "Me: sets 14 alarms for 7am\nMe at 7am: turns off all 14 alarms\nwithout waking up\nOh no",
+    translation: "Я: ставлю 14 будильников на 7 утра\nЯ в 7 утра: выключает все 14 будильников\nне просыпаясь\nО нет",
+    difficulty: "easy",
+    words: [
+        { id: "w283_1", en: "sets alarms", ru: "ставит будильники" },
+        { id: "w283_2", en: "turns off", ru: "выключает" },
+        { id: "w283_3", en: "without waking up", ru: "не просыпаясь" },
+        { id: "w283_4", en: "oh no", ru: "о нет, ой нет" },
+        { id: "w283_5", en: "without", ru: "без, не" }
+    ]
+},
+{
+    id: 284,
+    image: BASE3 + "sad/what did i do.jpg",
+    text: "Me after sending\na risky message\nand waiting for a reply:\nWhat did I do\nWhat did I just do",
+    translation: "Я после того как отправил\nрискованное сообщение\nи жду ответа:\nЧто я сделал\nЧто я только что сделал",
+    difficulty: "medium",
+    words: [
+        { id: "w284_1", en: "risky", ru: "рискованный, смелый" },
+        { id: "w284_2", en: "waiting for", ru: "ожидая, жду" },
+        { id: "w284_3", en: "reply", ru: "ответ, отвечать" },
+        { id: "w284_4", en: "what did I do", ru: "что я сделал" },
+        { id: "w284_5", en: "just", ru: "только что, просто" }
+    ]
+},
+{
+    id: 285,
+    image: BASE3 + "sad/Oof 2.jpg",
+    text: "Me eating hot soup:\n*my face at that moment*",
+    translation: "Я ем горячий суп\n*мое лицо в тот момент*",
+    difficulty: "easy",
+    words: [
+        { id: "w285_1", en: "hot", ru: "горячий" },
+        { id: "w285_2", en: "face", ru: "лицо" },
+        { id: "w285_3", en: "soup", ru: "суп" },
+        { id: "w285_4", en: "at that moment", ru: "в тот момент" }
+    ]
+},
+{
+    id: 286,
+    image: BASE3 + "sad/Family Guy 2.jpg",
+    text: "Me explaining to my parents\nwhy I need more money:\n*sweating nervously*\nIt's for very important things\ntrust me",
+    translation: "Я объясняю родителям\nпочему мне нужно больше денег:\n*нервно потею*\nЭто для очень важных вещей\nдоверьтесь мне",
+    difficulty: "medium",
+    words: [
+        { id: "w286_1", en: "explaining", ru: "объясняя" },
+        { id: "w286_2", en: "sweating", ru: "потею, потеть" },
+        { id: "w286_3", en: "nervously", ru: "нервно" },
+        { id: "w286_4", en: "trust me", ru: "доверьтесь мне, поверьте мне" },
+        { id: "w286_5", en: "important", ru: "важный" }
+    ]
+},
+{
+    id: 287,
+    image: BASE3 + "sad/Carlos money beggar.jpg",
+    text: "Me at the end of the month:*can you spare some change*",
+    translation: "Я в конце месяца:\n *у вас не найдётся мелочи*",
+    difficulty: "hard",
+    words: [
+        { id: "w287_1", en: "end of the month", ru: "конец месяца" },
+        { id: "w287_2", en: "spare", ru: "дать, уделить" },
+        { id: "w287_3", en: "change", ru: "мелочь, сдача" },
+        { id: "w287_4", en: "can you", ru: "можешь ли ты, не могли бы вы" }
+    ]
+},
+{
+    id: 288,
+    image: BASE3 + "sad/Pepe 3.jpg",
+    text: "Me: I'll text back later\nThat message sitting unread for 3 weeks:\nAre you even alive",
+    translation: "Я: отвечу позже\nТо сообщение лежит непрочитанным 3 недели:\nТы вообще живой",
+    difficulty: "medium",
+    words: [
+        { id: "w288_1", en: "text back", ru: "ответить на сообщение" },
+        { id: "w288_2", en: "sitting unread", ru: "лежит непрочитанным" },
+        { id: "w288_3", en: "even alive", ru: "вообще живой" },
+        { id: "w288_4", en: "later", ru: "позже, потом" },
+        { id: "w288_5", en: "weeks", ru: "недели" }
+    ]
+},
+{
+    id: 289,
+    image: BASE3 + "sad/Ah ah yes.jpg",
+    text: "Me: I don't need validation\nfrom social media\nAlso me: *refreshes page every 10 seconds\nwaiting for likes*",
+    translation: "Я: мне не нужно одобрение\nсоцсетей\nЯ же: *обновляет страницу каждые 10 секунд\nждёт лайки*",
+    difficulty: "hard",
+    words: [
+        { id: "w289_1", en: "validation", ru: "одобрение, подтверждение" },
+        { id: "w289_2", en: "social media", ru: "социальные сети" },
+        { id: "w289_3", en: "refreshes", ru: "обновляет" },
+        { id: "w289_4", en: "waiting for", ru: "ожидая, жду" },
+        { id: "w289_5", en: "likes", ru: "лайки" }
+    ]
+},
+{
+    id: 290,
+    image: BASE3 + "sad/tom is exhausted in agony siting.jpg",
+    text: "Me after doing\none productive thing today:\nI am exhausted\nI need a 3 day break\nI have given everything",
+    translation: "Я после того как сделал\nодно продуктивное дело сегодня:\nЯ измотан\nМне нужен перерыв на 3 дня\nЯ отдал всё",
+    difficulty: "medium",
+    words: [
+        { id: "w290_1", en: "exhausted", ru: "измотан, истощён" },
+        { id: "w290_2", en: "productive", ru: "продуктивный" },
+        { id: "w290_3", en: "break", ru: "перерыв, отдых" },
+        { id: "w290_4", en: "given everything", ru: "отдал всё" },
+        { id: "w290_5", en: "need", ru: "нуждаться, нужно" }
+    ]
+},
+  {
+    id: 291,
+    image: BASE3 + "attack/Thank you for your opinion.jpg",
+    text: "Someone: unsolicited advice\nMe: thank you for your opinion\n*immediately does the opposite*",
+    translation: "Кто-то: непрошеный совет\nЯ: спасибо за твоё мнение\n*немедленно делает наоборот*",
+    difficulty: "hard",
+    words: [
+        { id: "w291_1", en: "unsolicited", ru: "непрошеный, без запроса" },
+        { id: "w291_2", en: "opinion", ru: "мнение, точка зрения" },
+        { id: "w291_3", en: "immediately", ru: "немедленно, сразу" },
+        { id: "w291_4", en: "opposite", ru: "противоположное, наоборот" },
+        { id: "w291_5", en: "advice", ru: "совет, рекомендация" }
+    ]
+},
+{
+    id: 292,
+    image: BASE3 + "attack/cringe button.jpg",
+    text: "Someone: let me tell you\nmy hot take on pineapple pizza\nMe: *already reaching for the cringe button*",
+    translation: "Кто-то: дай расскажу тебе\nсвоё горячее мнение о пицце с ананасом\nЯ: *уже тянусь к кнопке кринжа*",
+    difficulty: "hard",
+    words: [
+        { id: "w292_1", en: "hot take", ru: "горячее мнение, спорная точка зрения" },
+        { id: "w292_2", en: "pineapple", ru: "ананас" },
+        { id: "w292_3", en: "reaching for", ru: "тянуться к, доставать" },
+        { id: "w292_4", en: "cringe", ru: "кринж, неловкость" },
+        { id: "w292_5", en: "already", ru: "уже" }
+    ]
+},
+{
+    id: 293,
+    image: BASE3 + "attack/Slap.jpg",
+    text: "Me when someone says\nthey don't like my favourite song:\nI took that personally",
+    translation: "Я когда кто-то говорит\nчто не любит мою любимую песню:\nЯ принял это близко к сердцу",
+    difficulty: "medium",
+    words: [
+        { id: "w293_1", en: "favourite song", ru: "любимая песня" },
+        { id: "w293_2", en: "took personally", ru: "принял близко к сердцу" },
+        { id: "w293_3", en: "don't like", ru: "не нравится, не любить" },
+        { id: "w293_4", en: "someone", ru: "кто-то, кто-нибудь" }
+    ]
+},
+{
+    id: 294,
+    image: BASE3 + "attack/Good dog.jpg",
+    text: "Me after doing\nthe bare minimum today:\nGood boy\nVery good boy\nYou deserve a treat",
+    translation: "Я после того как сделал\nсамый минимум сегодня:\nХороший мальчик\nОчень хороший мальчик\nТы заслуживаешь угощения",
+    difficulty: "easy",
+    words: [
+        { id: "w294_1", en: "bare minimum", ru: "самый минимум, минимальные усилия" },
+        { id: "w294_2", en: "deserve", ru: "заслуживать" },
+        { id: "w294_3", en: "treat", ru: "угощение, награда" },
+        { id: "w294_4", en: "good boy", ru: "хороший мальчик" },
+        { id: "w294_5", en: "today", ru: "сегодня" }
+    ]
+},
+{
+    id: 295,
+    image: BASE3 + "attack/Ecouter une poubelle.jpg",
+    text: "Someone giving me advice\nabout my life choices",
+    translation: "Кто-то даёт мне советы\nо моих жизненных выборах",
+    difficulty: "hard",
+    words: [
+        { id: "w295_1", en: "giving advice", ru: "давать советы" },
+        { id: "w295_2", en: "life choices", ru: "жизненные выборы, решения" },
+        { id: "w295_3", en: "someone", ru: "кто-то" },
+        { id: "w295_4", en: "about", ru: "про,насчет,об,обо" },
+    ]
+},
+{
+    id: 296,
+    image: BASE3 + "funny/Clown university invitation.jpg",
+    text: "Me: I'll wake up without an alarm tomorrow\nNext morning at 1pm:\nCongratulations\nyou are invited to clown university",
+    translation: "Я: завтра проснусь без будильника.\nСледующее утро в час дня:\nПоздравляем\nвас приглашают в университет клоунов",
+    difficulty: "medium",
+    words: [
+        { id: "w296_1", en: "without an alarm", ru: "без будильника" },
+        { id: "w296_2", en: "congratulations", ru: "поздравляем, поздравления" },
+        { id: "w296_3", en: "invited", ru: "приглашён, приглашают" },
+        { id: "w296_4", en: "university", ru: "университет" },
+        { id: "w296_5", en: "tomorrow", ru: "завтра" }
+    ]
+},
+{
+    id: 297,
+    image: BASE3 + "dumb/Certified idiot.jpg",
+    text: "Me: I am a very organised person\nAlso me: *has 47 unread emails\n2000 unread messages\nand a to-do list from 2019*",
+    translation: "Я: я очень организованный человек\nЯ же: *47 непрочитанных писем\n2000 непрочитанных сообщений\nи список дел с 2019 года*",
+    difficulty: "medium",
+    words: [
+        { id: "w297_1", en: "organised", ru: "организованный" },
+        { id: "w297_2", en: "unread", ru: "непрочитанный" },
+        { id: "w297_3", en: "emails", ru: "письма, имейлы" },
+        { id: "w297_4", en: "to-do list", ru: "список дел" },
+        { id: "w297_5", en: "messages", ru: "сообщения" }
+    ]
+},
+{
+    id: 298,
+    image: BASE3 + "offend/Sans nom 37.jpg",
+    text: "Me: *drops phone*\nPhone: *lands perfectly face down*\nI am closly looking if it's not damaged",
+    translation: "Я: *роняю телефон*\nТелефон: *падает точно экраном вниз*\nЯ внимательно осматриваю не поврежден ли он",
+    difficulty: "medium",
+    words: [
+        { id: "w298_1", en: "drops", ru: "роняет, уронить" },
+        { id: "w298_2", en: "lands", ru: "приземляется, падает" },
+        { id: "w298_3", en: "face down", ru: "экраном вниз, лицом вниз" },
+        { id: "w298_4", en: "damaged", ru: "поврежден" },
+        { id: "w298_5", en: "closly looking", ru: "внимательно осматриваю" }
+    ]
+},
+{
+    id: 299,
+    image: BASE3 + "funny/I have achieved comedy.jpg",
+    text: "Me after making\none person laugh today:\nI am the funniest person alive\nRetire the other comedians",
+    translation: "Я после того как рассмешил\nодного человека сегодня:\nЯ самый смешной человек на земле\nОстальные комики могут уходить на пенсию",
+    difficulty: "hard",
+    words: [
+        { id: "w299_1", en: "achieved", ru: "достиг, добился" },
+        { id: "w299_2", en: "funniest", ru: "самый смешной" },
+        { id: "w299_3", en: "alive", ru: "живой, на земле" },
+        { id: "w299_4", en: "retire", ru: "уходить на пенсию" },
+        { id: "w299_5", en: "comedians", ru: "комики, комедианты" }
+    ]
+},
+{
+    id: 300,
+    image: BASE3 + "hmm/Feels good.jpg",
+    text: "Me after i got meme number 300:\nI am great",
+    translation: "Я после того как мне попался мем номер 300:\nЯ великолепен",
+    difficulty: "easy",
+    words: [
+        { id: "w300_1", en: "got", ru: "попался" },
+        { id: "w300_2", en: "after", ru: "после" },
+        { id: "w300_3", en: "great", ru: "великолепен" },
+        { id: "w300_4", en: "number", ru: "число,номер" },
     ]
 }
 ];
