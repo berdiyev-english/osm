@@ -1,13 +1,18 @@
-const CACHE_NAME = 'bememes-v1';
+const CACHE_NAME = 'bemem-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/memes.js',
   '/manifest.json',
+  '/icon/favicon.ico',
+  '/icon/favicon.svg',
+  '/icon/favicon-96x96.png',
+  '/icon/icon-192.png',
+  '/icon/icon-512.png',
+  '/icon/apple-touch-icon.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'
 ];
 
-// Устанавливаем SW и кешируем статику
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -17,7 +22,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Чистим старые кеши
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -30,26 +34,27 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Стратегия: Network first для мемов, Cache first для статики
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Картинки мемов — только network (не кешируем, они тяжёлые)
-  if (url.hostname.includes('imgur') || 
-      url.hostname.includes('i.redd') ||
-      url.pathname.includes('/meme-img/')) {
+  // Картинки мемов — только network
+  if (
+    url.hostname.includes('imgur') ||
+    url.hostname.includes('i.redd') ||
+    url.hostname.includes('reddit') ||
+    url.pathname.includes('/meme-img/')
+  ) {
     event.respondWith(
-      fetch(event.request).catch(() => {
-        return new Response('', { status: 503 });
-      })
+      fetch(event.request).catch(() => new Response('', { status: 503 }))
     );
     return;
   }
 
-  // Статические файлы — Cache first
+  // Всё остальное — Cache first, потом network
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
+
       return fetch(event.request).then((response) => {
         if (response.ok) {
           const clone = response.clone();
@@ -57,7 +62,6 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       }).catch(() => {
-        // Если офлайн и нет кеша — возвращаем главную
         if (event.request.mode === 'navigate') {
           return caches.match('/index.html');
         }
