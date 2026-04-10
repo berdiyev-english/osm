@@ -11,8 +11,8 @@
             --card: #1a1a1a;
             --card2: #222222;
             --border: rgba(255,255,255,0.08);
-            --accent: #6c63ff;
-            --accent2: #8b5cf6;
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
             --text: #f0f0f0;
             --text2: #999;
             --text3: #666;
@@ -32,7 +32,6 @@
             padding-bottom: var(--nav-h);
         }
 
-        /* ── HEADER ── */
         header {
             background: var(--card);
             border-bottom: 1px solid var(--border);
@@ -82,9 +81,49 @@
             gap: 6px;
         }
 
-        /* ── PAGES ── */
         .page { display: none; }
         .page.active { display: block; }
+
+        /* ── FILTER BAR ── */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 14px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 62px;
+            z-index: 40;
+        }
+
+        .filter-bar::-webkit-scrollbar { display: none; }
+
+        .filter-btn {
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
 
         /* ── FEED ── */
         .feed {
@@ -93,36 +132,103 @@
             padding: 16px 14px;
         }
 
-        /* ── STATS ── */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--border);
+        /* ── SUPPORT BANNER ── */
+        .support-banner {
+            background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(56,189,248,0.1));
+            border: 1px solid rgba(14,165,233,0.2);
             border-radius: 14px;
-            padding: 14px 10px;
-            text-align: center;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
         }
 
-        .stat-num {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .support-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .stat-label {
+        .support-banner-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(14,165,233,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .support-banner p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .support-banner small {
             font-size: 11px;
             color: var(--text3);
-            margin-top: 3px;
-            font-weight: 500;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .support-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* ── BEWORDS BANNER ── */
+        .bewords-banner {
+            background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.06));
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .bewords-banner p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .bewords-banner small {
+            font-size: 11px;
+            color: var(--text3);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .bewords-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
         }
 
         /* ── MEME CARD ── */
@@ -140,12 +246,6 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border);
-        }
-
-        .card-header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .card-num {
@@ -185,7 +285,6 @@
             border: 1px solid rgba(239,68,68,0.2);
         }
 
-        /* Текст мема */
         .meme-text {
             padding: 16px;
             font-size: 15px;
@@ -196,15 +295,14 @@
             background: var(--card2);
         }
 
-        /* Картинка */
         .meme-img-wrap { position: relative; background: #111; }
 
         .meme-img {
-    width: 100%;
-    height: auto;        /* высота сама подстраивается под фото */
-    display: block;
-    background: #111;
-}
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #111;
+        }
 
         .img-error {
             display: none;
@@ -244,29 +342,50 @@
             font-weight: 600;
         }
 
-        /* Перевод */
+        /* ── TRANSLATION ── */
         .translation-block {
-            padding: 14px 16px;
             border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
         }
 
-        .trans-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: rgba(108,99,255,0.15);
-            border: 1px solid rgba(108,99,255,0.2);
+        .trans-toggle {
+            width: 100%;
+            padding: 13px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 1px;
+            justify-content: space-between;
+            transition: background 0.2s;
         }
 
-        .trans-content {}
+        .trans-toggle:hover { background: rgba(255,255,255,0.03); }
+
+        .trans-toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trans-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .trans-body.open { max-height: 500px; }
+
+        .trans-content {
+            padding: 14px 16px;
+            background: linear-gradient(135deg,
+                rgba(14,165,233,0.08),
+                rgba(56,189,248,0.05));
+            border-top: 1px solid var(--border);
+        }
 
         .trans-label {
             font-size: 10px;
@@ -274,24 +393,18 @@
             color: var(--accent);
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .trans-text {
             font-size: 14px;
             color: var(--text);
-            line-height: 1.65;
+            line-height: 1.75;
             font-weight: 400;
+            white-space: pre-line;
         }
 
-        .trans-text.loading {
-            color: var(--text3);
-            font-style: italic;
-        }
-
-        /* Слова */
-        .words-section {}
-
+        /* ── WORDS ── */
         .words-toggle {
             width: 100%;
             padding: 13px 16px;
@@ -310,10 +423,7 @@
         }
 
         .words-toggle:hover { background: rgba(255,255,255,0.03); }
-
-        .words-toggle.open {
-            border-bottom-color: var(--border);
-        }
+        .words-toggle.open { border-bottom-color: var(--border); }
 
         .toggle-left {
             display: flex;
@@ -354,7 +464,6 @@
         }
 
         .word-row:last-child { border-bottom: none; }
-
         .word-info { flex: 1; }
 
         .word-en {
@@ -364,10 +473,7 @@
             margin-bottom: 2px;
         }
 
-        .word-ru {
-            font-size: 12px;
-            color: var(--text2);
-        }
+        .word-ru { font-size: 12px; color: var(--text2); }
 
         .add-word-btn {
             width: 32px;
@@ -387,7 +493,7 @@
         .add-word-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
-            background: rgba(108,99,255,0.1);
+            background: rgba(14,165,233,0.1);
         }
 
         .add-word-btn.added {
@@ -429,8 +535,6 @@
 
         .nav-item.active { color: var(--accent); }
 
-        .nav-item svg { transition: color 0.2s; }
-
         .nav-badge {
             position: absolute;
             top: 8px;
@@ -455,16 +559,16 @@
             padding: 16px 14px;
         }
 
-        .words-page-header {
+        .page-header {
             margin-bottom: 20px;
         }
 
-        .words-page-header h2 {
+        .page-header h2 {
             font-size: 22px;
             font-weight: 800;
         }
 
-        .words-page-header p {
+        .page-header p {
             color: var(--text3);
             font-size: 13px;
             margin-top: 4px;
@@ -485,8 +589,8 @@
             width: 42px;
             height: 42px;
             border-radius: 10px;
-            background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(139,92,246,0.2));
-            border: 1px solid rgba(108,99,255,0.2);
+            background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(56,189,248,0.2));
+            border: 1px solid rgba(14,165,233,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -527,29 +631,335 @@
             background: rgba(239,68,68,0.08);
         }
 
+        /* ── QUIZ PAGE ── */
+        .quiz-page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        .quiz-start {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .quiz-start-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .quiz-start h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .quiz-start p {
+            color: var(--text3);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .quiz-start-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.35);
+        }
+
+        .quiz-card {
+            background: var(--card);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .quiz-progress {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-progress-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text2);
+        }
+
+        .quiz-score {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .quiz-progress-bar {
+            height: 4px;
+            background: var(--card2);
+            border-radius: 2px;
+            margin: 0 16px 14px;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-question {
+            padding: 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quiz-question-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-word {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .quiz-options {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 14px 12px;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.08);
+        }
+
+        .quiz-option.correct {
+            background: rgba(34,197,94,0.15);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .quiz-option.wrong {
+            background: rgba(239,68,68,0.12);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .quiz-option:disabled { cursor: not-allowed; }
+
+        .quiz-result {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .quiz-result h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .quiz-result-score {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 16px 0;
+        }
+
+        .quiz-result p {
+            color: var(--text3);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .quiz-restart-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── PROFILE PAGE ── */
+        .profile-page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        .profile-header {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-sub {
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .profile-stat {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .profile-stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-stat-label {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 4px;
+        }
+
+        .profile-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .profile-section-title {
+            padding: 14px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text2);
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-link {
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .profile-link:last-child { border-bottom: none; }
+        .profile-link:hover { background: rgba(255,255,255,0.03); }
+
+        .profile-link-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-link-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-link-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .profile-link-sub {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 1px;
+        }
+
+        /* ── EMPTY STATE ── */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
         }
 
-        .empty-state svg {
-            color: var(--text3);
-            margin-bottom: 16px;
-        }
+        .empty-state svg { color: var(--text3); margin-bottom: 16px; }
+        .empty-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .empty-state p { color: var(--text3); font-size: 14px; line-height: 1.6; }
 
-        .empty-state h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .empty-state p {
-            color: var(--text3);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* toast */
+        /* ── TOAST ── */
         .toast {
             position: fixed;
             bottom: calc(var(--nav-h) + 16px);
@@ -595,49 +1005,163 @@
             <path d="M2 17l10 5 10-5"/>
             <path d="M2 12l10 5 10-5"/>
         </svg>
-        <span id="header-count">0 мемов</span>
+        <span id="header-count">300 мемов</span>
     </div>
 </header>
+
+<!-- FILTER BAR (только на странице мемов) -->
+<div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all')">Все</button>
+    <button class="filter-btn" onclick="setFilter('easy')">🟢 Начинающий</button>
+    <button class="filter-btn" onclick="setFilter('medium')">🟡 Средний</button>
+    <button class="filter-btn" onclick="setFilter('hard')">🔴 Продвинутый</button>
+</div>
 
 <!-- PAGE: МЕМЫ -->
 <div class="page active" id="page-memes">
     <div class="feed">
-        <div class="stats-bar">
-            <div class="stat-card">
-                <div class="stat-num" id="stat-viewed">0</div>
-                <div class="stat-label">Просмотрено</div>
+
+        <!-- Поддержка -->
+        <div class="support-banner">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-num" id="stat-words">0</div>
-                <div class="stat-label">Слов изучено</div>
+            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
+        </div>
+
+        <!-- BeWords -->
+        <div class="bewords-banner">
+            <div>
+                <p>Учите английский эффективнее</p>
+                <small>Переходите в BeWords →</small>
             </div>
-            <div class="stat-card">
-                <div class="stat-num" id="stat-saved">0</div>
-                <div class="stat-label">Сохранено</div>
-            </div>
+            <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
         </div>
 
         <div id="feed-container"></div>
-
     </div>
 </div>
 
 <!-- PAGE: СЛОВА -->
 <div class="page" id="page-words">
     <div class="words-page">
-        <div class="words-page-header">
+        <div class="page-header">
             <h2>Мои слова</h2>
             <p>Слова которые ты добавил для изучения</p>
         </div>
-        <div id="saved-words-list">
-            <div class="empty-state">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
+
+        <div class="support-banner" style="margin-bottom:16px">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
+            </div>
+            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
+        </div>
+
+        <div id="saved-words-list"></div>
+    </div>
+</div>
+
+<!-- PAGE: QUIZ -->
+<div class="page" id="page-quiz">
+    <div class="quiz-page">
+        <div id="quiz-container"></div>
+    </div>
+</div>
+
+<!-- PAGE: ПРОФИЛЬ -->
+<div class="page" id="page-profile">
+    <div class="profile-page">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
                 </svg>
-                <h3>Пока пусто</h3>
-                <p>Добавляй слова из мемов<br>нажимая на кнопку + рядом со словом</p>
+            </div>
+            <div class="profile-name">BeMemes</div>
+            <div class="profile-sub">Учи английский через мемы</div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="profile-stat-num" id="profile-viewed">0</div>
+                <div class="profile-stat-label">Мемов просмотрено</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-num" id="profile-saved">0</div>
+                <div class="profile-stat-label">Слов добавлено</div>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-title">Проект</div>
+            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="profile-link">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(239,68,68,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">Поддержать проект</div>
+                        <div class="profile-link-sub">Донат на развитие</div>
+                    </div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+            <a href="https://bewords.ru" target="_blank" class="profile-link">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(34,197,94,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">BeWords</div>
+                        <div class="profile-link-sub">Учи английский эффективнее</div>
+                    </div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-title">О приложении</div>
+            <div class="profile-link">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(14,165,233,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">Версия 1.0</div>
+                        <div class="profile-link-sub">300 мемов • 1500+ слов</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -662,19 +1186,42 @@
         Слова
         <span class="nav-badge" id="words-badge" style="display:none">0</span>
     </button>
+    <button class="nav-item" id="nav-quiz" onclick="switchPage('quiz')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Квиз
+    </button>
+    <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Профиль
+    </button>
 </nav>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script src="memes.js"></script>
-<script>// ── STATE ──
+<script>
+// ── STATE ──
+let currentFilter = 'all';
+let filteredMemes = [];
+let shownIndices = [];
 let currentIndex = 0;
 const PER_PAGE = 4;
 const savedWords = new Map();
 let viewedCount = 0;
-let totalWords = 0;
 let isLoading = false;
+
+// ── QUIZ STATE ──
+let quizWords = [];
+let quizIndex = 0;
+let quizScore = 0;
+const QUIZ_LENGTH = 10;
 
 // ── NAVIGATION ──
 function switchPage(page) {
@@ -682,7 +1229,51 @@ function switchPage(page) {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(`page-${page}`).classList.add('active');
     document.getElementById(`nav-${page}`).classList.add('active');
+
+    // Показываем/скрываем фильтр
+    document.getElementById('filter-bar').style.display =
+        page === 'memes' ? 'flex' : 'none';
+
     if (page === 'words') renderSavedWords();
+    if (page === 'quiz') renderQuizStart();
+    if (page === 'profile') updateProfile();
+}
+
+// ── FILTER ──
+function setFilter(level) {
+    currentFilter = level;
+
+    // Обновляем кнопки
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Пересобираем ленту
+    document.getElementById('feed-container').innerHTML = '';
+    shownIndices = [];
+    currentIndex = 0;
+    viewedCount = 0;
+
+    buildFilteredList();
+    loadMore();
+}
+
+function buildFilteredList() {
+    if (currentFilter === 'all') {
+        filteredMemes = [...MEMES_DB];
+    } else {
+        filteredMemes = MEMES_DB.filter(m => m.difficulty === currentFilter);
+    }
+    // Перемешиваем рандомно
+    filteredMemes = shuffleArray(filteredMemes);
+}
+
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }
 
 // ── TOAST ──
@@ -721,7 +1312,7 @@ function toggleWord(wordId, memeId) {
     }
 
     updateBadge();
-    document.getElementById('stat-saved').textContent = savedWords.size;
+    updateProfile();
 }
 
 function updateBadge() {
@@ -732,6 +1323,12 @@ function updateBadge() {
     } else {
         badge.style.display = 'none';
     }
+}
+
+// ── PROFILE ──
+function updateProfile() {
+    document.getElementById('profile-viewed').textContent = viewedCount;
+    document.getElementById('profile-saved').textContent = savedWords.size;
 }
 
 // ── SAVED WORDS PAGE ──
@@ -775,12 +1372,12 @@ function removeWord(id) {
         btn.innerHTML = svgPlus();
     }
     updateBadge();
-    document.getElementById('stat-saved').textContent = savedWords.size;
+    updateProfile();
     renderSavedWords();
     showToast('Слово удалено');
 }
 
-// ── CREATE CARD ── (убрали async!)
+// ── CREATE CARD ──
 function createCard(meme) {
     const diff = diffInfo(meme.difficulty);
     const formattedText = meme.text.replace(/\n/g, '<br>');
@@ -789,11 +1386,9 @@ function createCard(meme) {
     card.className = 'meme-card';
     card.innerHTML = `
         <div class="card-header">
-            <div class="card-header-left">
-                <div>
-                    <div class="card-num">Мем #${meme.id}</div>
-                    <div class="card-sub">${meme.words.length} слов для изучения</div>
-                </div>
+            <div>
+                <div class="card-num">Мем #${meme.id}</div>
+                <div class="card-sub">${meme.words.length} слов для изучения</div>
             </div>
             <span class="diff-badge ${diff.cls}">${diff.label}</span>
         </div>
@@ -801,31 +1396,31 @@ function createCard(meme) {
         <div class="meme-text">${formattedText}</div>
 
         <div class="meme-img-wrap">
-            <img
-                class="meme-img"
-                src="${meme.image}"
-                alt="meme"
-                onerror="
-                    this.style.display='none';
-                    this.nextElementSibling.classList.add('show')
-                "
-            >
+            <img class="meme-img" src="${meme.image}" alt="meme"
+                onerror="this.style.display='none';this.nextElementSibling.classList.add('show')">
             <div class="img-error">
                 ${svgWifi()}
                 <p>Не удалось загрузить картинку</p>
-                <div class="vpn-badge">
-                    ${svgLock()}
-                    Включите VPN
-                </div>
+                <div class="vpn-badge">${svgLock()} Включите VPN</div>
                 <small>Картинки могут долго загружаться</small>
             </div>
         </div>
 
         <div class="translation-block">
-            <div class="trans-icon">${svgTranslate()}</div>
-            <div class="trans-content">
-                <div class="trans-label">Перевод</div>
-                <div class="trans-text">${meme.translation}</div>
+            <button class="trans-toggle" id="ttoggle-${meme.id}" onclick="toggleTrans(${meme.id})">
+                <div class="trans-toggle-left">
+                    ${svgTranslate()}
+                    <span>Показать перевод</span>
+                </div>
+                <svg class="chevron" id="tchev-${meme.id}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+            <div class="trans-body" id="tbody-${meme.id}">
+                <div class="trans-content">
+                    <div class="trans-label">🇷🇺 Перевод</div>
+                    <div class="trans-text">${meme.translation}</div>
+                </div>
             </div>
         </div>
 
@@ -847,11 +1442,9 @@ function createCard(meme) {
                             <div class="word-en">${w.en}</div>
                             <div class="word-ru">${w.ru}</div>
                         </div>
-                        <button
-                            class="add-word-btn ${savedWords.has(w.id) ? 'added' : ''}"
+                        <button class="add-word-btn ${savedWords.has(w.id) ? 'added' : ''}"
                             id="wbtn-${w.id}"
-                            onclick="toggleWord('${w.id}', ${meme.id})"
-                        >
+                            onclick="toggleWord('${w.id}', ${meme.id})">
                             ${savedWords.has(w.id) ? svgCheck() : svgPlus()}
                         </button>
                     </div>
@@ -861,13 +1454,16 @@ function createCard(meme) {
     `;
 
     document.getElementById('feed-container').appendChild(card);
-
-    // Статистика
     viewedCount++;
-    totalWords += meme.words.length;
-    document.getElementById('stat-viewed').textContent = viewedCount;
-    document.getElementById('stat-words').textContent = totalWords;
-    document.getElementById('header-count').textContent = `${MEMES_DB.length} мемов`;
+    updateProfile();
+}
+
+function toggleTrans(id) {
+    document.getElementById(`tbody-${id}`).classList.toggle('open');
+    document.getElementById(`tchev-${id}`).classList.toggle('open');
+    const toggle = document.getElementById(`ttoggle-${id}`);
+    const isOpen = document.getElementById(`tbody-${id}`).classList.contains('open');
+    toggle.querySelector('span').textContent = isOpen ? 'Скрыть перевод' : 'Показать перевод';
 }
 
 function toggleWords(id) {
@@ -876,48 +1472,209 @@ function toggleWords(id) {
     document.getElementById(`wtoggle-${id}`).classList.toggle('open');
 }
 
-// ── LOAD MORE ──
+// ── INFINITE SCROLL (бесконечная лента) ──
 function loadMore() {
     if (isLoading) return;
-    if (currentIndex >= MEMES_DB.length) return;
-
     isLoading = true;
 
-    const end = Math.min(currentIndex + PER_PAGE, MEMES_DB.length);
+    // Если показали все мемы - перемешиваем снова
+    if (currentIndex >= filteredMemes.length) {
+        filteredMemes = shuffleArray(filteredMemes);
+        currentIndex = 0;
+    }
+
+    const end = Math.min(currentIndex + PER_PAGE, filteredMemes.length);
     for (let i = currentIndex; i < end; i++) {
-        createCard(MEMES_DB[i]);
+        createCard(filteredMemes[i]);
     }
     currentIndex = end;
     isLoading = false;
 }
 
-// ── АВТОЗАГРУЗКА при скролле ──
 function setupInfiniteScroll() {
     const sentinel = document.createElement('div');
-    sentinel.id = 'sentinel';
     sentinel.style.height = '20px';
     document.getElementById('feed-container').after(sentinel);
 
     const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            if (currentIndex < MEMES_DB.length) {
-                loadMore();
-            } else {
-                // Все мемы загружены
-                sentinel.innerHTML = `
-                    <p style="text-align:center; color:var(--text3); 
-                    font-size:13px; padding: 10px 0 20px">
-                        🎉 Все мемы загружены!
-                    </p>
-                `;
-                observer.disconnect();
-            }
-        }
-    }, {
-        rootMargin: '200px' // начинаем грузить за 200px до конца
-    });
+        if (entries[0].isIntersecting) loadMore();
+    }, { rootMargin: '300px' });
 
     observer.observe(sentinel);
+}
+
+// ── QUIZ ──
+function renderQuizStart() {
+    const container = document.getElementById('quiz-container');
+
+    if (savedWords.size < 4) {
+        container.innerHTML = `
+            <div class="quiz-start">
+                <div class="quiz-start-icon">
+                    ${svgQuiz()}
+                </div>
+                <h2>Квиз</h2>
+                <p>Добавь минимум 4 слова из мемов<br>чтобы начать квиз!<br><br>
+                Сейчас добавлено: <strong>${savedWords.size}</strong> слов</p>
+                <button class="quiz-start-btn" onclick="switchPage('memes')">
+                    Добавить слова
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="quiz-start">
+            <div class="quiz-start-icon">
+                ${svgQuiz()}
+            </div>
+            <h2>Квиз</h2>
+            <p>Проверь как хорошо ты запомнил слова из мемов!<br><br>
+            Доступно слов: <strong>${savedWords.size}</strong><br>
+            Вопросов в раунде: <strong>${Math.min(QUIZ_LENGTH, savedWords.size)}</strong></p>
+            <button class="quiz-start-btn" onclick="startQuiz()">
+                Начать квиз 🚀
+            </button>
+        </div>
+    `;
+}
+
+function startQuiz() {
+    quizWords = shuffleArray([...savedWords.values()]).slice(0, QUIZ_LENGTH);
+    quizIndex = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+    if (quizIndex >= quizWords.length) {
+        renderQuizResult();
+        return;
+    }
+
+    const container = document.getElementById('quiz-container');
+    const word = quizWords[quizIndex];
+    const progress = ((quizIndex) / quizWords.length * 100).toFixed(0);
+
+    // Генерируем варианты ответов
+    const allWords = [...savedWords.values()];
+    const wrongOptions = shuffleArray(
+        allWords.filter(w => w.id !== word.id)
+    ).slice(0, 3);
+
+    const options = shuffleArray([word, ...wrongOptions]);
+
+    container.innerHTML = `
+        <div class="quiz-card">
+            <div class="quiz-progress">
+                <span class="quiz-progress-text">Вопрос ${quizIndex + 1} из ${quizWords.length}</span>
+                <span class="quiz-score">✅ ${quizScore}</span>
+            </div>
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" style="width: ${progress}%"></div>
+            </div>
+            <div class="quiz-question">
+                <div class="quiz-question-label">Переведи слово</div>
+                <div class="quiz-word">${word.en}</div>
+            </div>
+            <div class="quiz-options">
+                ${options.map(opt => `
+                    <button class="quiz-option"
+                        onclick="checkAnswer('${opt.id}', '${word.id}', this)">
+                        ${opt.ru}
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+
+        <div class="support-banner">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
+            </div>
+            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
+        </div>
+    `;
+}
+
+function checkAnswer(selectedId, correctId, btn) {
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(opt => opt.disabled = true);
+
+    if (selectedId === correctId) {
+        btn.classList.add('correct');
+        quizScore++;
+        showToast('✅ Правильно!');
+    } else {
+        btn.classList.add('wrong');
+        // Показываем правильный ответ
+        options.forEach(opt => {
+            if (opt.onclick.toString().includes(correctId)) {
+                opt.classList.add('correct');
+            }
+        });
+        showToast('❌ Неправильно');
+    }
+
+    setTimeout(() => {
+        quizIndex++;
+        renderQuizQuestion();
+    }, 1200);
+}
+
+function renderQuizResult() {
+    const container = document.getElementById('quiz-container');
+    const percent = Math.round(quizScore / quizWords.length * 100);
+
+    let emoji = '😅';
+    let msg = 'Нужно больше практики!';
+    if (percent >= 80) { emoji = '🔥'; msg = 'Отличный результат!'; }
+    else if (percent >= 60) { emoji = '👍'; msg = 'Хороший результат!'; }
+
+    container.innerHTML = `
+        <div class="quiz-card">
+            <div class="quiz-result">
+                <div style="font-size:48px;margin-bottom:8px">${emoji}</div>
+                <h2>${msg}</h2>
+                <div class="quiz-result-score">${quizScore}/${quizWords.length}</div>
+                <p>${percent}% правильных ответов</p>
+                <button class="quiz-restart-btn" onclick="startQuiz()">
+                    Ещё раз 🔄
+                </button>
+            </div>
+        </div>
+
+        <div class="bewords-banner">
+            <div>
+                <p>Хочешь выучить больше слов?</p>
+                <small>Переходи в BeWords →</small>
+            </div>
+            <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
+        </div>
+
+        <div class="support-banner">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
+            </div>
+            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
+        </div>
+    `;
 }
 
 // ── SVG ICONS ──
@@ -945,10 +1702,15 @@ function svgWifi() {
 function svgLock() {
     return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
 }
+function svgQuiz() {
+    return `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+}
 
 // ── СТАРТ ──
+buildFilteredList();
 loadMore();
 setupInfiniteScroll();
+updateProfile();
 </script>
 
 </body>
