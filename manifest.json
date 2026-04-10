@@ -1,10 +1,10 @@
 {
   "name": "BeMem — Английский через мемы",
   "short_name": "BeMem",
-  "description": "BeMem (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов, словарь, квиз.",
+  "description": "Учи английский через мемы! 300+ мемов с переводами, словарь и квиз.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0f0f",
+  "background_color": "#5cb85c",
   "theme_color": "#0ea5e9",
   "orientation": "portrait",
   "lang": "ru",
@@ -12,7 +12,8 @@
     {
       "src": "/icon/favicon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon/icon-192.png",
@@ -39,21 +40,22 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["education", "entertainment"],
   "shortcuts": [
     {
       "name": "Квиз",
       "short_name": "Квиз",
       "description": "Проверь свои слова",
-      "url": "/?page=quiz",
+      "url": "/",
       "icons": [{ "src": "/icon/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Мои слова",
       "short_name": "Слова",
       "description": "Список сохранённых слов",
-      "url": "/?page=words",
+      "url": "/",
       "icons": [{ "src": "/icon/icon-192.png", "sizes": "192x192" }]
     }
-  ]
+  ],
+  "categories": ["education", "entertainment"],
+  "screenshots": []
 }
