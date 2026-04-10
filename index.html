@@ -3,7 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeMemes</title>
+    
+    <!-- SEO -->
+    <title>BeMemes — Учи английский через мемы | БиМем</title>
+    <meta name="description" content="BeMemes (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов, словарь, квиз. Bemem — запоминай слова играючи!">
+    <meta name="keywords" content="bememes, бимем, bemem, бимемес, учить английский мемы, мемы английский язык, английский через мемы, учи английский бесплатно, bememes английский">
+    <meta name="author" content="BeMemes">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bememes.ru/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BeMemes — Учи английский через мемы">
+    <meta property="og:description" content="БиМем — 300+ мемов для изучения английского. Словарь, квиз, переводы. Bemem это весело!">
+    <meta property="og:url" content="https://bememes.ru/">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="BeMemes">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BeMemes — Английский через мемы">
+    <meta name="twitter:description" content="БиМем — учи английский весело! 300+ мемов, словарь, квиз.">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0ea5e9">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BeMemes">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+    <!-- Structured Data для поиска -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "BeMemes",
+      "alternateName": ["БиМем", "Bemem", "БиМемес", "BeMem"],
+      "description": "Учи английский язык через мемы. 300+ мемов с переводами, словарь и квиз.",
+      "url": "https://bememes.ru",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "ru",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      }
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -68,21 +117,361 @@
 
         .logo-text span { color: var(--accent); }
 
-        .header-badge {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            padding: 6px 12px;
+        /* ── DONATE HEADER BUTTON ── */
+        .header-donate-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: none;
+            padding: 7px 14px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
-            color: var(--text2);
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 12px rgba(239,68,68,0.3);
         }
 
-        .page { display: none; }
-        .page.active { display: block; }
+        .header-donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(239,68,68,0.4);
+        }
+
+        /* ── DONATE POPUP ── */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup-sheet {
+            background: var(--card);
+            border-radius: 24px 24px 0 0;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 0 0 32px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .popup-overlay.show .popup-sheet {
+            transform: translateY(0);
+        }
+
+        .popup-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 12px auto 0;
+        }
+
+        .popup-stage {
+            display: none;
+            padding: 24px 24px 0;
+        }
+
+        .popup-stage.active { display: block; }
+
+        /* Стадия 1 — шутка */
+        .popup-joke {
+            text-align: center;
+        }
+
+        .popup-joke-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+            display: block;
+            animation: bounce 0.6s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+
+        .popup-joke h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .popup-joke p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .popup-joke .joke-label {
+            display: inline-block;
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .popup-joke-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(239,68,68,0.3);
+        }
+
+        .popup-joke-btn:hover { transform: scale(1.02); }
+
+        /* Стадия 2 — настоящая */
+        .popup-real { text-align: center; }
+
+        .popup-real-emoji {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .popup-real h2 {
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        .popup-story {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .popup-story p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .popup-story p:last-child { margin-bottom: 0; }
+
+        .popup-story strong { color: var(--text); }
+
+        .popup-story .highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(14,165,233,0.1);
+            border: 1px solid rgba(14,165,233,0.2);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 8px;
+            margin: 4px 4px 4px 0;
+        }
+
+        .donate-real-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+            transition: all 0.2s;
+        }
+
+        .donate-real-btn:hover { transform: scale(1.02); }
+
+        .popup-skip {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text3);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .popup-skip:hover {
+            border-color: var(--text3);
+            color: var(--text2);
+        }
+
+        .popup-thanks {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        /* Стадия 3 — спасибо */
+        .popup-thankyou { text-align: center; }
+        .popup-thankyou .big-emoji {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 16px;
+            animation: heartbeat 0.8s ease infinite alternate;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        .popup-thankyou h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .popup-thankyou p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .close-popup-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── OFFLINE BANNER ── */
+        .offline-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .offline-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .offline-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .offline-overlay h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .offline-overlay p {
+            font-size: 14px;
+            color: var(--text3);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            max-width: 300px;
+        }
+
+        .offline-tips {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .offline-tip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        .offline-tip:last-child { border-bottom: none; }
+
+        .offline-tip-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .offline-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
 
         /* ── FILTER BAR ── */
         .filter-bar {
@@ -343,9 +732,7 @@
         }
 
         /* ── TRANSLATION ── */
-        .translation-block {
-            border-bottom: 1px solid var(--border);
-        }
+        .translation-block { border-bottom: 1px solid var(--border); }
 
         .trans-toggle {
             width: 100%;
@@ -381,9 +768,7 @@
 
         .trans-content {
             padding: 14px 16px;
-            background: linear-gradient(135deg,
-                rgba(14,165,233,0.08),
-                rgba(56,189,248,0.05));
+            background: linear-gradient(135deg,rgba(14,165,233,0.08),rgba(56,189,248,0.05));
             border-top: 1px solid var(--border);
         }
 
@@ -702,11 +1087,7 @@
             color: var(--text2);
         }
 
-        .quiz-score {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--accent);
-        }
+        .quiz-score { font-size: 13px; font-weight: 700; color: var(--accent); }
 
         .quiz-progress-bar {
             height: 4px;
@@ -959,6 +1340,10 @@
         .empty-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
         .empty-state p { color: var(--text3); font-size: 14px; line-height: 1.6; }
 
+        /* ── PAGE ── */
+        .page { display: none; }
+        .page.active { display: block; }
+
         /* ── TOAST ── */
         .toast {
             position: fixed;
@@ -986,6 +1371,121 @@
 </head>
 <body>
 
+<!-- DONATE POPUP -->
+<div class="popup-overlay" id="donate-popup" onclick="handleOverlayClick(event)">
+    <div class="popup-sheet">
+        <div class="popup-handle"></div>
+
+        <!-- Стадия 1: Шутка -->
+        <div class="popup-stage active" id="stage-1">
+            <div class="popup-joke">
+                <span class="popup-joke-emoji">💸</span>
+                <span class="joke-label">⚠️ ВНИМАНИЕ</span>
+                <h2>Мы забираем ваши деньги!</h2>
+                <p>Нет, серьёзно. Прямо сейчас они уходят к нам.<br>
+                Это не мем — это реальность 😈</p>
+                <p style="font-size:12px;color:var(--text3);margin-bottom:20px">
+                    (ладно, ладно... пошутили 😅)
+                </p>
+                <button class="popup-joke-btn" onclick="nextStage()">
+                    Окей, и что на самом деле? 👀
+                </button>
+            </div>
+        </div>
+
+        <!-- Стадия 2: Настоящая просьба -->
+        <div class="popup-stage" id="stage-2">
+            <div class="popup-real">
+                <span class="popup-real-emoji">👨‍💻</span>
+                <h2>Один человек — весь проект</h2>
+                <div class="popup-story">
+                    <p>Привет! Я <strong>один</strong> разрабатываю BeMemes в свободное время. Без команды, без инвесторов, без бюджета.</p>
+                    <p>Что я уже сделал:
+                        <br><span class="highlight">🎭 300+ мемов с переводами</span>
+                        <span class="highlight">📚 1500+ слов в словаре</span>
+                        <span class="highlight">🧠 Квиз для проверки</span>
+                        <span class="highlight">📱 PWA приложение</span>
+                    </p>
+                    <p>Любой донат — это мотивация добавить ещё больше мемов, улучшить квиз и сделать BeMemes лучшим способом учить английский! 🚀</p>
+                </div>
+                <a href="https://pay.cloudtips.ru/p/8f56d7d3"
+                   target="_blank"
+                   class="donate-real-btn"
+                   onclick="onDonateBtnClick()">
+                    ❤️ Поддержать на кофе
+                </a>
+                <button class="popup-skip" onclick="closeDonatePopup()">
+                    Может в другой раз
+                </button>
+                <div class="popup-thanks">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Спасибо что пользуешься BeMemes!
+                </div>
+            </div>
+        </div>
+
+        <!-- Стадия 3: Спасибо -->
+        <div class="popup-stage" id="stage-3">
+            <div class="popup-thankyou">
+                <span class="big-emoji">🥹</span>
+                <h2>Ты лучший!</h2>
+                <p>Серьёзно, каждый донат — это +100 к мотивации.<br>
+                Буду делать BeMemes ещё лучше специально для тебя! ❤️</p>
+                <button class="close-popup-btn" onclick="closeDonatePopup()">
+                    Продолжить учить мемы 🎭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- OFFLINE OVERLAY -->
+<div class="offline-overlay" id="offline-overlay">
+    <div class="offline-icon">📡</div>
+    <h2>Нет интернета</h2>
+    <p>Мемы требуют подключения к сети.<br>
+    Но у тебя есть кое-что доступное офлайн!</p>
+
+    <div class="offline-tips">
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(34,197,94,0.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            ✅ Квиз — доступен офлайн
+        </div>
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(14,165,233,0.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            ✅ Мои слова — доступны офлайн
+        </div>
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(239,68,68,0.1)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+            </div>
+            ❌ Мемы — нужен интернет
+        </div>
+    </div>
+
+    <button class="offline-btn" onclick="goToQuizOffline()">
+        Пройти квиз офлайн 🧠
+    </button>
+</div>
+
 <!-- HEADER -->
 <header>
     <div class="logo">
@@ -999,45 +1499,26 @@
         </div>
         <div class="logo-text">Be<span>Memes</span></div>
     </div>
-    <div class="header-badge">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-            <path d="M2 17l10 5 10-5"/>
-            <path d="M2 12l10 5 10-5"/>
+    <!-- Кнопка доната в шапке -->
+    <button class="header-donate-btn" onclick="openDonatePopup()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
-        <span id="header-count">300 мемов</span>
-    </div>
+        Поддержать ❤️
+    </button>
 </header>
 
-<!-- FILTER BAR (только на странице мемов) -->
+<!-- FILTER BAR -->
 <div class="filter-bar" id="filter-bar">
-    <button class="filter-btn active" onclick="setFilter('all')">Все</button>
-    <button class="filter-btn" onclick="setFilter('easy')">🟢 Начинающий</button>
-    <button class="filter-btn" onclick="setFilter('medium')">🟡 Средний</button>
-    <button class="filter-btn" onclick="setFilter('hard')">🔴 Продвинутый</button>
+    <button class="filter-btn active" onclick="setFilter('all', event)">Все</button>
+    <button class="filter-btn" onclick="setFilter('easy', event)">🟢 Легко</button>
+    <button class="filter-btn" onclick="setFilter('medium', event)">🟡 Средне</button>
+    <button class="filter-btn" onclick="setFilter('hard', event)">🔴 Сложно</button>
 </div>
 
 <!-- PAGE: МЕМЫ -->
 <div class="page active" id="page-memes">
     <div class="feed">
-
-        <!-- Поддержка -->
-        <div class="support-banner">
-            <div class="support-banner-left">
-                <div class="support-banner-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </div>
-                <div>
-                    <p>Поддержите проект</p>
-                    <small>Помогите нам расти!</small>
-                </div>
-            </div>
-            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
-        </div>
-
-        <!-- BeWords -->
         <div class="bewords-banner">
             <div>
                 <p>Учите английский эффективнее</p>
@@ -1045,7 +1526,6 @@
             </div>
             <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
         </div>
-
         <div id="feed-container"></div>
     </div>
 </div>
@@ -1057,22 +1537,6 @@
             <h2>Мои слова</h2>
             <p>Слова которые ты добавил для изучения</p>
         </div>
-
-        <div class="support-banner" style="margin-bottom:16px">
-            <div class="support-banner-left">
-                <div class="support-banner-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </div>
-                <div>
-                    <p>Поддержите проект</p>
-                    <small>Помогите нам расти!</small>
-                </div>
-            </div>
-            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
-        </div>
-
         <div id="saved-words-list"></div>
     </div>
 </div>
@@ -1111,7 +1575,7 @@
 
         <div class="profile-section">
             <div class="profile-section-title">Проект</div>
-            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="profile-link">
+            <div class="profile-link" onclick="openDonatePopup()">
                 <div class="profile-link-left">
                     <div class="profile-link-icon" style="background:rgba(239,68,68,0.15)">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
@@ -1126,7 +1590,7 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2">
                     <polyline points="9 18 15 12 9 6"/>
                 </svg>
-            </a>
+            </div>
             <a href="https://bewords.ru" target="_blank" class="profile-link">
                 <div class="profile-link-left">
                     <div class="profile-link-icon" style="background:rgba(34,197,94,0.15)">
@@ -1207,15 +1671,52 @@
 
 <script src="memes.js"></script>
 <script>
+// ── PWA SERVICE WORKER ──
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW error:', err));
+    });
+}
+
+// ── OFFLINE DETECTION ──
+let isOnline = navigator.onLine;
+
+function checkOnlineStatus() {
+    isOnline = navigator.onLine;
+    if (!isOnline && currentPage === 'memes') {
+        showOfflineOverlay();
+    } else {
+        hideOfflineOverlay();
+    }
+}
+
+function showOfflineOverlay() {
+    document.getElementById('offline-overlay').classList.add('show');
+}
+
+function hideOfflineOverlay() {
+    document.getElementById('offline-overlay').classList.remove('show');
+}
+
+function goToQuizOffline() {
+    hideOfflineOverlay();
+    switchPage('quiz');
+}
+
+window.addEventListener('online', checkOnlineStatus);
+window.addEventListener('offline', checkOnlineStatus);
+
 // ── STATE ──
 let currentFilter = 'all';
 let filteredMemes = [];
-let shownIndices = [];
 let currentIndex = 0;
 const PER_PAGE = 4;
 const savedWords = new Map();
 let viewedCount = 0;
 let isLoading = false;
+let currentPage = 'memes';
 
 // ── QUIZ STATE ──
 let quizWords = [];
@@ -1223,16 +1724,58 @@ let quizIndex = 0;
 let quizScore = 0;
 const QUIZ_LENGTH = 10;
 
+// ── POPUP ──
+let currentStage = 1;
+
+function openDonatePopup() {
+    currentStage = 1;
+    document.querySelectorAll('.popup-stage').forEach(s => s.classList.remove('active'));
+    document.getElementById('stage-1').classList.add('active');
+    document.getElementById('donate-popup').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDonatePopup() {
+    document.getElementById('donate-popup').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+function nextStage() {
+    currentStage = 2;
+    document.getElementById('stage-1').classList.remove('active');
+    document.getElementById('stage-2').classList.add('active');
+}
+
+function onDonateBtnClick() {
+    setTimeout(() => {
+        document.getElementById('stage-2').classList.remove('active');
+        document.getElementById('stage-3').classList.add('active');
+    }, 800);
+}
+
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('donate-popup')) {
+        closeDonatePopup();
+    }
+}
+
 // ── NAVIGATION ──
 function switchPage(page) {
+    currentPage = page;
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(`page-${page}`).classList.add('active');
     document.getElementById(`nav-${page}`).classList.add('active');
 
-    // Показываем/скрываем фильтр
     document.getElementById('filter-bar').style.display =
         page === 'memes' ? 'flex' : 'none';
+
+    // Проверяем офлайн при переходе на мемы
+    if (page === 'memes' && !isOnline) {
+        showOfflineOverlay();
+    } else {
+        hideOfflineOverlay();
+    }
 
     if (page === 'words') renderSavedWords();
     if (page === 'quiz') renderQuizStart();
@@ -1240,16 +1783,12 @@ function switchPage(page) {
 }
 
 // ── FILTER ──
-function setFilter(level) {
+function setFilter(level, e) {
     currentFilter = level;
-
-    // Обновляем кнопки
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    if (e && e.target) e.target.classList.add('active');
 
-    // Пересобираем ленту
     document.getElementById('feed-container').innerHTML = '';
-    shownIndices = [];
     currentIndex = 0;
     viewedCount = 0;
 
@@ -1263,7 +1802,6 @@ function buildFilteredList() {
     } else {
         filteredMemes = MEMES_DB.filter(m => m.difficulty === currentFilter);
     }
-    // Перемешиваем рандомно
     filteredMemes = shuffleArray(filteredMemes);
 }
 
@@ -1288,8 +1826,8 @@ function showToast(msg) {
 function diffInfo(d) {
     return {
         easy:   { label: 'Начинающий', cls: 'diff-easy' },
-        medium: { label: 'Средний',     cls: 'diff-medium' },
-        hard:   { label: 'Продвинутый', cls: 'diff-hard' },
+        medium: { label: 'Средний',    cls: 'diff-medium' },
+        hard:   { label: 'Продвинутый',cls: 'diff-hard' },
     }[d] || { label: 'Начинающий', cls: 'diff-easy' };
 }
 
@@ -1325,7 +1863,6 @@ function updateBadge() {
     }
 }
 
-// ── PROFILE ──
 function updateProfile() {
     document.getElementById('profile-viewed').textContent = viewedCount;
     document.getElementById('profile-saved').textContent = savedWords.size;
@@ -1341,8 +1878,7 @@ function renderSavedWords() {
                 ${svgBookLarge()}
                 <h3>Пока пусто</h3>
                 <p>Добавляй слова из мемов<br>нажимая на кнопку + рядом со словом</p>
-            </div>
-        `;
+            </div>`;
         return;
     }
 
@@ -1358,8 +1894,7 @@ function renderSavedWords() {
             </div>
             <button class="sw-remove" onclick="removeWord('${id}')">
                 ${svgTrash()}
-            </button>
-        `;
+            </button>`;
         container.appendChild(card);
     });
 }
@@ -1392,9 +1927,7 @@ function createCard(meme) {
             </div>
             <span class="diff-badge ${diff.cls}">${diff.label}</span>
         </div>
-
         <div class="meme-text">${formattedText}</div>
-
         <div class="meme-img-wrap">
             <img class="meme-img" src="${meme.image}" alt="meme"
                 onerror="this.style.display='none';this.nextElementSibling.classList.add('show')">
@@ -1405,14 +1938,14 @@ function createCard(meme) {
                 <small>Картинки могут долго загружаться</small>
             </div>
         </div>
-
         <div class="translation-block">
             <button class="trans-toggle" id="ttoggle-${meme.id}" onclick="toggleTrans(${meme.id})">
                 <div class="trans-toggle-left">
                     ${svgTranslate()}
                     <span>Показать перевод</span>
                 </div>
-                <svg class="chevron" id="tchev-${meme.id}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <svg class="chevron" id="tchev-${meme.id}" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"/>
                 </svg>
             </button>
@@ -1423,7 +1956,6 @@ function createCard(meme) {
                 </div>
             </div>
         </div>
-
         <div class="words-section">
             <button class="words-toggle" id="wtoggle-${meme.id}" onclick="toggleWords(${meme.id})">
                 <div class="toggle-left">
@@ -1431,7 +1963,8 @@ function createCard(meme) {
                     <span>Слова из мема</span>
                     <span class="words-pill">${meme.words.length}</span>
                 </div>
-                <svg class="chevron" id="chev-${meme.id}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <svg class="chevron" id="chev-${meme.id}" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <polyline points="6 9 12 15 18 9"/>
                 </svg>
             </button>
@@ -1450,8 +1983,7 @@ function createCard(meme) {
                     </div>
                 `).join('')}
             </div>
-        </div>
-    `;
+        </div>`;
 
     document.getElementById('feed-container').appendChild(card);
     viewedCount++;
@@ -1461,9 +1993,9 @@ function createCard(meme) {
 function toggleTrans(id) {
     document.getElementById(`tbody-${id}`).classList.toggle('open');
     document.getElementById(`tchev-${id}`).classList.toggle('open');
-    const toggle = document.getElementById(`ttoggle-${id}`);
     const isOpen = document.getElementById(`tbody-${id}`).classList.contains('open');
-    toggle.querySelector('span').textContent = isOpen ? 'Скрыть перевод' : 'Показать перевод';
+    document.getElementById(`ttoggle-${id}`).querySelector('span').textContent =
+        isOpen ? 'Скрыть перевод' : 'Показать перевод';
 }
 
 function toggleWords(id) {
@@ -1472,12 +2004,11 @@ function toggleWords(id) {
     document.getElementById(`wtoggle-${id}`).classList.toggle('open');
 }
 
-// ── INFINITE SCROLL (бесконечная лента) ──
+// ── INFINITE SCROLL ──
 function loadMore() {
     if (isLoading) return;
     isLoading = true;
 
-    // Если показали все мемы - перемешиваем снова
     if (currentIndex >= filteredMemes.length) {
         filteredMemes = shuffleArray(filteredMemes);
         currentIndex = 0;
@@ -1510,25 +2041,20 @@ function renderQuizStart() {
     if (savedWords.size < 4) {
         container.innerHTML = `
             <div class="quiz-start">
-                <div class="quiz-start-icon">
-                    ${svgQuiz()}
-                </div>
+                <div class="quiz-start-icon">${svgQuiz()}</div>
                 <h2>Квиз</h2>
                 <p>Добавь минимум 4 слова из мемов<br>чтобы начать квиз!<br><br>
                 Сейчас добавлено: <strong>${savedWords.size}</strong> слов</p>
                 <button class="quiz-start-btn" onclick="switchPage('memes')">
                     Добавить слова
                 </button>
-            </div>
-        `;
+            </div>`;
         return;
     }
 
     container.innerHTML = `
         <div class="quiz-start">
-            <div class="quiz-start-icon">
-                ${svgQuiz()}
-            </div>
+            <div class="quiz-start-icon">${svgQuiz()}</div>
             <h2>Квиз</h2>
             <p>Проверь как хорошо ты запомнил слова из мемов!<br><br>
             Доступно слов: <strong>${savedWords.size}</strong><br>
@@ -1536,8 +2062,7 @@ function renderQuizStart() {
             <button class="quiz-start-btn" onclick="startQuiz()">
                 Начать квиз 🚀
             </button>
-        </div>
-    `;
+        </div>`;
 }
 
 function startQuiz() {
@@ -1555,14 +2080,12 @@ function renderQuizQuestion() {
 
     const container = document.getElementById('quiz-container');
     const word = quizWords[quizIndex];
-    const progress = ((quizIndex) / quizWords.length * 100).toFixed(0);
+    const progress = (quizIndex / quizWords.length * 100).toFixed(0);
 
-    // Генерируем варианты ответов
     const allWords = [...savedWords.values()];
     const wrongOptions = shuffleArray(
         allWords.filter(w => w.id !== word.id)
     ).slice(0, 3);
-
     const options = shuffleArray([word, ...wrongOptions]);
 
     container.innerHTML = `
@@ -1572,22 +2095,20 @@ function renderQuizQuestion() {
                 <span class="quiz-score">✅ ${quizScore}</span>
             </div>
             <div class="quiz-progress-bar">
-                <div class="quiz-progress-fill" style="width: ${progress}%"></div>
+                <div class="quiz-progress-fill" style="width:${progress}%"></div>
             </div>
             <div class="quiz-question">
                 <div class="quiz-question-label">Переведи слово</div>
                 <div class="quiz-word">${word.en}</div>
             </div>
-            <div class="quiz-options">
-                ${options.map(opt => `
-                    <button class="quiz-option"
-                        onclick="checkAnswer('${opt.id}', '${word.id}', this)">
+            <div class="quiz-options" id="quiz-opts">
+                ${options.map((opt, i) => `
+                    <button class="quiz-option" data-id="${opt.id}" onclick="checkAnswer('${opt.id}','${word.id}',this)">
                         ${opt.ru}
                     </button>
                 `).join('')}
             </div>
         </div>
-
         <div class="support-banner">
             <div class="support-banner-left">
                 <div class="support-banner-icon">
@@ -1600,9 +2121,8 @@ function renderQuizQuestion() {
                     <small>Помогите нам расти!</small>
                 </div>
             </div>
-            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
-        </div>
-    `;
+            <button class="support-btn" onclick="openDonatePopup()">Донат ❤️</button>
+        </div>`;
 }
 
 function checkAnswer(selectedId, correctId, btn) {
@@ -1615,11 +2135,8 @@ function checkAnswer(selectedId, correctId, btn) {
         showToast('✅ Правильно!');
     } else {
         btn.classList.add('wrong');
-        // Показываем правильный ответ
         options.forEach(opt => {
-            if (opt.onclick.toString().includes(correctId)) {
-                opt.classList.add('correct');
-            }
+            if (opt.dataset.id === correctId) opt.classList.add('correct');
         });
         showToast('❌ Неправильно');
     }
@@ -1633,9 +2150,7 @@ function checkAnswer(selectedId, correctId, btn) {
 function renderQuizResult() {
     const container = document.getElementById('quiz-container');
     const percent = Math.round(quizScore / quizWords.length * 100);
-
-    let emoji = '😅';
-    let msg = 'Нужно больше практики!';
+    let emoji = '😅', msg = 'Нужно больше практики!';
     if (percent >= 80) { emoji = '🔥'; msg = 'Отличный результат!'; }
     else if (percent >= 60) { emoji = '👍'; msg = 'Хороший результат!'; }
 
@@ -1646,12 +2161,9 @@ function renderQuizResult() {
                 <h2>${msg}</h2>
                 <div class="quiz-result-score">${quizScore}/${quizWords.length}</div>
                 <p>${percent}% правильных ответов</p>
-                <button class="quiz-restart-btn" onclick="startQuiz()">
-                    Ещё раз 🔄
-                </button>
+                <button class="quiz-restart-btn" onclick="startQuiz()">Ещё раз 🔄</button>
             </div>
         </div>
-
         <div class="bewords-banner">
             <div>
                 <p>Хочешь выучить больше слов?</p>
@@ -1659,7 +2171,6 @@ function renderQuizResult() {
             </div>
             <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
         </div>
-
         <div class="support-banner">
             <div class="support-banner-left">
                 <div class="support-banner-icon">
@@ -1672,9 +2183,8 @@ function renderQuizResult() {
                     <small>Помогите нам расти!</small>
                 </div>
             </div>
-            <a href="https://pay.cloudtips.ru/p/8f56d7d3" target="_blank" class="support-btn">Донат ❤️</a>
-        </div>
-    `;
+            <button class="support-btn" onclick="openDonatePopup()">Донат ❤️</button>
+        </div>`;
 }
 
 // ── SVG ICONS ──
@@ -1711,7 +2221,9 @@ buildFilteredList();
 loadMore();
 setupInfiniteScroll();
 updateProfile();
-</script>
 
+// Проверяем офлайн при старте
+if (!isOnline) showOfflineOverlay();
+</script>
 </body>
 </html>
