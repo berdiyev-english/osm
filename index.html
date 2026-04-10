@@ -2283,21 +2283,66 @@ function svgSpeaker() {
     </svg>`;
 }
 
-function speakWord(word) {
-    const encoded = encodeURIComponent(word);
-    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=${encoded}`;
+function speakWord(word, btnEl) {
+    document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('playing'));
+    btnEl.classList.add('playing');
 
     if (window._currentAudio) {
         window._currentAudio.pause();
         window._currentAudio = null;
     }
 
-    const audio = new Audio(url);
+    const encoded = encodeURIComponent(word);
+    
+    // Просто создаём Audio элемент — браузер сам делает запрос
+    // как будто ты открыл ссылку — CORS не срабатывает!
+    const audio = new Audio();
+    audio.crossOrigin = null; // важно! убираем cors заголовок
+    audio.src = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=${encoded}`;
+    
     window._currentAudio = audio;
 
-    audio.play().catch(() => {
-        showToast('🔇 Озвучка недоступна офлайн');
+    audio.play().then(() => {
+        // играет!
+    }).catch(err => {
+        console.log(err);
+        btnEl.classList.remove('playing');
+        // фолбэк на Web Speech
+        fallbackSpeak(word, btnEl);
     });
+
+    audio.onended = () => {
+        btnEl.classList.remove('playing');
+        window._currentAudio = null;
+    };
+
+    audio.onerror = () => {
+        btnEl.classList.remove('playing');
+        fallbackSpeak(word, btnEl);
+    };
+}
+
+function fallbackSpeak(word, btnEl) {
+    if (!('speechSynthesis' in window)) {
+        showToast('🔇 Озвучка недоступна');
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+    btnEl.classList.add('playing');
+
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang.startsWith('en'));
+    if (englishVoice) utterance.voice = englishVoice;
+
+    utterance.onend = () => btnEl.classList.remove('playing');
+    utterance.onerror = () => btnEl.classList.remove('playing');
+    
+    window.speechSynthesis.speak(utterance);
 }
 
 // ── СТАРТ ──
