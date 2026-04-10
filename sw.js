@@ -6,12 +6,12 @@ const STATIC_ASSETS = [
   '/index.html',
   '/memes.js',
   '/manifest.json',
-  '/icon/icon-192.png',
-  '/icon/icon-512.png',
-  '/icon/apple-touch-icon.png',
-  '/icon/favicon.ico',
-  '/icon/favicon.svg',
-  '/icon/favicon-96x96.png'
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/apple-touch-icon.png',
+  '/icons/favicon.ico',
+  '/icons/favicon.svg',
+  '/icons/favicon-96x96.png'
 ];
 
 // Установка — кешируем статику
