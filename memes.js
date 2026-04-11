@@ -1410,11 +1410,11 @@ const MEMES_DB = [
 {
     id: 107,
     image: BASE3 + "angry/Angry kid.jpg",
-    text: "When someone touches the thermostat\nwithout asking:\nYou have crossed the line",
-    translation: "Когда кто-то трогает термостат\nне спросив:\nТы перешёл черту",
+    text: "When someone touches the air conditioner\nwithout asking:\nYou have crossed the line",
+    translation: "Когда кто-то трогает кондиционер ()\nне спросив:\nТы перешёл черту",
     difficulty: "medium",
     words: [
-        { id: "w107_1", en: "thermostat", ru: "термостат, регулятор температуры" },
+        { id: "w107_1", en: "air conditioner", ru: "кондиционер, регулятор температуры" },
         { id: "w107_2", en: "without asking", ru: "не спросив" },
         { id: "w107_3", en: "crossed the line", ru: "перешёл черту" },
         { id: "w107_4", en: "touches", ru: "трогает, касается" }
