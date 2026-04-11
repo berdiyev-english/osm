@@ -4,7 +4,7 @@
   "description": "Учи английский через мемы! 300+ мемов с переводами, словарь и квиз.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#5cb85c",
+  "background_color": "#9cd4f5",
   "theme_color": "#0ea5e9",
   "orientation": "portrait",
   "lang": "ru",
