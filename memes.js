@@ -1,6 +1,6 @@
 const BASE1 = "https://raw.githubusercontent.com/georapbox/meme-generator/refs/heads/master/src/assets/meme-templates/";
 const BASE2 = "https://raw.githubusercontent.com/jacebrowning/memegen/refs/heads/main/templates/";
-const BASE3 = "https://berdiyev-english.github.io/osm/memes/"
+const BASE3 = "https://bemem.ru/memes/"
 
 const MEMES_DB = [
     {
