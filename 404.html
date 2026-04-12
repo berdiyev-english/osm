@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Мимо, господа!</title>
+    <style>
+        :root {
+            --bg-color: #f5a623;
+            --text-color: #3d1a05;
+            --accent-color: #ef4444;
+            --paper-color: rgba(255, 255, 255, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 50%, #f7b733 0%, #e8941a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Georgia', serif; /* Благородный шрифт */
+            color: var(--text-color);
+        }
+
+        .card {
+            background: var(--paper-color);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            border: 8px solid white;
+            outline: 2px solid var(--text-color);
+        }
+
+        .error-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .cat-bob {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            display: block;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        .btn {
+            background: var(--text-color);
+            color: #f5a623;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #000;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="error-badge">Ошибка 404</div>
+        
+        <img src="https://bememe.ru/bemem-404.png" alt="Кот Боб" class="cat-bob">
+        
+        <h1>Мимо, господа!</h1>
+        <p>Боб надел свой лучший цилиндр, но даже он не смог найти эту страницу. Похоже, она ушла пить английский чай и заблудилась.</p>
+        
+        <a href="/" class="btn">Вернуться на BeMem</a>
+        
+        <div class="footer">BeMem — Учи английский, не теряйся.</div>
+    </div>
+
+</body>
+</html>
