@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeMem — Упс, интернет сбежал</title>
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --card: #1a1a1a;
+            --card2: #222222;
+            --border: rgba(255,255,255,0.08);
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
+            --text: #f0f0f0;
+            --text2: #999;
+            --text3: #666;
+            --green: #22c55e;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow-x: hidden;
+        }
+
+        /* Фоновые точки */
+        .bg-dots {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Главная иконка */
+        .main-icon-wrap {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .main-icon {
+            width: 110px;
+            height: 110px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        /* Wifi иконка перечёркнутая */
+        .wifi-svg {
+            color: var(--text3);
+        }
+
+        /* Маленькие бейджи вокруг иконки */
+        .badge-float {
+            position: absolute;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text2);
+            white-space: nowrap;
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        .badge-float.b1 {
+            top: -8px;
+            right: -60px;
+            animation-delay: 0.5s;
+            color: var(--red);
+            border-color: rgba(239,68,68,0.2);
+            background: rgba(239,68,68,0.08);
+        }
+
+        .badge-float.b2 {
+            bottom: 10px;
+            left: -70px;
+            animation-delay: 1s;
+            color: var(--yellow);
+            border-color: rgba(245,158,11,0.2);
+            background: rgba(245,158,11,0.08);
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Заголовок */
+        .title {
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .title span { color: var(--accent); }
+
+        /* Мем-текст */
+        .meme-quote {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            width: 100%;
+            position: relative;
+        }
+
+        .meme-quote::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--card);
+            border-left: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .meme-quote p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .meme-quote strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* Карточки что доступно */
+        .available-cards {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .avail-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .avail-card.clickable {
+            cursor: pointer;
+        }
+
+        .avail-card.clickable:hover {
+            border-color: var(--accent);
+            background: rgba(14,165,233,0.05);
+            transform: translateX(4px);
+        }
+
+        .avail-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .avail-info { flex: 1; }
+
+        .avail-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .avail-sub {
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .avail-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .status-ok {
+            background: rgba(34,197,94,0.12);
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+
+        .status-no {
+            background: rgba(239,68,68,0.1);
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,0.15);
+        }
+
+        /* Кнопки */
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 4px 24px rgba(14,165,233,0.3);
+            transition: all 0.2s;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover { transform: scale(1.02); }
+        .btn-primary:active { transform: scale(0.98); }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text2);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Онлайн баннер */
+        .online-banner {
+            display: none;
+            width: 100%;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.25);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            animation: slideDown 0.4s ease;
+        }
+
+        .online-banner.show { display: flex; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .online-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        .online-go-btn {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .online-go-btn:hover { transform: scale(1.05); }
+
+        /* Счётчик попыток */
+        .retry-hint {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text3);
+            text-align: center;
+        }
+
+        .retry-hint span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Пульсирующая точка */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            display: inline-block;
+            animation: pulseDot 1.5s ease infinite;
+        }
+
+        .pulse-dot.online { background: var(--green); }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-dots"></div>
+
+<div class="content">
+
+    <!-- Онлайн баннер (появляется когда интернет вернулся) -->
+    <div class="online-banner" id="online-banner">
+        <div class="online-banner-left">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                <path d="M10.54 16.1a6 6 0 0 1 4.91 0"/>
+                <line x1="12" y1="20" x2="12.01" y2="20"/>
+            </svg>
+            Интернет вернулся! 🎉
+        </div>
+        <button class="online-go-btn" onclick="window.location.href='/'">
+            Вернуться
+        </button>
+    </div>
+
+    <!-- Главная иконка -->
+    <div class="main-icon-wrap">
+        <div class="main-icon">
+            <!-- Wifi OFF svg -->
+            <svg class="wifi-svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="1" y1="1" x2="23" y2="23" stroke="#ef4444" stroke-width="2"/>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55" stroke="#444"/>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39" stroke="#444"/>
+                <path d="M10.71 5.05A16 16 0 0 1 22.56 9" stroke="#444"/>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88" stroke="#444"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0" stroke="#555"/>
+                <line x1="12" y1="20" x2="12.01" y2="20" stroke="#666" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div class="badge-float b1">
+            <span class="pulse-dot"></span> &nbsp;No signal
+        </div>
+        <div class="badge-float b2">
+            404: WiFi not found
+        </div>
+    </div>
+
+    <!-- Заголовок -->
+    <h1 class="title">Интернета <span>нет</span> </h1>
+
+    <!-- Мем-цитата -->
+    <div class="meme-quote">
+        <p>
+            Интернет сейчас как тот друг который сказал<br>
+            <strong>«я уже выхожу»</strong> уже 20 минут назад 🚶
+        </p>
+    </div>
+
+    <!-- Что доступно -->
+    <div class="available-cards">
+
+        <div class="avail-card">
+            <div class="avail-icon" style="background:rgba(239,68,68,0.1)">
+                <!-- Grid icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+            </div>
+            <div class="avail-info">
+                <div class="avail-title">Мемы</div>
+                <div class="avail-sub">Картинки живут в интернете</div>
+            </div>
+            <div class="avail-status status-no">
+                <!-- X icon -->
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                Офлайн
+            </div>
+        </div>
+
+        <div class="avail-card clickable" onclick="goToApp('quiz')">
+            <div class="avail-icon" style="background:rgba(14,165,233,0.12)">
+                <!-- Quiz icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="avail-info">
+                <div class="avail-title">Квиз</div>
+                <div class="avail-sub">Проверь свои слова без сети</div>
+            </div>
+            <div class="avail-status status-ok">
+                <!-- Check icon -->
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Доступно
+            </div>
+        </div>
+
+        <div class="avail-card clickable" onclick="goToApp('words')">
+            <div class="avail-icon" style="background:rgba(34,197,94,0.12)">
+                <!-- Book icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <div class="avail-info">
+                <div class="avail-title">Мои слова</div>
+                <div class="avail-sub">Твой словарь всегда с тобой</div>
+            </div>
+            <div class="avail-status status-ok">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Доступно
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Кнопки -->
+    <button class="btn-primary" onclick="goToApp('quiz')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Открыть квиз
+    </button>
+
+    <button class="btn-secondary" onclick="retryConnection()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="retry-icon">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        Проверить соединение
+    </button>
+
+    <p class="retry-hint" id="retry-hint">
+        Статус: <span class="pulse-dot" id="status-dot"></span>
+        &nbsp;<span id="status-text">Нет соединения</span>
+    </p>
+
+</div>
+
+<script>
+    // Переход в приложение
+    function goToApp(tab) {
+        window.location.href = `/?tab=${tab}`;
+    }
+
+    // Проверка соединения
+    let retryCount = 0;
+
+    function retryConnection() {
+        const icon = document.getElementById('retry-icon');
+        const hint = document.getElementById('retry-hint');
+
+        // Анимация иконки
+        icon.style.animation = 'spin 0.6s linear';
+        setTimeout(() => icon.style.animation = '', 600);
+
+        retryCount++;
+
+        // Пробуем fetch маленького файла
+        fetch('/manifest.json?nocache=' + Date.now(), { cache: 'no-store' })
+            .then(() => {
+                // Есть интернет!
+                showOnlineBanner();
+            })
+            .catch(() => {
+                // Всё ещё офлайн
+                const msgs = [
+                    'Всё ещё нет... 😔',
+                    'Нет, не работает 🙄',
+                    'Интернет где ты?? 😤',
+                    'Может попробовать выключить и включить? 💡',
+                    'Ладно, подожди ещё немного... ⏳',
+                ];
+                document.getElementById('status-text').textContent =
+                    msgs[Math.min(retryCount - 1, msgs.length - 1)];
+            });
+    }
+
+    function showOnlineBanner() {
+        document.getElementById('online-banner').classList.add('show');
+        document.getElementById('status-dot').classList.add('online');
+        document.getElementById('status-text').textContent = 'Соединение восстановлено!';
+        document.getElementById('status-text').style.color = 'var(--green)';
+    }
+
+    // Автоматически слушаем появление интернета
+    window.addEventListener('online', showOnlineBanner);
+
+    // Спиннер для кнопки retry
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>
