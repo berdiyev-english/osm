@@ -12,6 +12,7 @@ const STATIC_ASSETS = [
   '/icons/favicon.ico',
   '/icons/favicon.svg',
   '/icons/favicon-96x96.png'
+  '/bemem-404.png'
 ];
 
 self.addEventListener('install', (event) => {
