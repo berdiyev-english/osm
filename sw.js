@@ -1,9 +1,9 @@
-const CACHE_NAME = 'bemem-v2';
+const CACHE_NAME = 'bemem-v4';
 
-// Кешируем только самое необходимое для офлайн работы
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/offline.html',
   '/memes.js',
   '/manifest.json',
   '/icons/icon-192.png',
@@ -14,7 +14,6 @@ const STATIC_ASSETS = [
   '/icons/favicon-96x96.png'
 ];
 
-// Установка — кешируем статику
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -23,7 +22,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Активация — чистим старые кеши
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
@@ -36,28 +34,20 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch — главная логика
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+  const dest = event.request.destination;
 
-  // Картинки мемов — ТОЛЬКО сеть, не кешируем
-  // Если нет сети — просто 503, overlay покажет JS
-  const isMemeImage =
-    url.hostname.includes('imgur') ||
-    url.hostname.includes('i.redd.it') ||
-    url.hostname.includes('preview.redd.it') ||
-    url.hostname.includes('external-preview.redd.it') ||
-    url.hostname.includes('i.ibb.co') ||
-    url.hostname.includes('imgflip.com');
-
-  if (isMemeImage) {
+  // ─── НИКОГДА не кешируем картинки ───
+  // destination === 'image' ловит ВСЕ картинки независимо от домена
+  if (dest === 'image') {
     event.respondWith(
       fetch(event.request).catch(() => new Response('', { status: 503 }))
     );
     return;
   }
 
-  // Google TTS — только сеть, не кешируем (звук онлайн)
+  // ─── Google TTS — только сеть ───
   if (url.hostname.includes('translate.google.com')) {
     event.respondWith(
       fetch(event.request).catch(() => new Response('', { status: 503 }))
@@ -65,13 +55,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Google Fonts — сеть + кеш
+  // ─── Google Fonts — сеть + кеш ───
   if (url.hostname.includes('fonts.googleapis.com') ||
       url.hostname.includes('fonts.gstatic.com')) {
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
         return fetch(event.request).then(response => {
+          // Шрифты кешируем — они текст, не тяжёлые картинки
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
           return response;
@@ -81,27 +72,37 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Всё остальное (HTML, JS, иконки) — Cache first
-  // Если офлайн и нет кеша — возвращаем index.html
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
+  // ─── Навигация — если офлайн показываем offline.html ───
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => caches.match('/offline.html'))
+    );
+    return;
+  }
 
-      return fetch(event.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME)
-            .then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => {
-        // Офлайн — отдаём главную страницу
-        // JS на странице сам покажет overlay
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
-        return new Response('', { status: 503 });
-      });
-    })
+  // ─── Статика нашего сайта — Cache first ───
+  // Кешируем ТОЛЬКО файлы с нашего домена
+  if (url.origin === self.location.origin) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        if (cached) return cached;
+
+        return fetch(event.request).then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        }).catch(() => new Response('', { status: 503 }));
+      })
+    );
+    return;
+  }
+
+  // ─── Всё остальное (внешние запросы) — только сеть, не кешируем ───
+  event.respondWith(
+    fetch(event.request).catch(() => new Response('', { status: 503 }))
   );
 });
