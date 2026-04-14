@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "ru.bemem.app",
+        "sha256_cert_fingerprints": ["2D:60:5B:60:55:D0:A8:17:57:58:4B:E8:42:E2:AA:94:18:26:85:8A:26:4F:D2:56:94:64:38:BB:AF:07:9D:15"]
+      }
+    }]
