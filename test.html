@@ -485,21 +485,126 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* ── FILTER BAR ── */
-        .filter-bar {
-            display: flex;
-            gap: 8px;
-            padding: 12px 14px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 62px;
-            z-index: 40;
-        }
+        /* ── FILTER DROPDOWN ── */
+.filter-dropdown-wrap {
+    position: relative;
+}
 
-        .filter-bar::-webkit-scrollbar { display: none; }
+.filter-icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: var(--text3);
+    flex-shrink: 0;
+}
+
+.filter-icon-btn:hover,
+.filter-icon-btn.active-filter {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(14,165,233,0.1);
+}
+
+/* Точка — активный фильтр */
+.filter-icon-btn .filter-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 1.5px solid var(--card);
+    display: none;
+}
+
+.filter-icon-btn.active-filter .filter-dot {
+    display: block;
+}
+
+.filter-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    min-width: 180px;
+    z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px) scale(0.96);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top right;
+}
+
+.filter-menu.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+}
+
+.filter-menu-title {
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-menu-item {
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+}
+
+.filter-menu-item:last-child {
+    border-bottom: none;
+}
+
+.filter-menu-item:hover {
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+}
+
+.filter-menu-item.selected {
+    color: var(--accent);
+    background: rgba(14,165,233,0.08);
+}
+
+.filter-menu-item .fmi-check {
+    margin-left: auto;
+    opacity: 0;
+    color: var(--accent);
+}
+
+.filter-menu-item.selected .fmi-check {
+    opacity: 1;
+}
+
 
         .filter-btn {
             padding: 7px 16px;
@@ -769,16 +874,17 @@
         }
 
         .img-error {
-            display: none;
-            width: 100%;
-            padding: 40px 20px;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--card2);
-            text-align: center;
-        }
+    display: none;
+    width: 100%;
+    padding: 40px 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;           
+    background: var(--card2);
+    text-align: center;
+    min-height: 160px; 
+}
 
         .img-error.show { display: flex; }
 
@@ -1694,6 +1800,61 @@
         </div>
         <div class="logo-text">Be<span>Mem</span></div>
     </div>
+    
+        <div style="display:flex;align-items:center;gap:8px;">
+        <!-- Кнопка фильтра -->
+        <div class="filter-dropdown-wrap" id="filter-wrap">
+            <button class="filter-icon-btn" id="filter-icon-btn" 
+                    onclick="toggleFilterMenu()" title="Фильтр">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" 
+                     stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="6" x2="20" y2="6"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                    <line x1="11" y1="18" x2="13" y2="18"/>
+                </svg>
+                <span class="filter-dot"></span>
+            </button>
+
+            <div class="filter-menu" id="filter-menu">
+                <div class="filter-menu-title">Уровень сложности</div>
+                <button class="filter-menu-item selected" data-filter="all" onclick="setFilterFromMenu('all', this)">
+                    <span>📋</span> Все мемы
+                    <svg class="fmi-check" width="14" height="14" viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <button class="filter-menu-item" data-filter="easy" onclick="setFilterFromMenu('easy', this)">
+                    <span>🟢</span> Легко
+                    <svg class="fmi-check" width="14" height="14" viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <button class="filter-menu-item" data-filter="medium" onclick="setFilterFromMenu('medium', this)">
+                    <span>🟡</span> Средне
+                    <svg class="fmi-check" width="14" height="14" viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <button class="filter-menu-item" data-filter="hard" onclick="setFilterFromMenu('hard', this)">
+                    <span>🔴</span> Сложно
+                    <svg class="fmi-check" width="14" height="14" viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <button class="filter-menu-item" data-filter="favorites" onclick="setFilterFromMenu('favorites', this)">
+                    <span>❤️</span> Избранные
+                    <svg class="fmi-check" width="14" height="14" viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
     <button class="header-donate-btn" onclick="openDonatePopup()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -1701,15 +1862,6 @@
         Поддержать
     </button>
 </header>
-
-<!-- FILTER BAR -->
-<div class="filter-bar" id="filter-bar">
-    <button class="filter-btn active" onclick="setFilter('all', this)">Все</button>
-    <button class="filter-btn" onclick="setFilter('easy', this)">🟢 Легко</button>
-    <button class="filter-btn" onclick="setFilter('medium', this)">🟡 Средне</button>
-    <button class="filter-btn" onclick="setFilter('hard', this)">🔴 Сложно</button>
-    <button class="filter-btn" onclick="setFilter('favorites', this)">❤️ Избранные</button>
-</div>
 
 <!-- PAGE: МЕМЫ -->
 <div class="page active" id="page-memes">
@@ -1967,9 +2119,6 @@ function switchPage(page) {
     document.getElementById('page-' + page).classList.add('active');
     document.getElementById('nav-' + page).classList.add('active');
 
-    document.getElementById('filter-bar').style.display =
-        page === 'memes' ? 'flex' : 'none';
-
     if (page === 'memes' && !isOnline) {
         showOfflineOverlay();
     } else {
@@ -1979,20 +2128,20 @@ function switchPage(page) {
     if (page === 'words') renderSavedWords();
     if (page === 'quiz') renderQuizStart();
     if (page === 'profile') updateProfile();
+    const filterWrap = document.getElementById('filter-wrap');
+if (filterWrap) {
+    filterWrap.style.display = page === 'memes' ? 'block' : 'none';
 }
 
 // ── FILTER ──
-function setFilter(level, btn) {
+function setFilter(level) {
     currentFilter = level;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
 
     document.getElementById('feed-container').innerHTML = '';
     currentIndex = 0;
 
     buildFilteredList();
 
-    // Если избранные и их нет — не запускаем скролл
     if (currentFilter === 'favorites' && filteredMemes.length === 0) {
         setupInfiniteScroll();
         return;
@@ -2086,6 +2235,47 @@ function loadFavorites() {
             JSON.parse(saved).forEach(id => favoriteMemes.add(String(id)));
         }
     } catch(e) {}
+}
+
+// ── FILTER MENU ──
+function toggleFilterMenu() {
+    const menu = document.getElementById('filter-menu');
+    const btn = document.getElementById('filter-icon-btn');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+
+    // Закрываем по клику снаружи
+    if (isOpen) {
+        setTimeout(() => {
+            document.addEventListener('click', closeFilterMenuOutside);
+        }, 10);
+    }
+}
+
+function closeFilterMenuOutside(e) {
+    const wrap = document.getElementById('filter-wrap');
+    if (!wrap.contains(e.target)) {
+        document.getElementById('filter-menu').classList.remove('open');
+        document.getElementById('filter-icon-btn').classList.remove('open');
+        document.removeEventListener('click', closeFilterMenuOutside);
+    }
+}
+
+function setFilterFromMenu(level, btn) {
+    // Убираем selected у всех
+    document.querySelectorAll('.filter-menu-item').forEach(i => i.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    // Точка на иконке если фильтр не "all"
+    const iconBtn = document.getElementById('filter-icon-btn');
+    iconBtn.classList.toggle('active-filter', level !== 'all');
+
+    // Закрываем меню
+    document.getElementById('filter-menu').classList.remove('open');
+    document.removeEventListener('click', closeFilterMenuOutside);
+
+    // Применяем фильтр
+    setFilter(level);
 }
 
 // ── SHARE ──
@@ -2248,6 +2438,22 @@ function createCard(meme) {
 
     const card = document.createElement('div');
     card.className = 'meme-card';
+    
+    // Заглушка картинки
+const imgErrorEmoji = isOnline ? '🖼️' : '📡';
+const imgErrorTitle = isOnline ? 'Картинка недоступна' : 'Нет интернета';
+const imgErrorSub   = isOnline ? 'Возможно нужен VPN' : 'Картинки загружаются только онлайн';
+const imgErrorAction = isOnline
+    ? `<div class="vpn-badge">
+           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+           </svg>
+           Попробуй VPN
+       </div>`
+    : `<button onclick="goToQuizOffline()" style="background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
+           Пройти квиз офлайн 🧠
+       </button>`;
 
     // Строим HTML карточки
     card.innerHTML = `
@@ -2276,28 +2482,14 @@ function createCard(meme) {
         <div class="meme-text">${formattedText}</div>
 
         <div class="meme-img-wrap">
-            <img class="meme-img" src="${meme.image}" alt="meme #${meme.id}" loading="lazy">
-            <div class="img-error">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5">
-                    <line x1="1" y1="1" x2="23" y2="23"/>
-                    <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
-                    <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
-                    <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
-                    <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
-                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                    <line x1="12" y1="20" x2="12.01" y2="20"/>
-                </svg>
-                <p>Не удалось загрузить картинку</p>
-                <div class="vpn-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    Включите VPN
-                </div>
-                <small>Картинки могут долго загружаться</small>
-            </div>
-        </div>
+    <img class="meme-img" src="${meme.image}" alt="meme #${meme.id}" loading="lazy">
+    <div class="img-error">
+        <div style="font-size:48px;margin-bottom:8px">${imgErrorEmoji}</div>
+        <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">${imgErrorTitle}</p>
+        <p style="font-size:13px;color:var(--text3);margin-bottom:12px">${imgErrorSub}</p>
+        ${imgErrorAction}
+    </div>
+</div>
 
         <div class="translation-block">
             <button class="trans-toggle" id="ttoggle-${meme.id}">
@@ -2347,9 +2539,15 @@ function createCard(meme) {
     // Вешаем обработчики через addEventListener (без inline onclick)
     const img = card.querySelector('.meme-img');
     img.addEventListener('error', () => {
-        img.style.display = 'none';
-        card.querySelector('.img-error').classList.add('show');
-    });
+    img.style.display = 'none';
+    const errBlock = card.querySelector('.img-error');
+    errBlock.classList.add('show');
+    
+    // Показываем тост только если офлайн
+    if (!isOnline) {
+        showToast('📡 Нет интернета — картинка недоступна');
+    }
+});
 
     card.querySelector('.fav-btn').addEventListener('click', function() {
         toggleFavorite(meme.id, this);
@@ -2428,14 +2626,15 @@ function toggleWords(id) {
 // ── INFINITE SCROLL ──
 function loadMore() {
     if (isLoading || filteredMemes.length === 0) return;
-    isLoading = true;
 
+    // Для избранных — не зацикливаем
     if (currentIndex >= filteredMemes.length) {
-        // Перемешиваем и начинаем сначала
+        if (currentFilter === 'favorites') return; // стоп
         filteredMemes = shuffleArray(filteredMemes);
         currentIndex = 0;
     }
 
+    isLoading = true;
     const end = Math.min(currentIndex + PER_PAGE, filteredMemes.length);
     for (let i = currentIndex; i < end; i++) {
         createCard(filteredMemes[i]);
@@ -2637,57 +2836,114 @@ function renderQuizResult() {
 // ── SPEAK ──
 function speakWord(word, btnEl) {
     document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('playing'));
-    btnEl.classList.add('playing');
 
     if (window._currentAudio) {
         window._currentAudio.pause();
         window._currentAudio = null;
     }
+    if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+    }
+
+    btnEl.classList.add('playing');
 
     const encoded = encodeURIComponent(word);
     const audio = new Audio();
+    // Без crossOrigin — иначе браузер добавляет CORS заголовок и Google блокирует
     audio.src = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=' + encoded;
-
     window._currentAudio = audio;
 
-    audio.play()
-        .catch(() => {
-            btnEl.classList.remove('playing');
-            fallbackSpeak(word, btnEl);
-        });
+    // Таймаут — если Google TTS не ответил за 3 сек, падаем на синтез
+    const gttsFallbackTimer = setTimeout(() => {
+        audio.pause();
+        window._currentAudio = null;
+        console.log('Google TTS timeout — fallback to speechSynthesis');
+        fallbackSpeak(word, btnEl);
+    }, 1500);
+
+    audio.oncanplaythrough = () => {
+        clearTimeout(gttsFallbackTimer);
+    };
 
     audio.onended = () => {
+        clearTimeout(gttsFallbackTimer);
         btnEl.classList.remove('playing');
         window._currentAudio = null;
     };
 
     audio.onerror = () => {
-        btnEl.classList.remove('playing');
+        clearTimeout(gttsFallbackTimer);
+        console.log('Google TTS error — fallback to speechSynthesis');
+        window._currentAudio = null;
         fallbackSpeak(word, btnEl);
     };
+
+    audio.play().catch(() => {
+        clearTimeout(gttsFallbackTimer);
+        console.log('Google TTS play() blocked — fallback to speechSynthesis');
+        window._currentAudio = null;
+        fallbackSpeak(word, btnEl);
+    });
 }
 
 function fallbackSpeak(word, btnEl) {
     if (!('speechSynthesis' in window)) {
+        btnEl.classList.remove('playing');
         showToast('🔇 Озвучка недоступна');
         return;
     }
 
     window.speechSynthesis.cancel();
-    btnEl.classList.add('playing');
 
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
+    const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        const voices = window.speechSynthesis.getVoices();
+        const engVoice = voices.find(v => v.lang === 'en-US')
+                      || voices.find(v => v.lang === 'en-GB')
+                      || voices.find(v => v.lang.startsWith('en'));
+        if (engVoice) utterance.voice = engVoice;
+
+        // Защита от зависания
+        const timeout = setTimeout(() => {
+            btnEl.classList.remove('playing');
+        }, 5000);
+
+        utterance.onend = () => {
+            clearTimeout(timeout);
+            btnEl.classList.remove('playing');
+        };
+
+        utterance.onerror = (e) => {
+            clearTimeout(timeout);
+            btnEl.classList.remove('playing');
+            if (e.error !== 'interrupted') {
+                showToast('🔇 Не удалось воспроизвести');
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
+    };
 
     const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(v => v.lang.startsWith('en'));
-    if (englishVoice) utterance.voice = englishVoice;
-
-    utterance.onend = () => btnEl.classList.remove('playing');
-    utterance.onerror = () => btnEl.classList.remove('playing');
-
-    window.speechSynthesis.speak(utterance);
+    if (voices.length > 0) {
+        speak();
+    } else {
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.onvoiceschanged = null;
+            speak();
+        };
+        setTimeout(() => {
+            if (btnEl.classList.contains('playing')) {
+                window.speechSynthesis.onvoiceschanged = null;
+                speak();
+            }
+        }, 300);
+    }
 }
 
 // ── SVG ICONS ──
