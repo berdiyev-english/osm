@@ -2443,14 +2443,14 @@ function createCard(meme) {
     // Заглушка картинки
 const imgErrorEmoji = isOnline ? '🖼️' : '📡';
 const imgErrorTitle = isOnline ? 'Картинка недоступна' : 'Нет интернета';
-const imgErrorSub   = isOnline ? 'Возможно нужен VPN' : 'Картинки загружаются только онлайн';
+const imgErrorSub   = isOnline ? 'Нет соединения с интернетом' : 'Картинки загружаются только онлайн';
 const imgErrorAction = isOnline
     ? `<div class="vpn-badge">
            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
            </svg>
-           Попробуй VPN
+           Проверь подключение еще раз
        </div>`
     : `<button onclick="goToQuizOffline()" style="background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
            Пройти квиз офлайн 🧠
