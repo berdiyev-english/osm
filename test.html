@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>BeMem — Учи английский через мемы | БиМем</title>
+    <meta name="description" content="BeMem (БиМем) — учи английский язык через мемы бесплатно. 300+ мемов с переводами, словарь и квиз. Bemem — запоминай слова играючи!">
+    <meta name="keywords" content="bemem, бимем, bememes, бимемес, учить английский мемы, мемы английский язык, английский через мемы, учи английский бесплатно, bemem английский">
+    <meta name="author" content="BeMem">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bemem.ru/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BeMem — Учи английский через мемы">
+    <meta property="og:description" content="БиМем — 300+ мемов для изучения английского. Словарь, квиз, переводы. Bemem это весело!">
+    <meta property="og:url" content="https://bemem.ru/">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="BeMem">
+    <meta property="og:image" content="https://bemem.ru/icons/icon-512.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BeMem — Английский через мемы">
+    <meta name="twitter:description" content="БиМем — учи английский весело! 300+ мемов, словарь, квиз.">
+    <meta name="twitter:image" content="https://bemem.ru/icons/icon-512.png">
+
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Apple / iOS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BeMem">
+
+    <!-- Android / PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="BeMem">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "BeMem",
+      "alternateName": ["БиМем", "Bememes", "БиМемес", "BeMemes"],
+      "description": "Учи английский язык через мемы. 300+ мемов с переводами, словарь и квиз.",
+      "url": "https://bemem.ru",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "ru",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "BeMem"
+      }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --card: #1a1a1a;
+            --card2: #222222;
+            --border: rgba(255,255,255,0.08);
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
+            --text: #f0f0f0;
+            --text2: #999;
+            --text3: #666;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --nav-h: 65px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding-bottom: var(--nav-h);
+        }
+
+        header {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span { color: var(--accent); }
+
+        /* ── DONATE HEADER BUTTON ── */
+        .header-donate-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 12px rgba(239,68,68,0.3);
+        }
+
+        .header-donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(239,68,68,0.4);
+        }
+
+        /* ── DONATE POPUP ── */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup-sheet {
+            background: var(--card);
+            border-radius: 24px 24px 0 0;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 0 0 32px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .popup-overlay.show .popup-sheet {
+            transform: translateY(0);
+        }
+
+        .popup-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 12px auto 0;
+        }
+
+        .popup-stage {
+            display: none;
+            padding: 24px 24px 0;
+        }
+
+        .popup-stage.active { display: block; }
+
+        .popup-joke { text-align: center; }
+
+        .popup-joke-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+            display: block;
+            animation: bounce 0.6s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+
+        .popup-joke h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .popup-joke p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .popup-joke .joke-label {
+            display: inline-block;
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .popup-joke-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(239,68,68,0.3);
+        }
+
+        .popup-joke-btn:hover { transform: scale(1.02); }
+
+        .popup-real { text-align: center; }
+
+        .popup-real-emoji {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .popup-real h2 {
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        .popup-story {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .popup-story p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .popup-story p:last-child { margin-bottom: 0; }
+        .popup-story strong { color: var(--text); }
+
+        .popup-story .highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(14,165,233,0.1);
+            border: 1px solid rgba(14,165,233,0.2);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 8px;
+            margin: 4px 4px 4px 0;
+        }
+
+        .donate-real-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+            transition: all 0.2s;
+        }
+
+        .donate-real-btn:hover { transform: scale(1.02); }
+
+        .popup-skip {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text3);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .popup-skip:hover {
+            border-color: var(--text3);
+            color: var(--text2);
+        }
+
+        .popup-thanks {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .popup-thankyou { text-align: center; }
+
+        .popup-thankyou .big-emoji {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 16px;
+            animation: heartbeat 0.8s ease infinite alternate;
+        }
+
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .popup-thankyou h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .popup-thankyou p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .close-popup-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── OFFLINE BANNER ── */
+        .offline-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .offline-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .offline-icon { font-size: 72px; margin-bottom: 20px; }
+
+        .offline-overlay h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .offline-overlay p {
+            font-size: 14px;
+            color: var(--text3);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            max-width: 300px;
+        }
+
+        .offline-tips {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .offline-tip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        .offline-tip:last-child { border-bottom: none; }
+
+        .offline-tip-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .offline-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── FILTER BAR ── */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 14px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 62px;
+            z-index: 40;
+        }
+
+        .filter-bar::-webkit-scrollbar { display: none; }
+
+        .filter-btn {
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── FEED ── */
+        .feed {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        /* ── SUPPORT BANNER ── */
+        .support-banner {
+            background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(56,189,248,0.1));
+            border: 1px solid rgba(14,165,233,0.2);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .support-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .support-banner-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(14,165,233,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .support-banner p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .support-banner small {
+            font-size: 11px;
+            color: var(--text3);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .support-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* ── BEWORDS BANNER ── */
+        .bewords-banner {
+            background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.06));
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .bewords-banner p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .bewords-banner small {
+            font-size: 11px;
+            color: var(--text3);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .bewords-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* ── MEME CARD ── */
+        .meme-card {
+            background: var(--card);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            padding: 13px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-num {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card-sub {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 1px;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .diff-badge {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .diff-easy {
+            background: rgba(34,197,94,0.12);
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+
+        .diff-medium {
+            background: rgba(245,158,11,0.12);
+            color: var(--yellow);
+            border: 1px solid rgba(245,158,11,0.2);
+        }
+
+        .diff-hard {
+            background: rgba(239,68,68,0.12);
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        /* ── FAV BUTTON ── */
+        .fav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text3);
+            flex-shrink: 0;
+        }
+
+        .fav-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: rgba(239,68,68,0.1);
+        }
+
+        .fav-btn.active {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: rgba(239,68,68,0.1);
+            animation: heartPop 0.3s ease;
+        }
+
+        @keyframes heartPop {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* ── SHARE BUTTON ── */
+        .share-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text3);
+            flex-shrink: 0;
+        }
+
+        .share-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.1);
+        }
+
+        .meme-text {
+            padding: 16px;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            background: var(--card2);
+        }
+
+        .meme-img-wrap { position: relative; background: #111; }
+
+        .meme-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #111;
+        }
+
+        .img-error {
+            display: none;
+            width: 100%;
+            padding: 40px 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--card2);
+            text-align: center;
+        }
+
+        .img-error.show { display: flex; }
+
+        .img-error p {
+            color: var(--text2);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .img-error small {
+            color: var(--text3);
+            font-size: 12px;
+        }
+
+        .vpn-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: var(--red);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ── TRANSLATION ── */
+        .translation-block { border-bottom: 1px solid var(--border); }
+
+        .trans-toggle {
+            width: 100%;
+            padding: 13px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+
+        .trans-toggle:hover { background: rgba(255,255,255,0.03); }
+
+        .trans-toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trans-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .trans-body.open { max-height: 500px; }
+
+        .trans-content {
+            padding: 14px 16px;
+            background: linear-gradient(135deg,rgba(14,165,233,0.08),rgba(56,189,248,0.05));
+            border-top: 1px solid var(--border);
+        }
+
+        .trans-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .trans-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.75;
+            font-weight: 400;
+            white-space: pre-line;
+        }
+
+        /* ── WORDS ── */
+        .words-toggle {
+            width: 100%;
+            padding: 13px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
+        }
+
+        .words-toggle:hover { background: rgba(255,255,255,0.03); }
+        .words-toggle.open { border-bottom-color: var(--border); }
+
+        .toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .words-pill {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .chevron {
+            transition: transform 0.3s;
+            color: var(--text3);
+        }
+
+        .chevron.open { transform: rotate(180deg); }
+
+        .words-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .words-body.open { max-height: 2000px; }
+
+        .word-row {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .word-row:last-child { border-bottom: none; }
+        .word-info { flex: 1; }
+
+        .word-en {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .word-ru { font-size: 12px; color: var(--text2); }
+
+        .speak-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            color: var(--text3);
+        }
+
+        .speak-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.1);
+        }
+
+        .speak-btn.playing {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.15);
+            animation: pulse 1s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .add-word-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            color: var(--text3);
+        }
+
+        .add-word-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.1);
+        }
+
+        .add-word-btn.added {
+            background: rgba(34,197,94,0.12);
+            border-color: rgba(34,197,94,0.3);
+            color: var(--green);
+        }
+
+        /* ── BOTTOM NAV ── */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-h);
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            color: var(--text3);
+            font-size: 11px;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-item.active { color: var(--accent); }
+
+        .nav-badge {
+            position: absolute;
+            top: 8px;
+            right: calc(50% - 18px);
+            background: var(--accent);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+
+        /* ── WORDS PAGE ── */
+        .words-page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        .page-header { margin-bottom: 20px; }
+
+        .page-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            color: var(--text3);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .saved-word-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .sw-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(56,189,248,0.2));
+            border: 1px solid rgba(14,165,233,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sw-info { flex: 1; }
+
+        .sw-en {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .sw-ru {
+            font-size: 13px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+
+        .sw-remove {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            transition: all 0.2s;
+        }
+
+        .sw-remove:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(239,68,68,0.08);
+        }
+
+        /* ── FAVORITES PAGE ── */
+        .fav-meme-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .fav-meme-card:hover { background: var(--card2); }
+
+        .fav-meme-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--red);
+        }
+
+        .fav-meme-info { flex: 1; min-width: 0; }
+
+        .fav-meme-num {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .fav-meme-text {
+            font-size: 12px;
+            color: var(--text3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fav-remove {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .fav-remove:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(239,68,68,0.08);
+        }
+
+        /* ── QUIZ PAGE ── */
+        .quiz-page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        .quiz-start {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .quiz-start-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .quiz-start h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .quiz-start p {
+            color: var(--text3);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .quiz-start-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.35);
+        }
+
+        .quiz-card {
+            background: var(--card);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .quiz-progress {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-progress-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text2);
+        }
+
+        .quiz-score { font-size: 13px; font-weight: 700; color: var(--accent); }
+
+        .quiz-progress-bar {
+            height: 4px;
+            background: var(--card2);
+            border-radius: 2px;
+            margin: 0 16px 14px;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-question {
+            padding: 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quiz-question-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-word {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .quiz-options {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 14px 12px;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(14,165,233,0.08);
+        }
+
+        .quiz-option.correct {
+            background: rgba(34,197,94,0.15);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .quiz-option.wrong {
+            background: rgba(239,68,68,0.12);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .quiz-option:disabled { cursor: not-allowed; }
+
+        .quiz-result {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .quiz-result h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .quiz-result-score {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 16px 0;
+        }
+
+        .quiz-result p {
+            color: var(--text3);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .quiz-restart-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── PROFILE PAGE ── */
+        .profile-page {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 16px 14px;
+        }
+
+        .profile-header {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-sub {
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .profile-stat {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 8px;
+            text-align: center;
+        }
+
+        .profile-stat-num {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-stat-label {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 4px;
+        }
+
+        .profile-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .profile-section-title {
+            padding: 14px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text2);
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-link {
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .profile-link:last-child { border-bottom: none; }
+        .profile-link:hover { background: rgba(255,255,255,0.03); }
+
+        .profile-link-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-link-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-link-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .profile-link-sub {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 1px;
+        }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state svg { color: var(--text3); margin-bottom: 16px; }
+        .empty-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .empty-state p { color: var(--text3); font-size: 14px; line-height: 1.6; }
+
+        /* ── PAGE ── */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: calc(var(--nav-h) + 16px);
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--card2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ── LOADER ── */
+        .loader {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text3);
+        }
+
+        .loader-spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader p {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- DONATE POPUP -->
+<div class="popup-overlay" id="donate-popup" onclick="handleOverlayClick(event)">
+    <div class="popup-sheet">
+        <div class="popup-handle"></div>
+
+        <!-- Стадия 1: Шутка -->
+        <div class="popup-stage active" id="stage-1">
+            <div class="popup-joke">
+                <span class="popup-joke-emoji">💸</span>
+                <span class="joke-label">⚠️ ВНИМАНИЕ</span>
+                <h2>Мы забираем ваши деньги!</h2>
+                <p>Нет, серьёзно. Прямо сейчас они уходят к нам.<br>
+                Это не мем — это реальность 😈</p>
+                <p style="font-size:12px;color:var(--text3);margin-bottom:20px">
+                    (ладно, ладно... пошутили 😅)
+                </p>
+                <button class="popup-joke-btn" onclick="nextStage()">
+                    Окей, и что на самом деле? 👀
+                </button>
+            </div>
+        </div>
+
+        <!-- Стадия 2: Настоящая просьба -->
+        <div class="popup-stage" id="stage-2">
+            <div class="popup-real">
+                <span class="popup-real-emoji">👨‍💻</span>
+                <h2>Один человек — весь проект</h2>
+                <div class="popup-story">
+                    <p>Привет! Я <strong>один</strong> разрабатываю BeMem в свободное время. Без команды, без инвесторов, без бюджета.</p>
+                    <p>Что я уже сделал:
+                        <br><span class="highlight">🎭 300+ мемов с переводами</span>
+                        <span class="highlight">📚 1500+ слов в словаре</span>
+                        <span class="highlight">🧠 Квиз для проверки</span>
+                        <span class="highlight">📱 PWA приложение</span>
+                    </p>
+                    <p>Любой донат — это мотивация добавить ещё больше мемов, улучшить квиз и сделать BeMem лучшим способом учить английский! 🚀</p>
+                </div>
+                <a href="https://pay.cloudtips.ru/p/8f56d7d3"
+                   target="_blank"
+                   class="donate-real-btn"
+                   onclick="onDonateBtnClick()">
+                    ❤️ Поддержать на кофе
+                </a>
+                <button class="popup-skip" onclick="closeDonatePopup()">
+                    Может в другой раз
+                </button>
+                <div class="popup-thanks">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Спасибо что пользуешься BeMem!
+                </div>
+            </div>
+        </div>
+
+        <!-- Стадия 3: Спасибо -->
+        <div class="popup-stage" id="stage-3">
+            <div class="popup-thankyou">
+                <span class="big-emoji">🥹</span>
+                <h2>Ты лучший!</h2>
+                <p>Серьёзно, каждый донат — это +100 к мотивации.<br>
+                Буду делать BeMem ещё лучше специально для тебя! ❤️</p>
+                <button class="close-popup-btn" onclick="closeDonatePopup()">
+                    Продолжить учить мемы 🎭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- OFFLINE OVERLAY -->
+<div class="offline-overlay" id="offline-overlay">
+    <div class="offline-icon">📡</div>
+    <h2>Нет интернета</h2>
+    <p>Мемы требуют подключения к сети.<br>
+    Но у тебя есть кое-что доступное офлайн!</p>
+
+    <div class="offline-tips">
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(34,197,94,0.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            ✅ Квиз — доступен офлайн
+        </div>
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(14,165,233,0.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            ✅ Мои слова — доступны офлайн
+        </div>
+        <div class="offline-tip">
+            <div class="offline-tip-icon" style="background:rgba(239,68,68,0.1)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+            </div>
+            ❌ Мемы — нужен интернет
+        </div>
+    </div>
+
+    <button class="offline-btn" onclick="goToQuizOffline()">
+        Пройти квиз офлайн 🧠
+    </button>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <div class="logo-icon" style="background:none;padding:0;overflow:hidden;">
+            <img src="/icons/icon-192.png" alt="BeMem"
+                style="width:34px;height:34px;border-radius:10px;display:block;object-fit:cover;">
+        </div>
+        <div class="logo-text">Be<span>Mem</span></div>
+    </div>
+    <button class="header-donate-btn" onclick="openDonatePopup()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        Поддержать
+    </button>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Все</button>
+    <button class="filter-btn" onclick="setFilter('easy', this)">🟢 Легко</button>
+    <button class="filter-btn" onclick="setFilter('medium', this)">🟡 Средне</button>
+    <button class="filter-btn" onclick="setFilter('hard', this)">🔴 Сложно</button>
+    <button class="filter-btn" onclick="setFilter('favorites', this)">❤️ Избранные</button>
+</div>
+
+<!-- PAGE: МЕМЫ -->
+<div class="page active" id="page-memes">
+    <div class="feed">
+        <div class="bewords-banner">
+            <div>
+                <p>Учите английский эффективнее</p>
+                <small>Переходите в BeWords →</small>
+            </div>
+            <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
+        </div>
+        <div id="feed-container"></div>
+    </div>
+</div>
+
+<!-- PAGE: СЛОВА -->
+<div class="page" id="page-words">
+    <div class="words-page">
+        <div class="page-header">
+            <h2>Мои слова</h2>
+            <p>Слова которые ты добавил для изучения</p>
+        </div>
+        <div id="saved-words-list"></div>
+    </div>
+</div>
+
+<!-- PAGE: QUIZ -->
+<div class="page" id="page-quiz">
+    <div class="quiz-page">
+        <div id="quiz-container"></div>
+    </div>
+</div>
+
+<!-- PAGE: ПРОФИЛЬ -->
+<div class="page" id="page-profile">
+    <div class="profile-page">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <div class="profile-name">BeMem</div>
+            <div class="profile-sub">Учи английский через мемы</div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="profile-stat-num" id="profile-viewed">0</div>
+                <div class="profile-stat-label">Просмотрено</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-num" id="profile-saved">0</div>
+                <div class="profile-stat-label">Слов добавлено</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-num" id="profile-fav">0</div>
+                <div class="profile-stat-label">В избранном</div>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-title">Проект</div>
+            <div class="profile-link" onclick="openDonatePopup()">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(239,68,68,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">Поддержать проект</div>
+                        <div class="profile-link-sub">Донат на развитие</div>
+                    </div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </div>
+            <a href="https://bewords.ru" target="_blank" class="profile-link">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(34,197,94,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">BeWords</div>
+                        <div class="profile-link-sub">Учи английский эффективнее</div>
+                    </div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-section-title">О приложении</div>
+            <div class="profile-link">
+                <div class="profile-link-left">
+                    <div class="profile-link-icon" style="background:rgba(14,165,233,0.15)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="profile-link-title">Версия 1.1</div>
+                        <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+    <button class="nav-item active" id="nav-memes" onclick="switchPage('memes')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Мемы
+    </button>
+    <button class="nav-item" id="nav-words" onclick="switchPage('words')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        Слова
+        <span class="nav-badge" id="words-badge" style="display:none">0</span>
+    </button>
+    <button class="nav-item" id="nav-quiz" onclick="switchPage('quiz')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Квиз
+    </button>
+    <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Профиль
+    </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── PWA SERVICE WORKER ──
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('SW registered'))
+            .catch(err => console.log('SW error:', err));
+    });
+}
+
+// ── OFFLINE DETECTION ──
+let isOnline = navigator.onLine;
+
+function checkOnlineStatus() {
+    isOnline = navigator.onLine;
+    if (!isOnline && currentPage === 'memes') {
+        showOfflineOverlay();
+    } else {
+        hideOfflineOverlay();
+    }
+}
+
+function showOfflineOverlay() {
+    document.getElementById('offline-overlay').classList.add('show');
+}
+
+function hideOfflineOverlay() {
+    document.getElementById('offline-overlay').classList.remove('show');
+}
+
+function goToQuizOffline() {
+    hideOfflineOverlay();
+    switchPage('quiz');
+}
+
+window.addEventListener('online', checkOnlineStatus);
+window.addEventListener('offline', checkOnlineStatus);
+
+// ── STATE ──
+let MEMES_DB = [];
+let currentFilter = 'all';
+let filteredMemes = [];
+let currentIndex = 0;
+const PER_PAGE = 4;
+
+// Используем строковые ключи везде для единообразия
+const savedWords = new Map();
+const favoriteMemes = new Set();
+
+let viewedMemeIds = new Set(); // уникальные просмотры
+let isLoading = false;
+let currentPage = 'memes';
+let scrollObserver = null;
+
+// ── QUIZ STATE ──
+let quizWords = [];
+let quizIndex = 0;
+let quizScore = 0;
+const QUIZ_LENGTH = 10;
+
+// ── POPUP ──
+function openDonatePopup() {
+    document.querySelectorAll('.popup-stage').forEach(s => s.classList.remove('active'));
+    document.getElementById('stage-1').classList.add('active');
+    document.getElementById('donate-popup').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDonatePopup() {
+    document.getElementById('donate-popup').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+function nextStage() {
+    document.getElementById('stage-1').classList.remove('active');
+    document.getElementById('stage-2').classList.add('active');
+}
+
+function onDonateBtnClick() {
+    setTimeout(() => {
+        document.getElementById('stage-2').classList.remove('active');
+        document.getElementById('stage-3').classList.add('active');
+    }, 800);
+}
+
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('donate-popup')) {
+        closeDonatePopup();
+    }
+}
+
+// ── NAVIGATION ──
+function switchPage(page) {
+    currentPage = page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('nav-' + page).classList.add('active');
+
+    document.getElementById('filter-bar').style.display =
+        page === 'memes' ? 'flex' : 'none';
+
+    if (page === 'memes' && !isOnline) {
+        showOfflineOverlay();
+    } else {
+        hideOfflineOverlay();
+    }
+
+    if (page === 'words') renderSavedWords();
+    if (page === 'quiz') renderQuizStart();
+    if (page === 'profile') updateProfile();
+}
+
+// ── FILTER ──
+function setFilter(level, btn) {
+    currentFilter = level;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('feed-container').innerHTML = '';
+    currentIndex = 0;
+
+    buildFilteredList();
+
+    // Если избранные и их нет — не запускаем скролл
+    if (currentFilter === 'favorites' && filteredMemes.length === 0) {
+        setupInfiniteScroll();
+        return;
+    }
+
+    loadMore();
+    setupInfiniteScroll();
+}
+
+function buildFilteredList() {
+    if (currentFilter === 'favorites') {
+        filteredMemes = MEMES_DB.filter(m => favoriteMemes.has(String(m.id)));
+        if (filteredMemes.length === 0) {
+            document.getElementById('feed-container').innerHTML = `
+                <div class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <h3>Нет избранных</h3>
+                    <p>Нажми ❤️ на карточке мема<br>чтобы добавить в избранное</p>
+                </div>`;
+        }
+        return;
+    }
+
+    if (currentFilter === 'all') {
+        filteredMemes = [...MEMES_DB];
+    } else {
+        filteredMemes = MEMES_DB.filter(m => m.difficulty === currentFilter);
+    }
+
+    filteredMemes = shuffleArray(filteredMemes);
+}
+
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+// ── TOAST ──
+let toastTimer = null;
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ── DIFFICULTY ──
+function diffInfo(d) {
+    return {
+        easy:   { label: 'Начинающий', cls: 'diff-easy' },
+        medium: { label: 'Средний',    cls: 'diff-medium' },
+        hard:   { label: 'Продвинутый',cls: 'diff-hard' },
+    }[d] || { label: 'Начинающий', cls: 'diff-easy' };
+}
+
+// ── FAVORITES ──
+function toggleFavorite(memeId, btn) {
+    const key = String(memeId);
+    if (favoriteMemes.has(key)) {
+        favoriteMemes.delete(key);
+        btn.classList.remove('active');
+        btn.innerHTML = svgHeart(false);
+        showToast('Удалено из избранного');
+    } else {
+        favoriteMemes.add(key);
+        btn.classList.add('active');
+        btn.innerHTML = svgHeart(true);
+        showToast('❤️ Добавлено в избранное!');
+    }
+    saveFavorites();
+    updateProfile();
+}
+
+function saveFavorites() {
+    try {
+        localStorage.setItem('bemem_favorites', JSON.stringify([...favoriteMemes]));
+    } catch(e) {}
+}
+
+function loadFavorites() {
+    try {
+        const saved = localStorage.getItem('bemem_favorites');
+        if (saved) {
+            JSON.parse(saved).forEach(id => favoriteMemes.add(String(id)));
+        }
+    } catch(e) {}
+}
+
+// ── SHARE ──
+async function shareMeme(memeId) {
+    const meme = MEMES_DB.find(m => m.id === memeId);
+    if (!meme) return;
+
+    const shareText = meme.text.length > 80
+        ? meme.text.slice(0, 80) + '...'
+        : meme.text;
+
+    const shareData = {
+        title: 'BeMem — Учи английский через мемы',
+        text: shareText + '\n\n📚 Учи английский через мемы на bemem.ru',
+        url: 'https://bemem.ru/'
+    };
+
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+        } catch(err) {
+            // Пользователь отменил — не ошибка
+            if (err.name !== 'AbortError') {
+                fallbackShare();
+            }
+        }
+    } else {
+        fallbackShare();
+    }
+}
+
+function fallbackShare() {
+    const url = 'https://bemem.ru/';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url)
+            .then(() => showToast('🔗 Ссылка скопирована!'))
+            .catch(() => showToast('🔗 bemem.ru'));
+    } else {
+        showToast('🔗 bemem.ru');
+    }
+}
+
+// ── WORD SAVE/REMOVE ──
+function toggleWord(wordId, memeId) {
+    const key = String(wordId);
+    const meme = MEMES_DB.find(m => m.id === memeId);
+    if (!meme) return;
+
+    const word = meme.words.find(w => String(w.id) === key);
+    if (!word) return;
+
+    const btn = document.getElementById('wbtn-' + key);
+
+    if (savedWords.has(key)) {
+        savedWords.delete(key);
+        if (btn) {
+            btn.classList.remove('added');
+            btn.innerHTML = svgPlus();
+        }
+        showToast('Слово удалено');
+    } else {
+        savedWords.set(key, { ...word });
+        if (btn) {
+            btn.classList.add('added');
+            btn.innerHTML = svgCheck();
+        }
+        showToast('"' + word.en + '" добавлено!');
+    }
+
+    updateBadge();
+    updateProfile();
+}
+
+function updateBadge() {
+    const badge = document.getElementById('words-badge');
+    if (savedWords.size > 0) {
+        badge.style.display = 'flex';
+        badge.textContent = savedWords.size;
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function updateProfile() {
+    document.getElementById('profile-viewed').textContent = viewedMemeIds.size;
+    document.getElementById('profile-saved').textContent = savedWords.size;
+    document.getElementById('profile-fav').textContent = favoriteMemes.size;
+
+    if (MEMES_DB.length > 0) {
+        document.getElementById('profile-meme-count').textContent =
+            MEMES_DB.length + ' мемов • 1500+ слов';
+    }
+}
+
+// ── SAVED WORDS PAGE ──
+function renderSavedWords() {
+    const container = document.getElementById('saved-words-list');
+
+    if (savedWords.size === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <h3>Пока пусто</h3>
+                <p>Добавляй слова из мемов<br>нажимая на кнопку + рядом со словом</p>
+            </div>`;
+        return;
+    }
+
+    container.innerHTML = '';
+    savedWords.forEach((word, key) => {
+        const card = document.createElement('div');
+        card.className = 'saved-word-card';
+        card.innerHTML = `
+            <div class="sw-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <div class="sw-info">
+                <div class="sw-en">${escapeHtml(word.en)}</div>
+                <div class="sw-ru">${escapeHtml(word.ru)}</div>
+            </div>
+            <button class="sw-remove" title="Удалить">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14H6L5 6"/>
+                    <path d="M10 11v6"/><path d="M14 11v6"/>
+                    <path d="M9 6V4h6v2"/>
+                </svg>
+            </button>`;
+
+        card.querySelector('.sw-remove').addEventListener('click', () => removeWord(key));
+        container.appendChild(card);
+    });
+}
+
+function removeWord(key) {
+    savedWords.delete(key);
+    const btn = document.getElementById('wbtn-' + key);
+    if (btn) {
+        btn.classList.remove('added');
+        btn.innerHTML = svgPlus();
+    }
+    updateBadge();
+    updateProfile();
+    renderSavedWords();
+    showToast('Слово удалено');
+}
+
+// ── CREATE CARD ──
+function createCard(meme) {
+    const diff = diffInfo(meme.difficulty);
+    const memeIdStr = String(meme.id);
+    const isFav = favoriteMemes.has(memeIdStr);
+    const formattedText = escapeHtml(meme.text).replace(/\n/g, '<br>');
+
+    const card = document.createElement('div');
+    card.className = 'meme-card';
+
+    // Строим HTML карточки
+    card.innerHTML = `
+        <div class="card-header">
+            <div>
+                <div class="card-num">Мем #${meme.id}</div>
+                <div class="card-sub">${meme.words.length} слов для изучения</div>
+            </div>
+            <div class="card-actions">
+                <button class="share-btn" title="Поделиться">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                </button>
+                <button class="fav-btn ${isFav ? 'active' : ''}" title="В избранное">
+                    ${svgHeart(isFav)}
+                </button>
+                <span class="diff-badge ${diff.cls}">${diff.label}</span>
+            </div>
+        </div>
+
+        <div class="meme-text">${formattedText}</div>
+
+        <div class="meme-img-wrap">
+            <img class="meme-img" src="${meme.image}" alt="meme #${meme.id}" loading="lazy">
+            <div class="img-error">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5">
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                    <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+                    <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+                    <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+                    <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                    <line x1="12" y1="20" x2="12.01" y2="20"/>
+                </svg>
+                <p>Не удалось загрузить картинку</p>
+                <div class="vpn-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Включите VPN
+                </div>
+                <small>Картинки могут долго загружаться</small>
+            </div>
+        </div>
+
+        <div class="translation-block">
+            <button class="trans-toggle" id="ttoggle-${meme.id}">
+                <div class="trans-toggle-left">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/>
+                        <path d="M2 5h12"/><path d="M7 2h1"/>
+                        <path d="M22 22l-5-10-5 10"/>
+                        <path d="M14 18h6"/>
+                    </svg>
+                    <span>Показать перевод</span>
+                </div>
+                <svg class="chevron" id="tchev-${meme.id}" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+            <div class="trans-body" id="tbody-${meme.id}">
+                <div class="trans-content">
+                    <div class="trans-label">🇷🇺 Перевод</div>
+                    <div class="trans-text">${escapeHtml(meme.translation)}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="words-section">
+            <button class="words-toggle" id="wtoggle-${meme.id}">
+                <div class="toggle-left">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <span>Слова из мема</span>
+                    <span class="words-pill">${meme.words.length}</span>
+                </div>
+                <svg class="chevron" id="chev-${meme.id}" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+            <div class="words-body" id="wbody-${meme.id}">
+                <div id="words-list-${meme.id}"></div>
+            </div>
+        </div>
+    `;
+
+    // Вешаем обработчики через addEventListener (без inline onclick)
+    const img = card.querySelector('.meme-img');
+    img.addEventListener('error', () => {
+        img.style.display = 'none';
+        card.querySelector('.img-error').classList.add('show');
+    });
+
+    card.querySelector('.fav-btn').addEventListener('click', function() {
+        toggleFavorite(meme.id, this);
+    });
+
+    card.querySelector('.share-btn').addEventListener('click', () => {
+        shareMeme(meme.id);
+    });
+
+    card.querySelector('.trans-toggle').addEventListener('click', () => {
+        toggleTrans(meme.id);
+    });
+
+    card.querySelector('.words-toggle').addEventListener('click', () => {
+        toggleWords(meme.id);
+    });
+
+    // Строим список слов
+    const wordsList = card.querySelector('#words-list-' + meme.id);
+    meme.words.forEach(w => {
+        const key = String(w.id);
+        const row = document.createElement('div');
+        row.className = 'word-row';
+        row.innerHTML = `
+            <div class="word-info">
+                <div class="word-en">${escapeHtml(w.en)}</div>
+                <div class="word-ru">${escapeHtml(w.ru)}</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+                <button class="speak-btn" title="Произношение">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                    </svg>
+                </button>
+                <button class="add-word-btn ${savedWords.has(key) ? 'added' : ''}" id="wbtn-${key}">
+                    ${savedWords.has(key) ? svgCheck() : svgPlus()}
+                </button>
+            </div>`;
+
+        row.querySelector('.speak-btn').addEventListener('click', function() {
+            speakWord(w.en, this);
+        });
+
+        row.querySelector('.add-word-btn').addEventListener('click', () => {
+            toggleWord(w.id, meme.id);
+        });
+
+        wordsList.appendChild(row);
+    });
+
+    document.getElementById('feed-container').appendChild(card);
+
+    // Считаем уникальные просмотры
+    viewedMemeIds.add(memeIdStr);
+    updateProfile();
+}
+
+function toggleTrans(id) {
+    const body = document.getElementById('tbody-' + id);
+    const chev = document.getElementById('tchev-' + id);
+    const toggle = document.getElementById('ttoggle-' + id);
+    const isOpen = body.classList.toggle('open');
+    chev.classList.toggle('open', isOpen);
+    toggle.querySelector('span').textContent =
+        isOpen ? 'Скрыть перевод' : 'Показать перевод';
+}
+
+function toggleWords(id) {
+    document.getElementById('wbody-' + id).classList.toggle('open');
+    document.getElementById('chev-' + id).classList.toggle('open');
+    document.getElementById('wtoggle-' + id).classList.toggle('open');
+}
+
+// ── INFINITE SCROLL ──
+function loadMore() {
+    if (isLoading || filteredMemes.length === 0) return;
+    isLoading = true;
+
+    if (currentIndex >= filteredMemes.length) {
+        // Перемешиваем и начинаем сначала
+        filteredMemes = shuffleArray(filteredMemes);
+        currentIndex = 0;
+    }
+
+    const end = Math.min(currentIndex + PER_PAGE, filteredMemes.length);
+    for (let i = currentIndex; i < end; i++) {
+        createCard(filteredMemes[i]);
+    }
+    currentIndex = end;
+    isLoading = false;
+}
+
+function setupInfiniteScroll() {
+    // Удаляем старый sentinel
+    const old = document.getElementById('scroll-sentinel');
+    if (old) old.remove();
+    if (scrollObserver) scrollObserver.disconnect();
+
+    const sentinel = document.createElement('div');
+    sentinel.id = 'scroll-sentinel';
+    sentinel.style.height = '20px';
+    document.getElementById('feed-container').after(sentinel);
+
+    scrollObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) loadMore();
+    }, { rootMargin: '300px' });
+
+    scrollObserver.observe(sentinel);
+}
+
+// ── QUIZ ──
+function renderQuizStart() {
+    const container = document.getElementById('quiz-container');
+
+    if (savedWords.size < 4) {
+        container.innerHTML = `
+            <div class="quiz-start">
+                <div class="quiz-start-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <h2>Квиз</h2>
+                <p>Добавь минимум 4 слова из мемов<br>чтобы начать квиз!<br><br>
+                Сейчас добавлено: <strong>${savedWords.size}</strong> слов</p>
+                <button class="quiz-start-btn" onclick="switchPage('memes')">
+                    Добавить слова
+                </button>
+            </div>`;
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="quiz-start">
+            <div class="quiz-start-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <h2>Квиз</h2>
+            <p>Проверь как хорошо ты запомнил слова из мемов!<br><br>
+            Доступно слов: <strong>${savedWords.size}</strong><br>
+            Вопросов в раунде: <strong>${Math.min(QUIZ_LENGTH, savedWords.size)}</strong></p>
+            <button class="quiz-start-btn" onclick="startQuiz()">
+                Начать квиз 🚀
+            </button>
+        </div>`;
+}
+
+function startQuiz() {
+    quizWords = shuffleArray([...savedWords.values()]).slice(0, QUIZ_LENGTH);
+    quizIndex = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+    if (quizIndex >= quizWords.length) {
+        renderQuizResult();
+        return;
+    }
+
+    const container = document.getElementById('quiz-container');
+    const word = quizWords[quizIndex];
+    const progress = (quizIndex / quizWords.length * 100).toFixed(0);
+
+    // Берём неправильные варианты с уникальными переводами
+    const allWords = [...savedWords.values()];
+    const wrongPool = allWords.filter(w => String(w.id) !== String(word.id));
+    const wrongOptions = shuffleArray(wrongPool).slice(0, 3);
+    const options = shuffleArray([word, ...wrongOptions]);
+
+    container.innerHTML = `
+        <div class="quiz-card">
+            <div class="quiz-progress">
+                <span class="quiz-progress-text">Вопрос ${quizIndex + 1} из ${quizWords.length}</span>
+                <span class="quiz-score">✅ ${quizScore}</span>
+            </div>
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" style="width:${progress}%"></div>
+            </div>
+            <div class="quiz-question">
+                <div class="quiz-question-label">Переведи слово</div>
+                <div class="quiz-word">${escapeHtml(word.en)}</div>
+            </div>
+            <div class="quiz-options" id="quiz-opts"></div>
+        </div>
+        <div class="support-banner">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
+            </div>
+            <button class="support-btn" onclick="openDonatePopup()">Донат ❤️</button>
+        </div>`;
+
+    // Кнопки ответов через addEventListener
+    const optsContainer = document.getElementById('quiz-opts');
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = opt.ru;
+        btn.dataset.id = String(opt.id);
+        btn.addEventListener('click', function() {
+            checkAnswer(String(opt.id), String(word.id), this);
+        });
+        optsContainer.appendChild(btn);
+    });
+}
+
+function checkAnswer(selectedId, correctId, btn) {
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(opt => opt.disabled = true);
+
+    if (selectedId === correctId) {
+        btn.classList.add('correct');
+        quizScore++;
+        showToast('✅ Правильно!');
+    } else {
+        btn.classList.add('wrong');
+        options.forEach(opt => {
+            if (opt.dataset.id === correctId) opt.classList.add('correct');
+        });
+        showToast('❌ Неправильно');
+    }
+
+    setTimeout(() => {
+        quizIndex++;
+        renderQuizQuestion();
+    }, 1200);
+}
+
+function renderQuizResult() {
+    const container = document.getElementById('quiz-container');
+    const percent = Math.round(quizScore / quizWords.length * 100);
+    let emoji = '😅', msg = 'Нужно больше практики!';
+    if (percent >= 80) { emoji = '🔥'; msg = 'Отличный результат!'; }
+    else if (percent >= 60) { emoji = '👍'; msg = 'Хороший результат!'; }
+
+    container.innerHTML = `
+        <div class="quiz-card">
+            <div class="quiz-result">
+                <div style="font-size:48px;margin-bottom:8px">${emoji}</div>
+                <h2>${msg}</h2>
+                <div class="quiz-result-score">${quizScore}/${quizWords.length}</div>
+                <p>${percent}% правильных ответов</p>
+                <button class="quiz-restart-btn" onclick="startQuiz()">Ещё раз 🔄</button>
+            </div>
+        </div>
+        <div class="bewords-banner">
+            <div>
+                <p>Хочешь выучить больше слов?</p>
+                <small>Переходи в BeWords →</small>
+            </div>
+            <a href="https://bewords.ru" target="_blank" class="bewords-btn">BeWords</a>
+        </div>
+        <div class="support-banner">
+            <div class="support-banner-left">
+                <div class="support-banner-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <p>Поддержите проект</p>
+                    <small>Помогите нам расти!</small>
+                </div>
+            </div>
+            <button class="support-btn" onclick="openDonatePopup()">Донат ❤️</button>
+        </div>`;
+}
+
+// ── SPEAK ──
+function speakWord(word, btnEl) {
+    document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('playing'));
+    btnEl.classList.add('playing');
+
+    if (window._currentAudio) {
+        window._currentAudio.pause();
+        window._currentAudio = null;
+    }
+
+    const encoded = encodeURIComponent(word);
+    const audio = new Audio();
+    audio.src = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=' + encoded;
+
+    window._currentAudio = audio;
+
+    audio.play()
+        .catch(() => {
+            btnEl.classList.remove('playing');
+            fallbackSpeak(word, btnEl);
+        });
+
+    audio.onended = () => {
+        btnEl.classList.remove('playing');
+        window._currentAudio = null;
+    };
+
+    audio.onerror = () => {
+        btnEl.classList.remove('playing');
+        fallbackSpeak(word, btnEl);
+    };
+}
+
+function fallbackSpeak(word, btnEl) {
+    if (!('speechSynthesis' in window)) {
+        showToast('🔇 Озвучка недоступна');
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+    btnEl.classList.add('playing');
+
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang.startsWith('en'));
+    if (englishVoice) utterance.voice = englishVoice;
+
+    utterance.onend = () => btnEl.classList.remove('playing');
+    utterance.onerror = () => btnEl.classList.remove('playing');
+
+    window.speechSynthesis.speak(utterance);
+}
+
+// ── SVG ICONS ──
+function svgPlus() {
+    return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+}
+
+function svgCheck() {
+    return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+}
+
+function svgHeart(filled) {
+    const fill = filled ? '#ef4444' : 'none';
+    const stroke = filled ? '#ef4444' : 'currentColor';
+    return '<svg width="16" height="16" viewBox="0 0 24 24" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+}
+
+// Защита от XSS
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+// ── ЗАГРУЗКА МЕМОВ ──
+async function initApp() {
+    document.getElementById('feed-container').innerHTML = `
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <p>Загружаем мемы...</p>
+        </div>`;
+
+    try {
+        const res = await fetch('/memes.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        MEMES_DB = await res.json();
+        console.log('✅ Мемов загружено:', MEMES_DB.length);
+
+        document.getElementById('feed-container').innerHTML = '';
+
+        loadFavorites();
+        buildFilteredList();
+        loadMore();
+        setupInfiniteScroll();
+        updateProfile();
+
+        if (!isOnline) showOfflineOverlay();
+
+    } catch(err) {
+        console.error('Ошибка загрузки:', err);
+        document.getElementById('feed-container').innerHTML = `
+            <div class="empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <h3>Не удалось загрузить мемы</h3>
+                <p>Проверь подключение к интернету</p>
+                <button onclick="initApp()" style="
+                    margin-top:16px;
+                    background:var(--accent);
+                    color:#fff;
+                    border:none;
+                    padding:10px 24px;
+                    border-radius:10px;
+                    font-size:14px;
+                    font-weight:700;
+                    cursor:pointer;
+                    font-family:'Inter',sans-serif;">
+                    Попробовать снова
+                </button>
+            </div>`;
+    }
+}
+
+// ── СТАРТ ──
+initApp();
+</script>
+</body>
+</html>
