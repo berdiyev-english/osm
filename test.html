@@ -2834,7 +2834,6 @@ function renderQuizResult() {
         </div>`;
 }
 
-// ── SPEAK ──
 function speakWord(word, btnEl) {
     document.querySelectorAll('.speak-btn').forEach(b => b.classList.remove('playing'));
 
@@ -2848,55 +2847,24 @@ function speakWord(word, btnEl) {
 
     btnEl.classList.add('playing');
 
-    const encoded = encodeURIComponent(word);
-    const audio = new Audio();
-    // Без crossOrigin — иначе браузер добавляет CORS заголовок и Google блокирует
-    audio.src = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=' + encoded;
-    window._currentAudio = audio;
+    // Пробуем speechSynthesis СРАЗУ синхронно (iOS требует)
+    // Он будет готов как фолбэк если Google TTS не загрузится
+    let speechStarted = false;
+    let gttsWorked = false;
 
-    // Таймаут — если Google TTS не ответил за 3 сек, падаем на синтез
-    const gttsFallbackTimer = setTimeout(() => {
-        audio.pause();
-        window._currentAudio = null;
-        console.log('Google TTS timeout — fallback to speechSynthesis');
-        fallbackSpeak(word, btnEl);
-    }, 1500);
+    const tryFallback = () => {
+        if (gttsWorked) return; // Google TTS уже играет — не нужно
+        if (speechStarted) return; // уже запустили синтез
+        speechStarted = true;
 
-    audio.oncanplaythrough = () => {
-        clearTimeout(gttsFallbackTimer);
-    };
+        if (!('speechSynthesis' in window)) {
+            btnEl.classList.remove('playing');
+            showToast('🔇 Озвучка недоступна');
+            return;
+        }
 
-    audio.onended = () => {
-        clearTimeout(gttsFallbackTimer);
-        btnEl.classList.remove('playing');
-        window._currentAudio = null;
-    };
+        window.speechSynthesis.cancel();
 
-    audio.onerror = () => {
-        clearTimeout(gttsFallbackTimer);
-        console.log('Google TTS error — fallback to speechSynthesis');
-        window._currentAudio = null;
-        fallbackSpeak(word, btnEl);
-    };
-
-    audio.play().catch(() => {
-        clearTimeout(gttsFallbackTimer);
-        console.log('Google TTS play() blocked — fallback to speechSynthesis');
-        window._currentAudio = null;
-        fallbackSpeak(word, btnEl);
-    });
-}
-
-function fallbackSpeak(word, btnEl) {
-    if (!('speechSynthesis' in window)) {
-        btnEl.classList.remove('playing');
-        showToast('🔇 Озвучка недоступна');
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const speak = () => {
         const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = 'en-US';
         utterance.rate = 0.85;
@@ -2909,10 +2877,7 @@ function fallbackSpeak(word, btnEl) {
                       || voices.find(v => v.lang.startsWith('en'));
         if (engVoice) utterance.voice = engVoice;
 
-        // Защита от зависания
-        const timeout = setTimeout(() => {
-            btnEl.classList.remove('playing');
-        }, 5000);
+        const timeout = setTimeout(() => btnEl.classList.remove('playing'), 5000);
 
         utterance.onend = () => {
             clearTimeout(timeout);
@@ -2922,7 +2887,7 @@ function fallbackSpeak(word, btnEl) {
         utterance.onerror = (e) => {
             clearTimeout(timeout);
             btnEl.classList.remove('playing');
-            if (e.error !== 'interrupted') {
+            if (e.error !== 'interrupted' && e.error !== 'canceled') {
                 showToast('🔇 Не удалось воспроизвести');
             }
         };
@@ -2930,21 +2895,58 @@ function fallbackSpeak(word, btnEl) {
         window.speechSynthesis.speak(utterance);
     };
 
-    const voices = window.speechSynthesis.getVoices();
-    if (voices.length > 0) {
-        speak();
-    } else {
-        window.speechSynthesis.onvoiceschanged = () => {
-            window.speechSynthesis.onvoiceschanged = null;
-            speak();
-        };
-        setTimeout(() => {
-            if (btnEl.classList.contains('playing')) {
-                window.speechSynthesis.onvoiceschanged = null;
-                speak();
-            }
-        }, 300);
+    // Google TTS — пробуем в первую очередь
+    const encoded = encodeURIComponent(word);
+    const audio = new Audio();
+    audio.src = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q=' + encoded;
+    window._currentAudio = audio;
+
+    // Если Google TTS загрузился — останавливаем синтез и играем его
+    audio.oncanplaythrough = () => {
+        gttsWorked = true;
+        // Останавливаем синтез если он уже начался
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
+    };
+
+    audio.onended = () => {
+        btnEl.classList.remove('playing');
+        window._currentAudio = null;
+    };
+
+    audio.onerror = () => {
+        window._currentAudio = null;
+        tryFallback();
+    };
+
+    // Запускаем Google TTS
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                // Google TTS играет — отлично
+                gttsWorked = true;
+                if (window.speechSynthesis) {
+                    window.speechSynthesis.cancel();
+                }
+            })
+            .catch(() => {
+                // Google TTS заблокирован (iOS, нет VPN)
+                window._currentAudio = null;
+                tryFallback();
+            });
     }
+
+    // Таймаут — если Google TTS молчит 1.5 сек запускаем синтез
+    setTimeout(() => {
+        if (!gttsWorked) {
+            audio.pause();
+            window._currentAudio = null;
+            tryFallback();
+        }
+    }, 1500);
 }
 
 // ── SVG ICONS ──
