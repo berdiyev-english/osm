@@ -2030,6 +2030,54 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// ── ЛОКАЛЬНОЕ ХРАНИЛИЩЕ ──
+function saveToStorage() {
+    try {
+        // Сохраняем слова
+        const wordsArr = [];
+        savedWords.forEach((word, key) => {
+            wordsArr.push({ key, word });
+        });
+        localStorage.setItem('bemem_words', JSON.stringify(wordsArr));
+
+        // Сохраняем избранные
+        localStorage.setItem('bemem_favorites', JSON.stringify([...favoriteMemes]));
+
+        // Сохраняем просмотренные
+        localStorage.setItem('bemem_viewed', JSON.stringify([...viewedMemeIds]));
+
+    } catch(e) {
+        console.log('localStorage недоступен:', e);
+    }
+}
+
+function loadFromStorage() {
+    try {
+        // Загружаем слова
+        const wordsRaw = localStorage.getItem('bemem_words');
+        if (wordsRaw) {
+            JSON.parse(wordsRaw).forEach(({ key, word }) => {
+                savedWords.set(String(key), word);
+            });
+        }
+
+        // Загружаем избранные
+        const favsRaw = localStorage.getItem('bemem_favorites');
+        if (favsRaw) {
+            JSON.parse(favsRaw).forEach(id => favoriteMemes.add(String(id)));
+        }
+
+        // Загружаем просмотренные
+        const viewedRaw = localStorage.getItem('bemem_viewed');
+        if (viewedRaw) {
+            JSON.parse(viewedRaw).forEach(id => viewedMemeIds.add(String(id)));
+        }
+
+    } catch(e) {
+        console.log('Ошибка загрузки из localStorage:', e);
+    }
+}
+
 // ── OFFLINE DETECTION ──
 let isOnline = navigator.onLine;
 
@@ -2219,23 +2267,8 @@ function toggleFavorite(memeId, btn) {
         btn.innerHTML = svgHeart(true);
         showToast('❤️ Добавлено в избранное!');
     }
-    saveFavorites();
+    saveToStorage();
     updateProfile();
-}
-
-function saveFavorites() {
-    try {
-        localStorage.setItem('bemem_favorites', JSON.stringify([...favoriteMemes]));
-    } catch(e) {}
-}
-
-function loadFavorites() {
-    try {
-        const saved = localStorage.getItem('bemem_favorites');
-        if (saved) {
-            JSON.parse(saved).forEach(id => favoriteMemes.add(String(id)));
-        }
-    } catch(e) {}
 }
 
 // ── FILTER MENU ──
@@ -2348,6 +2381,7 @@ function toggleWord(wordId, memeId) {
 
     updateBadge();
     updateProfile();
+    saveToStorage();
 }
 
 function updateBadge() {
@@ -2428,6 +2462,7 @@ function removeWord(key) {
     updateProfile();
     renderSavedWords();
     showToast('Слово удалено');
+    saveToStorage();
 }
 
 // ── CREATE CARD ──
@@ -2991,11 +3026,12 @@ async function initApp() {
 
         document.getElementById('feed-container').innerHTML = '';
 
-        loadFavorites();
+        loadFromStorage();
         buildFilteredList();
         loadMore();
         setupInfiniteScroll();
         updateProfile();
+        updateBadge(); 
 
         if (!isOnline) showOfflineOverlay();
 
