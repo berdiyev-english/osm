@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1775,8 +1776,22 @@
             to   { opacity: 1; transform: none; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .page.active { animation: none; }
-            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+            /* Декоративные бесконечные анимации — полностью off,
+               иначе на 0.01ms они превращаются в стробоскоп */
+            .chip-flame, .sc-flame, .ls-flame,
+            .xp-fill, .xp-fill::after,
+            .quiz-start-btn, .swipe-hint i,
+            .speak-btn.playing i, .loader-spinner,
+            .meme-card, .page.active, .fs-sheet,
+            .mock-float, .confetti-piece {
+                animation: none !important;
+            }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
 
         /* Мем-карточка — игровое ощущение */
@@ -3420,6 +3435,36 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        /* ═══════════ v1.7.1: МОБИЛЬНЫЕ ФИКСЫ ═══════════ */
+
+        /* PWA/standalone и чёлка: топбар не залезает под статус-бар */
+        header {
+            padding-top: calc(14px + env(safe-area-inset-top, 0px));
+            padding-left: max(20px, env(safe-area-inset-left, 0px));
+            padding-right: max(20px, env(safe-area-inset-right, 0px));
+        }
+        .bottom-nav {
+            padding-left: calc(8px + env(safe-area-inset-left, 0px));
+            padding-right: calc(8px + env(safe-area-inset-right, 0px));
+        }
+        .toast { bottom: calc(var(--nav-h) + 16px); }
+        .ach-toast { top: calc(70px + env(safe-area-inset-top, 0px)); }
+
+        /* Баннер BeWords: виден только на первом меме, при скролле сворачивается */
+        .bewords-banner {
+            max-height: 160px;
+            transition: max-height 0.35s ease, opacity 0.3s ease,
+                        margin-bottom 0.35s ease, transform 0.3s ease;
+            overflow: hidden;
+        }
+        .bewords-banner.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0 !important;
+            transform: scale(0.97);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -5613,13 +5658,30 @@ function addSwipeHint() {
     }
 }
 
-// Высота ленты: viewport минус шапка и нижнее меню
+// Высота ленты: viewport минус шапка и нижнее меню.
+// Замеряем РЕАЛЬНЫЕ высоты (safe-area в PWA делает их больше базовых).
 function updateFeedLayout() {
     const header = document.querySelector('header');
     if (header && header.offsetHeight) {
         document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
     }
+    const nav = document.querySelector('.bottom-nav');
+    if (nav && nav.offsetHeight) {
+        // все потребители (body padding, высота ленты, тосты) используют --nav-h
+        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    }
     document.body.classList.toggle('feed-locked', currentPage === 'memes');
+}
+
+// Баннер BeWords: показан на первом меме, скрывается при скролле ленты
+function setupBannerCollapse() {
+    const c = document.getElementById('feed-container');
+    const b = document.querySelector('.bewords-banner');
+    if (!c || !b || b.dataset.collapseBound) return;
+    b.dataset.collapseBound = '1';
+    c.addEventListener('scroll', () => {
+        b.classList.toggle('collapsed', c.scrollTop > 40);
+    }, { passive: true });
 }
 window.addEventListener('resize', updateFeedLayout);
 window.addEventListener('load', updateFeedLayout);
@@ -6438,6 +6500,7 @@ async function initApp() {
 
 // ── СТАРТ ──
 initApp();
+setupBannerCollapse();
 
 // Переход из offline-страницы и шер-ссылок: /?tab=quiz и т.п.
 (function () {

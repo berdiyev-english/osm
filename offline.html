@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -87,6 +88,8 @@
             align-items: center;
             justify-content: center;
             padding: 24px;
+            padding-top: calc(24px + env(safe-area-inset-top, 0px));
+            padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
             overflow-x: hidden;
         }
 
@@ -453,6 +456,14 @@
         @keyframes pulseDot {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.4; transform: scale(0.7); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .main-icon, .badge-float, .pulse-dot, .online-banner { animation: none !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>

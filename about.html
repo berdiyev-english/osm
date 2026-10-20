@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -236,6 +237,9 @@
             background: var(--card);
             border-bottom: 2px solid var(--border-strong);
             padding: 14px 20px;
+            padding-top: calc(14px + env(safe-area-inset-top, 0px));
+            padding-left: max(20px, env(safe-area-inset-left, 0px));
+            padding-right: max(20px, env(safe-area-inset-right, 0px));
             display: flex;
             align-items: center;
             justify-content: space-between;
