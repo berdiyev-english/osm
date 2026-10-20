@@ -2,120 +2,220 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Мимо, господа!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>404 — страница не найдена | BeMem</title>
+    <meta name="description" content="Такой страницы нет в BeMem. Вернись на главную и продолжи учить английский через мемы!">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0f0f">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f5fa">
+    <meta name="theme-color" content="#0f0f0f">
+
+    <!-- Тема без мигания -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('bemem_theme');
+                var dark = t === 'dark' || ((!t || t === 'system') &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches);
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer-when-downgrade">
+
     <style>
-        :root {
-            --bg-color: #f5a623;
-            --text-color: #3d1a05;
-            --accent-color: #ef4444;
-            --paper-color: rgba(255, 255, 255, 0.85);
+        :root, :root[data-theme="dark"] {
+            color-scheme: dark;
+            --bg: #0f0f0f;
+            --bg-glow: radial-gradient(1000px 420px at 50% -80px, rgba(14,165,233,0.10), transparent 60%);
+            --card: #1a1a1a;
+            --border: rgba(255,255,255,0.08);
+            --border2: rgba(255,255,255,0.14);
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
+            --accent-soft: rgba(14,165,233,0.12);
+            --text: #f0f0f0;
+            --text2: #999;
+            --text3: #666;
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --bg: #f2f5fa;
+            --bg-glow: radial-gradient(1000px 420px at 50% -80px, rgba(14,165,233,0.12), transparent 60%);
+            --card: #ffffff;
+            --border: rgba(15,23,42,0.09);
+            --border2: rgba(15,23,42,0.16);
+            --accent: #0284c7;
+            --accent2: #0ea5e9;
+            --accent-soft: rgba(2,132,199,0.10);
+            --text: #101828;
+            --text2: #5b6b81;
+            --text3: #8b98ab;
+            --shadow-lg: 0 20px 50px rgba(15,23,42,0.14);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 50%, #f7b733 0%, #e8941a 100%);
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            font-family: 'Georgia', serif; /* Благородный шрифт */
-            color: var(--text-color);
+            padding: 24px;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: var(--bg-glow);
+            pointer-events: none;
         }
 
         .card {
-            background: var(--paper-color);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             position: relative;
-            border: 8px solid white;
-            outline: 2px solid var(--text-color);
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px 32px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
         }
 
         .error-badge {
-            background: var(--accent-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 14px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 12px;
             display: inline-block;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            margin-bottom: 22px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
+            box-shadow: 0 4px 16px rgba(239,68,68,0.35);
         }
 
         .cat-bob {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px;
             display: block;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            object-fit: contain;
+            filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
             animation: bounce 3s ease-in-out infinite;
         }
-
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 10px;
-            font-family: 'Playfair Display', serif;
         }
 
         p {
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            opacity: 0.8;
+            font-size: 14.5px;
+            color: var(--text2);
+            margin-bottom: 26px;
+            line-height: 1.6;
         }
 
+        /* Объёмная глянцевая кнопка */
         .btn {
-            background: var(--text-color);
-            color: #f5a623;
+            position: relative;
+            background: linear-gradient(180deg, var(--accent2), var(--accent));
+            color: #fff;
             padding: 15px 30px;
-            border-radius: 8px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            display: inline-block;
-            transition: transform 0.2s, background 0.2s;
+            font-weight: 800;
+            font-size: 14.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            box-shadow: 0 4px 0 var(--btn-bottom, #0369a1), 0 8px 18px rgba(0,0,0,0.22);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            transition: transform 0.07s ease, box-shadow 0.07s ease, filter 0.15s;
+            isolation: isolate;
         }
+        :root[data-theme="light"] .btn { --btn-bottom: #075985; }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255,255,255,0.30), rgba(255,255,255,0.05) 48%, rgba(255,255,255,0) 60%);
+            pointer-events: none;
+        }
+        .btn > * { position: relative; }
+        .btn:hover { filter: brightness(1.07); }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 transparent, 0 2px 6px rgba(0,0,0,0.2); }
 
-        .btn:hover {
-            transform: scale(1.05);
-            background: #000;
+        .links {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
+        .links a {
+            color: var(--text3);
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .links a:hover { color: var(--accent); }
 
         .footer {
-            margin-top: 30px;
-            font-size: 12px;
-            opacity: 0.5;
+            margin-top: 24px;
+            font-size: 11.5px;
+            color: var(--text3);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cat-bob { animation: none; }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="error-badge">Ошибка 404</div>
-        
-        <img src="/bemem-404.png" alt="Кот Боб" class="cat-bob">
-        
+        <div class="error-badge"><i class="fa-solid fa-triangle-exclamation"></i> Ошибка 404</div>
+
+        <img src="/bemem-404.png" alt="Кот Боб в цилиндре" class="cat-bob" width="180" height="180">
+
         <h1>Мимо, господа!</h1>
-        <p>Боб надел свой лучший цилиндр, но даже он не смог найти эту страницу. Похоже, она ушла пить английский чай и заблудилась.</p>
-        
-        <a href="/" class="btn">Вернуться на BeMem</a>
-        
-        <div class="footer">BeMem — Учи английский, не теряйся!</div>
+        <p>Боб надел свой лучший цилиндр, но даже он не смог найти эту страницу.
+        Похоже, она ушла пить английский чай и заблудилась.</p>
+
+        <a href="/" class="btn"><i class="fa-solid fa-table-cells"></i> Вернуться к мемам</a>
+
+        <div class="links">
+            <a href="/about.html"><i class="fa-solid fa-circle-info"></i> О приложении</a>
+            <a href="https://bewords.ru/download-app.html" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i> BeWords</a>
+        </div>
+
+        <div class="footer">BeMem — учи английский, не теряйся!</div>
     </div>
 
 </body>

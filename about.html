@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Тема без мигания -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('bemem_theme');
+                var dark = t === 'dark' || ((!t || t === 'system') &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches);
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <!-- SEO -->
+    <title>BeMem — учи английский через мемы: весело, бесплатно, каждый день | БиМем</title>
+    <meta name="description" content="Английский, который хочется открывать каждый день: смешные мемы с переводом, личный словарь, три упражнения и умное повторение. Бесплатно, без регистрации, 5 минут в день. Попробуй BeMem!">
+    <meta name="keywords" content="bemem, бимем, учить английский через мемы, английский по мемам, учить английский бесплатно, приложение для изучения английского, английский каждый день, бимем приложение">
+    <meta name="author" content="BeMem">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://bemem.ru/about.html">
+    <link rel="alternate" hreflang="ru" href="https://bemem.ru/about.html">
+    <link rel="alternate" hreflang="x-default" href="https://bemem.ru/about.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BeMem — учи английский, пока смеёшься над мемами">
+    <meta property="og:description" content="5 минут мемов в день — и новые слова запоминаются сами. Бесплатно, без регистрации, работает даже без интернета.">
+    <meta property="og:url" content="https://bemem.ru/about.html">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="BeMem">
+    <meta property="og:image" content="https://bemem.ru/icons/icon-512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="BeMem — учи английский через мемы">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BeMem — английский через мемы">
+    <meta name="twitter:description" content="Смешные мемы с переводом, словарь, упражнения и умное повторение. Бесплатно.">
+    <meta name="twitter:image" content="https://bemem.ru/icons/icon-512.png">
+
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0f0f">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f5fa">
+    <meta name="theme-color" content="#0f0f0f">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer-when-downgrade">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "BeMem — учи английский через мемы",
+      "description": "Смешные мемы с переводом, личный словарь, три упражнения и умное повторение. Бесплатно, без регистрации, 5 минут в день.",
+      "url": "https://bemem.ru/about.html",
+      "inLanguage": "ru",
+      "isPartOf": { "@type": "WebSite", "name": "BeMem", "url": "https://bemem.ru/" },
+      "about": {
+        "@type": "WebApplication",
+        "name": "BeMem",
+        "alternateName": ["БиМем", "Bememes", "БиМемес"],
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bemem.ru/" },
+          { "@type": "ListItem", "position": 2, "name": "О приложении", "item": "https://bemem.ru/about.html" }
+        ]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "BeMem — это правда бесплатно?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, полностью: без подписок, пробных периодов, рекламы и регистрации. Все мемы, словарь и упражнения доступны сразу. Проект делает один человек в свободное время, поэтому есть добровольная поддержка — но она ни на что не влияет." }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему учить английский по мемам эффективно?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Смех включает эмоции, а эмоции включают память: слова из смешной ситуации запоминаются в разы лучше, чем из списка в учебнике. Плюс мемы — это живой разговорный английский, который реально используют носители, а не устаревшие фразы." }
+        },
+        {
+          "@type": "Question",
+          "name": "Какой уровень английского нужен, чтобы начать?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Любой. В ленте есть фильтр сложности: простые мемы для новичков, средние и сложные для продолжающих. У каждого мема есть перевод, а у каждого слова — озвучка, поэтому начинать можно с нуля." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как работает умное повторение?",
+          "acceptedAnswer": { "@type": "Answer", "text": "BeMem показывает сохранённые слова ровно тогда, когда вы начинаете их забывать: после правильного ответа слово вернётся через день, потом через два, четыре, семь, четырнадцать и тридцать дней. Если ошиблись — вернётся раньше. Так слова уходят в долговременную память без зубрёжки." }
+        },
+        {
+          "@type": "Question",
+          "name": "BeMem работает без интернета?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да. Упражнения и личный словарь работают офлайн всегда, а мемы, которые вы уже открывали, остаются доступны без сети. Интернет нужен только для новых мемов и озвучки." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как установить BeMem на телефон?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Откройте bemem.ru в браузере, нажмите меню браузера и выберите «Установить приложение» или «На экран Домой». Иконка BeMem появится на рабочем столе, а само приложение будет открываться на весь экран — как обычное." }
+        },
+        {
+          "@type": "Question",
+          "name": "Где хранится мой прогресс?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Прямо на вашем устройстве: слова, уровни, серия дней и достижения никуда не отправляются, аккаунт не нужен. Минус один — на другом устройстве прогресс начнётся заново." }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько времени нужно заниматься в день?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Достаточно 5 минут: посмотреть несколько мемов, сохранить пару слов и пройти одно упражнение. Главное — каждый день: за это отвечает ударный темп и ежедневные бонусы." }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root, :root[data-theme="dark"] {
+            color-scheme: dark;
+            --bg: #0f0f0f;
+            --bg-glow: radial-gradient(1200px 500px at 50% -100px, rgba(14,165,233,0.10), transparent 60%);
+            --card: #1a1a1a;
+            --card2: #222222;
+            --card3: #2a2a2a;
+            --border: rgba(255,255,255,0.08);
+            --border-strong: rgba(255,255,255,0.14);
+            --hover: rgba(255,255,255,0.035);
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
+            --accent-soft: rgba(14,165,233,0.12);
+            --accent-dark: #0369a1;
+            --text: #f0f0f0;
+            --text2: #999;
+            --text3: #666;
+            --green: #22c55e;
+            --green-dark: #15803d;
+            --yellow: #f59e0b;
+            --yellow-dark: #b45309;
+            --red: #ef4444;
+            --red-dark: #b91c1c;
+            --purple: #a855f7;
+            --purple-dark: #7e22ce;
+            --gray-btn: #2e2e2e;
+            --gray-btn-dark: #161616;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.35);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+            --press-shadow: rgba(0,0,0,0.25);
+            --gloss: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.04) 48%, rgba(255,255,255,0) 60%);
+            --grad-level: linear-gradient(135deg, #0ea5e9, #a855f7);
+            --grad-fire: linear-gradient(135deg, #f59e0b, #ef4444);
+        }
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --bg: #f2f5fa;
+            --bg-glow: radial-gradient(1200px 500px at 50% -100px, rgba(14,165,233,0.12), transparent 60%);
+            --card: #ffffff;
+            --card2: #eef2f8;
+            --card3: #e5ebf4;
+            --border: rgba(15,23,42,0.09);
+            --border-strong: #dfe6f0;
+            --hover: rgba(15,23,42,0.04);
+            --accent: #0284c7;
+            --accent2: #0ea5e9;
+            --accent-soft: rgba(2,132,199,0.10);
+            --accent-dark: #075985;
+            --text: #101828;
+            --text2: #5b6b81;
+            --text3: #8b98ab;
+            --green: #16a34a;
+            --green-dark: #166534;
+            --yellow: #d97706;
+            --yellow-dark: #92400e;
+            --red: #dc2626;
+            --red-dark: #991b1b;
+            --purple: #9333ea;
+            --purple-dark: #6b21a8;
+            --gray-btn: #ffffff;
+            --gray-btn-dark: #cbd5e1;
+            --shadow-sm: 0 2px 8px rgba(15,23,42,0.07);
+            --shadow-md: 0 8px 28px rgba(15,23,42,0.10);
+            --shadow-lg: 0 20px 50px rgba(15,23,42,0.14);
+            --press-shadow: rgba(15,23,42,0.10);
+            --gloss: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.12) 48%, rgba(255,255,255,0) 60%);
+            --grad-level: linear-gradient(135deg, #0284c7, #9333ea);
+            --grad-fire: linear-gradient(135deg, #f59e0b, #ef4444);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            line-height: 1.55;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: var(--bg-glow);
+            pointer-events: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            background: var(--card);
+            border-bottom: 2px solid var(--border-strong);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+        .logo img { width: 34px; height: 34px; border-radius: 10px; display: block; object-fit: cover; }
+        .logo-text { font-size: 19px; font-weight: 900; letter-spacing: -0.5px; }
+        .logo-text span { color: var(--accent); }
+
+        .theme-toggle {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            border: 2px solid var(--border-strong);
+            background: var(--card);
+            color: var(--text2);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 0 var(--gray-btn-dark);
+            transition: all 0.15s;
+            font-size: 15px;
+        }
+        .theme-toggle:hover { color: var(--yellow); }
+        .theme-toggle:active { transform: translateY(3px); box-shadow: none; }
+        .theme-toggle i { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        :root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+        main { position: relative; max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+
+        .breadcrumbs { font-size: 12px; color: var(--text3); margin-bottom: 18px; font-weight: 700; }
+        .breadcrumbs a { color: var(--accent); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+
+        /* ── 3D-кнопки ── */
+        .btn3d {
+            position: relative;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            cursor: pointer;
+            isolation: isolate;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            transition: transform 0.07s ease, box-shadow 0.07s ease, filter 0.15s ease;
+        }
+        .btn3d::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: var(--gloss);
+            pointer-events: none;
+        }
+        .btn3d > * { position: relative; z-index: 2; }
+        .btn3d.sky {
+            background: linear-gradient(180deg, var(--accent2), var(--accent));
+            color: #fff;
+            box-shadow: 0 5px 0 var(--accent-dark), 0 10px 20px var(--press-shadow);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+        .btn3d.red {
+            background: linear-gradient(180deg, #f87171, #ef4444 55%, #dc2626);
+            color: #fff;
+            box-shadow: 0 4px 0 var(--red-dark), 0 8px 16px var(--press-shadow);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+        .btn3d.sky:hover, .btn3d.red:hover { filter: brightness(1.07); }
+        .btn3d:active { transform: translateY(5px); box-shadow: 0 0 0 transparent, 0 2px 6px var(--press-shadow); }
+
+        /* ══ HERO ══ */
+        .hero { padding: 26px 0 40px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34,197,94,0.12);
+            border: 2px solid rgba(34,197,94,0.35);
+            color: var(--green);
+            font-size: 11.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+        .hero h1 {
+            font-size: clamp(30px, 7vw, 46px);
+            font-weight: 900;
+            letter-spacing: -1.2px;
+            line-height: 1.12;
+            margin-bottom: 16px;
+        }
+        .hero h1 .accent {
+            background: var(--grad-level);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            color: var(--text2);
+            font-size: 16px;
+            font-weight: 600;
+            max-width: 540px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .hero-sub b { color: var(--text); }
+        .hero-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+        .hero-cta { padding: 16px 34px; font-size: 16px; }
+        .hero-note { font-size: 12px; color: var(--text3); font-weight: 700; }
+        .hero-note i { color: var(--green); margin-right: 4px; }
+
+        /* Мокап приложения */
+        .hero-mock {
+            position: relative;
+            margin: 34px auto 0;
+            max-width: 340px;
+        }
+        .mock-card {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: var(--shadow-lg);
+            transform: rotate(-1.5deg);
+        }
+        .mock-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .mock-num { font-size: 11px; font-weight: 900; color: var(--text3); }
+        .mock-diff {
+            font-size: 9.5px; font-weight: 900; color: var(--green);
+            background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
+            padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .mock-text { font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.4; margin-bottom: 12px; }
+        .mock-img {
+            height: 120px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(14,165,233,0.25), rgba(168,85,247,0.25));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 44px;
+            margin-bottom: 12px;
+            border: 2px solid var(--border);
+        }
+        .mock-trans {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 800; color: var(--text2);
+            background: var(--card2); border-radius: 11px; padding: 10px 12px; margin-bottom: 10px;
+        }
+        .mock-trans i { color: var(--accent); }
+        .mock-words { display: flex; gap: 8px; flex-wrap: wrap; }
+        .mock-word {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 11.5px; font-weight: 800; color: var(--accent2);
+            background: var(--accent-soft); border: 1px solid rgba(14,165,233,0.3);
+            padding: 6px 11px; border-radius: 10px;
+        }
+        .mock-word i { font-size: 9px; }
+        .mock-float {
+            position: absolute;
+            display: flex; align-items: center; gap: 6px;
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 13px;
+            padding: 8px 13px;
+            font-size: 13px; font-weight: 900;
+            box-shadow: var(--shadow-md);
+            animation: mockFloat 3.4s ease-in-out infinite;
+        }
+        .mock-float.f-streak { top: -14px; right: -26px; color: var(--yellow); border-color: rgba(245,158,11,0.4); animation-delay: 0.3s; }
+        .mock-float.f-gems { bottom: 34px; left: -34px; color: var(--accent2); border-color: rgba(14,165,233,0.4); animation-delay: 0.9s; }
+        .mock-float.f-lvl { bottom: -16px; right: -14px; color: var(--purple); border-color: rgba(168,85,247,0.4); animation-delay: 1.5s; }
+        @keyframes mockFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ══ Секции ══ */
+        section { margin-bottom: 44px; }
+        .section-tag {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent2);
+            background: var(--accent-soft);
+            border: 1px solid rgba(14,165,233,0.25);
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+        h2 { font-size: clamp(22px, 5vw, 28px); font-weight: 900; letter-spacing: -0.6px; margin-bottom: 14px; line-height: 1.2; }
+        .section-text { color: var(--text2); font-size: 14.5px; margin-bottom: 12px; font-weight: 600; }
+        .section-text strong { color: var(--text); }
+
+        /* Боли */
+        .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+        @media (max-width: 600px) { .pains { grid-template-columns: 1fr; } }
+        .pain {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 16px;
+        }
+        .pain .p-ic {
+            width: 40px; height: 40px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; margin-bottom: 10px;
+            background: rgba(239,68,68,0.10); color: var(--red);
+        }
+        .pain h3 { font-size: 13.5px; font-weight: 900; margin-bottom: 4px; }
+        .pain p { font-size: 12px; color: var(--text3); font-weight: 600; line-height: 1.45; }
+        .solution-line {
+            display: flex; align-items: center; gap: 12px;
+            background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(14,165,233,0.08));
+            border: 2px solid rgba(34,197,94,0.35);
+            border-radius: 16px;
+            padding: 15px 18px;
+            font-size: 14px; font-weight: 800; color: var(--text);
+            box-shadow: 0 4px 0 rgba(21,128,61,0.3);
+        }
+        .solution-line i { font-size: 20px; color: var(--green); flex-shrink: 0; }
+
+        /* Цифры */
+        .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        @media (max-width: 520px) { .numbers { grid-template-columns: repeat(2, 1fr); } }
+        .number-card {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 16px 8px;
+            text-align: center;
+        }
+        .number-card .n { font-size: 24px; font-weight: 900; color: var(--accent2); }
+        .number-card .l { font-size: 10.5px; color: var(--text3); font-weight: 800; margin-top: 3px; }
+
+        /* Шаги */
+        .steps { display: grid; gap: 12px; }
+        .step {
+            display: flex; gap: 16px; align-items: flex-start;
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 18px;
+            transition: transform 0.15s, border-color 0.2s;
+        }
+        .step:hover { transform: translateY(-2px); border-color: var(--accent); }
+        .step-num {
+            width: 42px; height: 42px; flex-shrink: 0;
+            border-radius: 13px;
+            background: var(--grad-level);
+            color: #fff; font-weight: 900; font-size: 17px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 0 var(--accent-dark);
+        }
+        .step h3 { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+        .step p { font-size: 13px; color: var(--text2); font-weight: 600; }
+
+        /* Фичи */
+        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+        .feature {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 18px;
+            transition: transform 0.15s, border-color 0.2s;
+        }
+        .feature:hover { transform: translateY(-2px); border-color: var(--accent); }
+        .feature .f-icon {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+        .feature h3 { font-size: 14.5px; font-weight: 900; margin-bottom: 5px; }
+        .feature p { font-size: 12.5px; color: var(--text2); font-weight: 600; }
+
+        /* CTA-баннер */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(14,165,233,0.16), rgba(168,85,247,0.12));
+            border: 2px solid rgba(14,165,233,0.4);
+            border-radius: 22px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        .cta-banner h2 { margin-bottom: 8px; }
+        .cta-banner p { color: var(--text2); font-size: 14px; font-weight: 600; margin-bottom: 20px; max-width: 440px; margin-left: auto; margin-right: auto; }
+        .cta-banner .btn3d { padding: 15px 34px; font-size: 15.5px; }
+        .cta-banner .cta-note { margin-top: 14px; font-size: 11.5px; color: var(--text3); font-weight: 700; }
+
+        /* Игра */
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        @media (max-width: 600px) { .game-grid { grid-template-columns: 1fr; } }
+        .game-card {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+        }
+        .game-card .g-ic {
+            width: 52px; height: 52px; margin: 0 auto 12px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: #fff;
+        }
+        .game-card.fire .g-ic { background: var(--grad-fire); box-shadow: 0 4px 0 var(--red-dark); }
+        .game-card.gem .g-ic { background: linear-gradient(180deg, #7dd3fc, #38bdf8); box-shadow: 0 4px 0 var(--accent-dark); }
+        .game-card.trophy .g-ic { background: linear-gradient(180deg, #fbbf24, #f59e0b); box-shadow: 0 4px 0 var(--yellow-dark); }
+        .game-card h3 { font-size: 14.5px; font-weight: 900; margin-bottom: 6px; }
+        .game-card p { font-size: 12px; color: var(--text2); font-weight: 600; }
+        .ranks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; justify-content: center; }
+        .rank-pill {
+            font-size: 11.5px; font-weight: 800;
+            padding: 6px 12px; border-radius: 999px;
+            border: 2px solid var(--border-strong);
+            background: var(--card); color: var(--text2);
+        }
+        .rank-pill.hot { border-color: rgba(245,158,11,0.5); color: var(--yellow); background: linear-gradient(135deg, rgba(245,158,11,0.10), var(--card)); }
+
+        /* FAQ */
+        .faq details {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq summary {
+            padding: 15px 18px;
+            font-size: 14px; font-weight: 800;
+            cursor: pointer; list-style: none;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            color: var(--text);
+        }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after {
+            content: '+';
+            font-size: 19px; font-weight: 900; color: var(--accent);
+            transition: transform 0.25s; flex-shrink: 0;
+        }
+        .faq details[open] summary::after { transform: rotate(45deg); }
+        .faq .faq-body { padding: 0 18px 16px; font-size: 13.5px; color: var(--text2); font-weight: 600; }
+
+        /* Донат */
+        .donate-card {
+            background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(245,158,11,0.08));
+            border: 2px solid rgba(239,68,68,0.3);
+            border-radius: 20px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .donate-card .d-emoji { font-size: 34px; display: block; margin-bottom: 12px; color: var(--red); }
+        .donate-card h2 { margin-bottom: 8px; }
+        .donate-card p { color: var(--text2); font-size: 14px; font-weight: 600; margin-bottom: 18px; max-width: 460px; margin-left: auto; margin-right: auto; }
+        .donate-btn { padding: 14px 28px; font-size: 14.5px; }
+
+        footer {
+            border-top: 2px solid var(--border-strong);
+            padding: 26px 16px 34px;
+            text-align: center;
+            position: relative;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 18px; margin-bottom: 12px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 800; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { font-size: 11.5px; color: var(--text3); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .mock-float { animation: none; }
+            html { scroll-behavior: auto; }
+        }
+        @media (max-width: 420px) {
+            .mock-float.f-gems { left: -10px; }
+            .mock-float.f-streak { right: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo" aria-label="BeMem — на главную">
+        <img src="/icons/icon-192.png" alt="BeMem" width="34" height="34" fetchpriority="high">
+        <div class="logo-text">Be<span>Mem</span></div>
+    </a>
+    <button class="theme-toggle" id="theme-toggle-btn" onclick="cycleTheme()" title="Сменить тему" aria-label="Сменить тему">
+        <i class="fa-solid fa-sun icon-sun"></i>
+        <i class="fa-solid fa-moon icon-moon"></i>
+    </button>
+</header>
+
+<main>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a href="/">Главная</a> <i class="fa-solid fa-chevron-right" style="font-size:9px"></i> О приложении
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <div class="hero">
+        <div class="hero-badge"><i class="fa-solid fa-bolt"></i> Бесплатно · Без регистрации</div>
+        <h1>Учи английский,<br>пока <span class="accent">смеёшься над мемами</span></h1>
+        <p class="hero-sub">
+            <b>5 минут в день</b> вместо скучных учебников: смешные мемы с переводом,
+            личный словарь и упражнения, которые сами напоминают о себе.
+            Слова запоминаются — потому что тебе <b>весело</b>.
+        </p>
+        <div class="hero-cta-row">
+            <a href="/" class="btn3d sky hero-cta"><span><i class="fa-solid fa-play"></i> Начать бесплатно</span></a>
+            <span class="hero-note"><i class="fa-solid fa-circle-check"></i>300+ мемов уже ждут</span>
+        </div>
+
+        <div class="hero-mock" aria-hidden="true">
+            <div class="mock-card">
+                <div class="mock-head">
+                    <span class="mock-num">Мем #146</span>
+                    <span class="mock-diff">Легко</span>
+                </div>
+                <div class="mock-text">When you finally understood the meme in English 😎</div>
+                <div class="mock-img">🎭</div>
+                <div class="mock-trans"><i class="fa-solid fa-language"></i> Показать перевод</div>
+                <div class="mock-words">
+                    <span class="mock-word"><i class="fa-solid fa-plus"></i> finally</span>
+                    <span class="mock-word"><i class="fa-solid fa-plus"></i> understood</span>
+                </div>
+            </div>
+            <div class="mock-float f-streak"><i class="fa-solid fa-fire"></i> 7 дней</div>
+            <div class="mock-float f-gems"><i class="fa-solid fa-gem"></i> 125</div>
+            <div class="mock-float f-lvl"><i class="fa-solid fa-trophy"></i> Уровень 5</div>
+        </div>
+    </div>
+
+    <!-- ══ БОЛИ → РЕШЕНИЕ ══ -->
+    <section id="why">
+        <span class="section-tag">Почему не получалось раньше</span>
+        <h2>Знакомо?</h2>
+        <div class="pains">
+            <div class="pain">
+                <div class="p-ic"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Зубрёжка не работает</h3>
+                <p>Выучил 50 слов по списку — через неделю не помнишь ни одного.</p>
+            </div>
+            <div class="pain">
+                <div class="p-ic"><i class="fa-solid fa-face-tired"></i></div>
+                <h3>Скучно и бросаешь</h3>
+                <p>Учебники и курсы усыпляют. Motivation заканчивается на третьем дне.</p>
+            </div>
+            <div class="pain">
+                <div class="p-ic"><i class="fa-solid fa-hourglass-half"></i></div>
+                <h3>Нет времени</h3>
+                <p>«Целый час на занятия» — и вот уже снова отложил на понедельник.</p>
+            </div>
+        </div>
+        <div class="solution-line">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Смех включает эмоции, а эмоции — память. Мем, над которым ты посмеялся, запоминается вместе со словами. Навсегда.</span>
+        </div>
+    </section>
+
+    <!-- ══ ЦИФРЫ ══ -->
+    <section id="numbers">
+        <div class="numbers">
+            <div class="number-card"><div class="n">300+</div><div class="l">мемов с переводом</div></div>
+            <div class="number-card"><div class="n">1500+</div><div class="l">слов в словаре</div></div>
+            <div class="number-card"><div class="n">5 мин</div><div class="l">в день достаточно</div></div>
+            <div class="number-card"><div class="n">0 ₽</div><div class="l">навсегда</div></div>
+        </div>
+    </section>
+
+    <!-- ══ КАК ЭТО РАБОТАЕТ ══ -->
+    <section id="how">
+        <span class="section-tag">Как это работает</span>
+        <h2>Три шага — и слова остаются в голове</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <h3>Смеёшься над мемами</h3>
+                    <p>Листаешь ленту и читаешь мемы на английском. Не понял шутку — открыл перевод в один тап. Выбрал сложность под себя: от простых до продвинутых.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <h3>Сохраняешь слова</h3>
+                    <p>Под каждым мемом — слова с переводом и озвучкой. Одно нажатие — и слово в твоём словаре, где его слышно и видно.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <h3>Закрепляешь играючи</h3>
+                    <p>Три упражнения: квиз переводов, «собери слово» из букв и «пары» на скорость. А умное повторение вернёт слово ровно тогда, когда ты начнёшь его забывать.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ ВОЗМОЖНОСТИ ══ -->
+    <section id="features">
+        <span class="section-tag">Возможности</span>
+        <h2>Всё, чтобы ты не бросил</h2>
+        <div class="features">
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(14,165,233,0.12);color:var(--accent)"><i class="fa-solid fa-masks-theater"></i></span>
+                <h3>Живой английский</h3>
+                <p>Мемы — это язык, на котором реально шутят носители. Никаких «London is the capital».</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(34,197,94,0.12);color:var(--green)"><i class="fa-solid fa-book"></i></span>
+                <h3>Твой личный словарь</h3>
+                <p>Все сохранённые слова в одном месте: с переводом, озвучкой и отметкой «выучено».</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(168,85,247,0.12);color:var(--purple)"><i class="fa-solid fa-brain"></i></span>
+                <h3>Три упражнения</h3>
+                <p>Квиз переводов, «собери слово» из букв и «пары» на скорость — однообразия не будет.</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(245,158,11,0.13);color:var(--yellow)"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                <h3>Умное повторение</h3>
+                <p>Слова возвращаются через 1, 2, 4, 7, 14 и 30 дней — ровно когда начинают забываться. Так они уходят в долговременную память.</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(239,68,68,0.11);color:var(--red)"><i class="fa-solid fa-fire"></i></span>
+                <h3>Ударный темп</h3>
+                <p>Серия дней, календарь занятий и заморозка на случай пропуска. Не бросить — легче лёгкого.</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(56,189,248,0.13);color:var(--accent2)"><i class="fa-solid fa-gem"></i></span>
+                <h3>Алмазы и уровни</h3>
+                <p>За занятия — алмазы и очки опыта. Копи, покупай заморозки, расти от «Новичка» до «Легенды мемов».</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(14,165,233,0.12);color:var(--accent)"><i class="fa-solid fa-mobile-screen"></i></span>
+                <h3>Как обычное приложение</h3>
+                <p>Устанавливается на телефон одним тапом и работает без интернета: упражнения и словарь — всегда, открытые мемы — тоже.</p>
+            </div>
+            <div class="feature">
+                <span class="f-icon" style="background:rgba(168,85,247,0.12);color:var(--purple)"><i class="fa-solid fa-palette"></i></span>
+                <h3>Тёмная и светлая тема</h3>
+                <p>Учи английский ночью или днём — выбирай тему по вкусу или доверься настройкам телефона.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA ══ -->
+    <section id="start">
+        <div class="cta-banner">
+            <h2>Начни сегодня — не с понедельника</h2>
+            <p>Первый мем можно посмотреть прямо сейчас. Без скачиваний, регистрации и карты — открыл и учишь.</p>
+            <a href="/" class="btn3d sky"><span><i class="fa-solid fa-rocket"></i> Открыть BeMem</span></a>
+            <div class="cta-note"><i class="fa-solid fa-clock" style="color:var(--accent)"></i> Занимает 5 минут в день</div>
+        </div>
+    </section>
+
+    <!-- ══ ИГРА ══ -->
+    <section id="game">
+        <span class="section-tag">Мотивация</span>
+        <h2>Учёба, которая затягивает как игра</h2>
+        <div class="game-grid">
+            <div class="game-card fire">
+                <div class="g-ic"><i class="fa-solid fa-fire"></i></div>
+                <h3>Ударный темп</h3>
+                <p>Занимайся каждый день — расти серию. Пропустил? Спасёт заморозка серии.</p>
+            </div>
+            <div class="game-card gem">
+                <div class="g-ic"><i class="fa-solid fa-gem"></i></div>
+                <h3>Алмазы</h3>
+                <p>Каждое занятие приносит алмазы. Трать их на заморозки серии — хранится до двух.</p>
+            </div>
+            <div class="game-card trophy">
+                <div class="g-ic"><i class="fa-solid fa-trophy"></i></div>
+                <h3>Достижения</h3>
+                <p>19 наград: от «Первой серии» до «Марафонца» за 30 дней подряд. Собери все.</p>
+            </div>
+        </div>
+        <div class="ranks">
+            <span class="rank-pill">Новичок</span>
+            <span class="rank-pill">Ученик</span>
+            <span class="rank-pill">Мемолов</span>
+            <span class="rank-pill">Мастер слов</span>
+            <span class="rank-pill">Мемлорд</span>
+            <span class="rank-pill">Языковой самурай</span>
+            <span class="rank-pill">Гроза словарей</span>
+            <span class="rank-pill hot"><i class="fa-solid fa-crown"></i> Легенда мемов</span>
+        </div>
+    </section>
+
+    <!-- ══ FAQ ══ -->
+    <section id="faq" class="faq">
+        <span class="section-tag">Вопросы</span>
+        <h2>Отвечаем честно</h2>
+
+        <details>
+            <summary>BeMem — это правда бесплатно?</summary>
+            <div class="faq-body">Да, полностью: без подписок, пробных периодов, рекламы и регистрации. Все мемы, словарь и упражнения доступны сразу. Проект делает один человек в свободное время, поэтому есть добровольная поддержка — но она ни на что не влияет.</div>
+        </details>
+        <details>
+            <summary>Почему учить английский по мемам эффективно?</summary>
+            <div class="faq-body">Смех включает эмоции, а эмоции включают память: слова из смешной ситуации запоминаются в разы лучше, чем из списка в учебнике. Плюс мемы — это живой разговорный английский, который реально используют носители, а не устаревшие фразы.</div>
+        </details>
+        <details>
+            <summary>Какой уровень английского нужен, чтобы начать?</summary>
+            <div class="faq-body">Любой. В ленте есть фильтр сложности: простые мемы для новичков, средние и сложные для продолжающих. У каждого мема есть перевод, а у каждого слова — озвучка, поэтому начинать можно с нуля.</div>
+        </details>
+        <details>
+            <summary>Как работает умное повторение?</summary>
+            <div class="faq-body">BeMem показывает сохранённые слова ровно тогда, когда вы начинаете их забывать: после правильного ответа слово вернётся через день, потом через два, четыре, семь, четырнадцать и тридцать дней. Если ошиблись — вернётся раньше. Так слова уходят в долговременную память без зубрёжки.</div>
+        </details>
+        <details>
+            <summary>BeMem работает без интернета?</summary>
+            <div class="faq-body">Да. Упражнения и личный словарь работают офлайн всегда, а мемы, которые вы уже открывали, остаются доступны без сети. Интернет нужен только для новых мемов и озвучки.</div>
+        </details>
+        <details>
+            <summary>Как установить BeMem на телефон?</summary>
+            <div class="faq-body">Откройте bemem.ru в браузере, нажмите меню браузера и выберите «Установить приложение» или «На экран Домой». Иконка BeMem появится на рабочем столе, а само приложение будет открываться на весь экран — как обычное.</div>
+        </details>
+        <details>
+            <summary>Где хранится мой прогресс?</summary>
+            <div class="faq-body">Прямо на вашем устройстве: слова, уровни, серия дней и достижения никуда не отправляются, аккаунт не нужен. Минус один — на другом устройстве прогресс начнётся заново.</div>
+        </details>
+        <details>
+            <summary>Сколько времени нужно заниматься в день?</summary>
+            <div class="faq-body">Достаточно 5 минут: посмотреть несколько мемов, сохранить пару слов и пройти одно упражнение. Главное — каждый день: за это отвечают ударный темп и ежедневные бонусы.</div>
+        </details>
+    </section>
+
+    <!-- ══ ДОНАТ ══ -->
+    <section id="donate">
+        <div class="donate-card">
+            <span class="d-emoji"><i class="fa-solid fa-heart"></i></span>
+            <h2>Понравилось? Помоги проекту</h2>
+            <p>BeMem делает один человек в свободное время — без команды, инвесторов и бюджета.
+            Любая поддержка превращается в новые мемы, слова и функции для всех.</p>
+            <a href="https://dalink.to/berdiyev_eng" target="_blank" rel="noopener" class="btn3d red donate-btn">
+                <span><i class="fa-solid fa-heart"></i> Помочь проекту</span>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="/"><i class="fa-solid fa-house"></i> Главная</a>
+        <a href="/"><i class="fa-solid fa-table-cells"></i> Мемы</a>
+        <a href="#faq"><i class="fa-solid fa-circle-question"></i> Вопросы</a>
+        <a href="https://bewords.ru/download-app.html" target="_blank" rel="noopener"><i class="fa-solid fa-book"></i> BeWords</a>
+        <a href="https://dalink.to/berdiyev_eng" target="_blank" rel="noopener"><i class="fa-solid fa-heart"></i> Помочь</a>
+    </div>
+    <div class="footer-copy">© 2026 BeMem (БиМем) — учи английский через мемы. Сделано <i class="fa-solid fa-heart" style="color:var(--red);font-size:10px"></i> одним человеком.</div>
+</footer>
+
+<script>
+    // Тема
+    var themePref = 'system';
+    try { themePref = localStorage.getItem('bemem_theme') || 'system'; } catch (e) {}
+    function systemPrefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function applyTheme() {
+        var dark = themePref === 'dark' || (themePref === 'system' && systemPrefersDark());
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+        if (meta) meta.setAttribute('content', dark ? '#0f0f0f' : '#f2f5fa');
+    }
+    function setTheme(val) {
+        themePref = val;
+        try { localStorage.setItem('bemem_theme', val); } catch (e) {}
+        applyTheme();
+    }
+    function cycleTheme() {
+        var darkNow = document.documentElement.getAttribute('data-theme') === 'dark';
+        setTheme(darkNow ? 'light' : 'dark');
+    }
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+            if (themePref === 'system') applyTheme();
+        });
+    }
+    applyTheme();
+</script>
+
+</body>
+</html>
