@@ -3455,17 +3455,130 @@
         /* Баннер BeWords: виден только на первом меме, при скролле сворачивается */
         .bewords-banner {
             max-height: 160px;
-            transition: max-height 0.35s ease, opacity 0.3s ease,
-                        margin-bottom 0.35s ease, transform 0.3s ease;
             overflow: hidden;
+            transition: max-height 0.32s ease, opacity 0.24s ease, margin-bottom 0.32s ease,
+                        padding 0.32s ease, border-width 0.32s ease;
         }
+        /* Полностью обнуляем box: иначе border+padding оставляют видимую полоску */
         .bewords-banner.collapsed {
-            max-height: 0;
-            opacity: 0;
+            max-height: 0 !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            border-top-width: 0 !important;
+            border-bottom-width: 0 !important;
+            margin-top: 0 !important;
             margin-bottom: 0 !important;
-            transform: scale(0.97);
+            opacity: 0;
             pointer-events: none;
         }
+
+        /* ═══════════ v1.8: REELS-ЛЕНТА ═══════════ */
+
+        /* Карточка всегда помещается на экран: текст 3 строки, картинка резиновая */
+        #feed-container > .meme-card { position: relative; }
+        #feed-container .meme-text {
+            -webkit-line-clamp: 3;
+            font-size: 15px;
+            padding: 12px 16px;
+        }
+        #feed-container .meme-img-wrap { min-height: 120px; }
+
+        /* Боковой рейл как в Instagram Reels */
+        .reels-rail {
+            position: absolute;
+            right: 10px;
+            bottom: 64px;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            z-index: 6;
+        }
+        .reel-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--border-strong);
+            background: var(--card);
+            color: var(--text2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-sm), 0 3px 0 var(--gray-btn-dark);
+            transition: transform 0.07s ease, box-shadow 0.07s ease, color 0.2s, border-color 0.2s;
+        }
+        .reel-btn:active { transform: translateY(3px) scale(0.94); box-shadow: none; }
+        .reel-btn.like.active { color: var(--red); border-color: rgba(239,68,68,0.45); }
+        .reel-btn.like.active i { color: var(--red); animation: heartPop 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+        .rail-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            min-width: 19px;
+            height: 19px;
+            padding: 0 4px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--card);
+        }
+        @media (max-width: 380px) {
+            .reel-btn { width: 42px; height: 42px; font-size: 15px; }
+            .reels-rail { gap: 10px; right: 7px; bottom: 56px; }
+        }
+
+        /* Шторка мема («комментарии»): текст, перевод, слова */
+        .sheet-fulltext {
+            background: var(--card2);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.5;
+            white-space: pre-line;
+            margin-bottom: 16px;
+        }
+        .sheet-block { margin-bottom: 18px; }
+        .sheet-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text3);
+            margin-bottom: 10px;
+        }
+        .sheet-label i { color: var(--accent); }
+        .sheet-trans {
+            background: linear-gradient(135deg, rgba(14,165,233,0.08), rgba(56,189,248,0.04));
+            border: 2px solid rgba(14,165,233,0.22);
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.55;
+        }
+        .sheet-words .word-row {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 14px;
+            margin-bottom: 8px;
+        }
+        .fs-title .diff-badge { margin-left: 6px; }
     </style>
 </head>
 <body>
@@ -3498,14 +3611,14 @@
                 <span class="popup-real-emoji">👨‍💻</span>
                 <h2>Один человек — весь проект</h2>
                 <div class="popup-story">
-                    <p>Привет! Я <strong>один</strong> разрабатываю BeMem в свободное время. Без команды, без инвесторов, без бюджета.</p>
+                    <p>Привет! Я <strong>один</strong> делаю BeMem в свободное время. Без команды, без инвесторов, без бюджета.</p>
                     <p>Что я уже сделал:
                         <br><span class="highlight">🎭 300+ мемов с переводами</span>
                         <span class="highlight">📚 1500+ слов в словаре</span>
                         <span class="highlight">🧠 Квиз для проверки</span>
                         <span class="highlight">📱 Устанавливается на телефон</span>
                     </p>
-                    <p>Любой донат — это мотивация добавить ещё больше мемов, улучшить квиз и сделать BeMem лучшим способом учить английский! 🚀</p>
+                    <p>Любая поддержка — это возможность добавить больше мемов, улучшать упражнения и делать BeMem удобнее. 🚀</p>
                 </div>
                 <a href="https://dalink.to/berdiyev_eng"
                    target="_blank"
@@ -3529,8 +3642,8 @@
             <div class="popup-thankyou">
                 <span class="big-emoji">🥹</span>
                 <h2>Ты лучший!</h2>
-                <p>Серьёзно, каждый донат — это +100 к мотивации.<br>
-                Буду делать BeMem ещё лучше специально для тебя! ❤️</p>
+                <p>Серьёзно, любая поддержка — это возможность сделать BeMem ещё лучше.<br>
+                Больше мемов, больше слов, больше удобств — и для тебя тоже! ❤️</p>
                 <button class="close-popup-btn" onclick="closeDonatePopup()">
                     <span><i class="fa-solid fa-masks-theater"></i> Продолжить учить мемы</span>
                 </button>
@@ -3819,7 +3932,7 @@
                     </div>
                     <div>
                         <div class="profile-link-title">Помочь проекту</div>
-                        <div class="profile-link-sub">Донат на развитие</div>
+                        <div class="profile-link-sub">Возможность развивать BeMem</div>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color:var(--text3);font-size:13px"></i>
@@ -3858,7 +3971,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.7</div>
+                        <div class="profile-link-title">Версия 1.8</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -3945,6 +4058,21 @@
             </div>
             <div class="cal-month-stats" id="cal-month-stats"></div>
         </div>
+    </div>
+</div>
+
+<!-- ПОЛНОЭКРАННОЕ ОКНО: ПЕРЕВОД И СЛОВА МЕМА («комментарии») -->
+<div class="fs-overlay" id="meme-sheet" onclick="fsOverlayClick(event, 'meme-sheet')">
+    <div class="fs-sheet">
+        <div class="fs-head">
+            <div class="fs-title" id="meme-sheet-title">
+                <i class="fa-solid fa-language" style="color:var(--accent)"></i> Перевод и слова
+            </div>
+            <button class="fs-close" onclick="closeFsPopup('meme-sheet')" aria-label="Закрыть">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="fs-body" id="meme-sheet-body"></div>
     </div>
 </div>
 
@@ -5406,7 +5534,7 @@ function removeWord(key) {
     scheduleSave();
 }
 
-// ── CREATE CARD ──
+// ── CREATE CARD (Reels-формат: мем на весь экран + боковые кнопки) ──
 function createCard(meme, priority) {
     const diff = diffInfo(meme.difficulty);
     const memeIdStr = String(meme.id);
@@ -5416,148 +5544,147 @@ function createCard(meme, priority) {
     const card = document.createElement('div');
     card.className = 'meme-card';
     card.dataset.memeId = memeIdStr;
-    
-    // Заглушка картинки
-const imgErrorEmoji = isOnline ? '🖼️' : '📡';
-const imgErrorTitle = isOnline ? 'Картинка недоступна' : 'Нет интернета';
-const imgErrorSub   = isOnline ? 'Нет соединения с интернетом' : 'Картинки загружаются только онлайн';
-const imgErrorAction = isOnline
-    ? `<div class="vpn-badge">
-           <i class="fa-solid fa-lock"></i>
-           Проверь подключение еще раз
-       </div>`
-    : `<button onclick="goToQuizOffline()" class="btn3d sky" style="padding:9px 20px;font-size:13px;font-family:'Nunito',sans-serif;">
-           <span><i class="fa-solid fa-graduation-cap"></i> Учить слова офлайн</span>
-       </button>`;
 
-    // Строим HTML карточки
+    // Заглушка картинки
+    const imgErrorEmoji = isOnline ? '\u{1F5BC}\uFE0F' : '\u{1F4E1}';
+    const imgErrorTitle = isOnline ? 'Картинка недоступна' : 'Нет интернета';
+    const imgErrorSub   = isOnline ? 'Нет соединения с интернетом' : 'Картинки загружаются только онлайн';
+    const imgErrorAction = isOnline
+        ? `<div class="vpn-badge">
+               <i class="fa-solid fa-lock"></i>
+               Проверь подключение еще раз
+           </div>`
+        : `<button onclick="goToQuizOffline()" class="btn3d sky" style="padding:9px 20px;font-size:13px;font-family:'Nunito',sans-serif;">
+               <span><i class="fa-solid fa-graduation-cap"></i> Учить слова офлайн</span>
+           </button>`;
+
     card.innerHTML = `
         <div class="card-header">
             <div>
                 <div class="card-num">Мем #${meme.id}</div>
                 <div class="card-sub">${meme.words.length} слов для изучения</div>
             </div>
-            <div class="card-actions">
-                <button class="share-btn" title="Поделиться" aria-label="Поделиться мемом">
-                    <i class="fa-solid fa-share-nodes"></i>
-                </button>
-                <button class="fav-btn ${isFav ? 'active' : ''}" title="В избранное">
-                    ${svgHeart(isFav)}
-                </button>
-                <span class="diff-badge ${diff.cls}">${diff.label}</span>
-            </div>
+            <span class="diff-badge ${diff.cls}">${diff.label}</span>
         </div>
 
         <div class="meme-text">${formattedText}</div>
 
         <div class="meme-img-wrap">
-    <img class="meme-img" src="${meme.image}" alt="Мем №${meme.id}: ${escapeHtml(meme.text).slice(0, 90)}"
-         loading="${priority ? 'eager' : 'lazy'}" decoding="async"
-         ${priority ? 'fetchpriority="high"' : ''}>
-    <div class="img-error">
-        <div style="font-size:48px;margin-bottom:8px">${imgErrorEmoji}</div>
-        <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">${imgErrorTitle}</p>
-        <p style="font-size:13px;color:var(--text3);margin-bottom:12px">${imgErrorSub}</p>
-        ${imgErrorAction}
-    </div>
-</div>
-
-        <div class="translation-block">
-            <button class="trans-toggle" id="ttoggle-${meme.id}">
-                <div class="trans-toggle-left">
-                    <i class="fa-solid fa-language"></i>
-                    <span>Показать перевод</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron" id="tchev-${meme.id}"></i>
-            </button>
-            <div class="trans-body" id="tbody-${meme.id}">
-                <div class="trans-content">
-                    <div class="trans-label">🇷🇺 Перевод</div>
-                    <div class="trans-text">${escapeHtml(meme.translation)}</div>
-                </div>
+            <img class="meme-img" src="${meme.image}" alt="Мем №${meme.id}: ${escapeHtml(meme.text).slice(0, 90)}"
+                 loading="${priority ? 'eager' : 'lazy'}" decoding="async"
+                 ${priority ? 'fetchpriority="high"' : ''}>
+            <div class="img-error">
+                <div style="font-size:48px;margin-bottom:8px">${imgErrorEmoji}</div>
+                <p style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">${imgErrorTitle}</p>
+                <p style="font-size:13px;color:var(--text3);margin-bottom:12px">${imgErrorSub}</p>
+                ${imgErrorAction}
             </div>
         </div>
 
-        <div class="words-section">
-            <button class="words-toggle" id="wtoggle-${meme.id}">
-                <div class="toggle-left">
-                    <i class="fa-solid fa-book-open"></i>
-                    <span>Слова из мема</span>
-                    <span class="words-pill">${meme.words.length}</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron" id="chev-${meme.id}"></i>
+        <!-- Боковая панель как в рилс: лайк, «комменты» (перевод+слова), шер, звук -->
+        <div class="reels-rail">
+            <button class="reel-btn like ${isFav ? 'active' : ''}" title="В избранное" aria-label="Добавить в избранное">
+                ${svgHeart(isFav)}
             </button>
-            <div class="words-body" id="wbody-${meme.id}">
-                <div id="words-list-${meme.id}"></div>
-            </div>
+            <button class="reel-btn sheet-btn" title="Перевод и слова" aria-label="Перевод и слова из мема">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span class="rail-badge">${meme.words.length}</span>
+            </button>
+            <button class="reel-btn share-btn" title="Поделиться" aria-label="Поделиться мемом">
+                <i class="fa-solid fa-share-nodes"></i>
+            </button>
+            <button class="reel-btn speak-btn" title="Прослушать мем" aria-label="Прослушать мем">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
         </div>
     `;
 
-    // Вешаем обработчики через addEventListener (без inline onclick)
+    // Обработчики
     const img = card.querySelector('.meme-img');
     img.addEventListener('error', () => {
-    img.style.display = 'none';
-    const errBlock = card.querySelector('.img-error');
-    errBlock.classList.add('show');
-    
-    // Показываем тост только если офлайн
-    if (!isOnline) {
-        showToast('📡 Нет интернета — картинка недоступна');
-    }
-});
+        img.style.display = 'none';
+        const errBlock = card.querySelector('.img-error');
+        errBlock.classList.add('show');
+        if (!isOnline) {
+            showToast('\u{1F4E1} Нет интернета — картинка недоступна');
+        }
+    });
 
-    card.querySelector('.fav-btn').addEventListener('click', function() {
+    card.querySelector('.reel-btn.like').addEventListener('click', function () {
         toggleFavorite(meme.id, this);
     });
-
-    card.querySelector('.share-btn').addEventListener('click', () => {
+    card.querySelector('.reel-btn.sheet-btn').addEventListener('click', () => {
+        openMemeSheet(memeIdStr);
+    });
+    card.querySelector('.reel-btn.share-btn').addEventListener('click', () => {
         shareMeme(meme.id);
     });
-
-    card.querySelector('.trans-toggle').addEventListener('click', () => {
-        toggleTrans(meme.id);
-    });
-
-    card.querySelector('.words-toggle').addEventListener('click', () => {
-        toggleWords(meme.id);
-    });
-
-    // Строим список слов
-    const wordsList = card.querySelector('#words-list-' + meme.id);
-    meme.words.forEach(w => {
-        const key = String(w.id);
-        const row = document.createElement('div');
-        row.className = 'word-row';
-        row.innerHTML = `
-            <div class="word-info">
-                <div class="word-en">${escapeHtml(w.en)}</div>
-                <div class="word-ru">${escapeHtml(w.ru)}</div>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center;">
-                <button class="speak-btn" title="Произношение" aria-label="Прослушать произношение">
-                    <i class="fa-solid fa-volume-high"></i>
-                </button>
-                <button class="add-word-btn ${savedWords.has(key) ? 'added' : ''}" data-word-btn="${key}"
-                        title="Добавить слово в словарь" aria-label="Добавить слово ${escapeHtml(w.en)} в словарь">
-                    ${savedWords.has(key) ? svgCheck() : svgPlus()}
-                </button>
-            </div>`;
-
-        row.querySelector('.speak-btn').addEventListener('click', function() {
-            speakWord(w.en, this);
-        });
-
-        row.querySelector('.add-word-btn').addEventListener('click', function() {
-            toggleWord(w.id, meme.id, this);
-        });
-
-        wordsList.appendChild(row);
+    card.querySelector('.reel-btn.speak-btn').addEventListener('click', function () {
+        speakWord(String(meme.text).replace(/\s+/g, ' ').slice(0, 180), this);
     });
 
     document.getElementById('feed-container').appendChild(card);
 
     // Просмотр засчитываем, когда карточку реально увидели на экране
     getViewObserver().observe(card);
+}
+
+// ── Строка слова (общая для шторки мема) ──
+function buildWordRow(w, memeId) {
+    const key = String(w.id);
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.innerHTML = `
+        <div class="word-info">
+            <div class="word-en">${escapeHtml(w.en)}</div>
+            <div class="word-ru">${escapeHtml(w.ru)}</div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+            <button class="speak-btn" title="Произношение" aria-label="Прослушать ${escapeHtml(w.en)}">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <button class="add-word-btn ${savedWords.has(key) ? 'added' : ''}" data-word-btn="${key}"
+                    title="Добавить слово в словарь" aria-label="Добавить слово ${escapeHtml(w.en)} в словарь">
+                ${savedWords.has(key) ? svgCheck() : svgPlus()}
+            </button>
+        </div>`;
+    row.querySelector('.speak-btn').addEventListener('click', function () {
+        speakWord(w.en, this);
+    });
+    row.querySelector('.add-word-btn').addEventListener('click', function () {
+        toggleWord(w.id, memeId, this);
+    });
+    return row;
+}
+
+// ── Шторка мема: полный текст, перевод и слова (как «комментарии» в рилс) ──
+function openMemeSheet(memeId) {
+    const meme = MEMES_DB.find(m => String(m.id) === String(memeId));
+    if (!meme) return;
+    const diff = diffInfo(meme.difficulty);
+    const body = document.getElementById('meme-sheet-body');
+    const title = document.getElementById('meme-sheet-title');
+    if (!body || !title) return;
+
+    title.innerHTML = '<i class="fa-solid fa-language" style="color:var(--accent)"></i> Мем #' + meme.id +
+        ' <span class="diff-badge ' + diff.cls + '">' + diff.label + '</span>';
+
+    body.innerHTML = `
+        <div class="sheet-fulltext">${escapeHtml(meme.text).replace(/\n/g, '<br>')}</div>
+        <div class="sheet-block">
+            <div class="sheet-label"><i class="fa-solid fa-earth-americas"></i> Перевод</div>
+            <div class="sheet-trans">${escapeHtml(meme.translation)}</div>
+        </div>
+        <div class="sheet-block">
+            <div class="sheet-label"><i class="fa-solid fa-book-open"></i> Слова из мема · ${meme.words.length}</div>
+            <div class="sheet-words"></div>
+        </div>`;
+
+    const list = body.querySelector('.sheet-words');
+    meme.words.forEach(w => list.appendChild(buildWordRow(w, meme.id)));
+
+    document.getElementById('meme-sheet').classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
 
 // ── Умный подсмотр просмотров (IntersectionObserver) ──
@@ -5581,22 +5708,6 @@ function markMemeViewed(id, el) {
     viewedMemeIds.add(id);
     scheduleSave();
     awardXP(2, el, { silent: true });
-}
-
-function toggleTrans(id) {
-    const body = document.getElementById('tbody-' + id);
-    const chev = document.getElementById('tchev-' + id);
-    const toggle = document.getElementById('ttoggle-' + id);
-    const isOpen = body.classList.toggle('open');
-    chev.classList.toggle('open', isOpen);
-    toggle.querySelector('span').textContent =
-        isOpen ? 'Скрыть перевод' : 'Показать перевод';
-}
-
-function toggleWords(id) {
-    document.getElementById('wbody-' + id).classList.toggle('open');
-    document.getElementById('chev-' + id).classList.toggle('open');
-    document.getElementById('wtoggle-' + id).classList.toggle('open');
 }
 
 // ── INFINITE SCROLL ──
@@ -5834,8 +5945,8 @@ function renderQuizStart() {
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div>
-                    <p>Поддержите проект</p>
-                    <small>Помогите нам расти!</small>
+                    <p>Помочь проекту</p>
+                    <small>Это возможность развивать BeMem</small>
                 </div>
             </div>
             <button class="support-btn btn3d red" onclick="openDonatePopup()"><i class="fa-solid fa-heart"></i><span>Помочь</span></button>
@@ -5905,8 +6016,8 @@ function renderQuizQuestion() {
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div>
-                    <p>Поддержите проект</p>
-                    <small>Помогите нам расти!</small>
+                    <p>Помочь проекту</p>
+                    <small>Это возможность развивать BeMem</small>
                 </div>
             </div>
             <button class="support-btn btn3d red" onclick="openDonatePopup()"><i class="fa-solid fa-heart"></i><span>Помочь</span></button>
@@ -6007,8 +6118,8 @@ function renderQuizResult() {
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div>
-                    <p>Поддержите проект</p>
-                    <small>Помогите нам расти!</small>
+                    <p>Помочь проекту</p>
+                    <small>Это возможность развивать BeMem</small>
                 </div>
             </div>
             <button class="support-btn btn3d red" onclick="openDonatePopup()"><i class="fa-solid fa-heart"></i><span>Помочь</span></button>
