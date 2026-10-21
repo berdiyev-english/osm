@@ -10,14 +10,39 @@
   "orientation": "portrait",
   "background_color": "#0f0f0f",
   "theme_color": "#0f0f0f",
-  "categories": ["education", "games"],
+  "categories": [
+    "education",
+    "games"
+  ],
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
   ],
   "shortcuts": [
-    { "name": "Квиз", "url": "/?tab=quiz", "description": "Проверить свои слова" },
-    { "name": "Мои слова", "url": "/?tab=words", "description": "Личный словарь" },
-    { "name": "Профиль", "url": "/?tab=profile", "description": "Прогресс и достижения" }
+    {
+      "name": "Квиз",
+      "url": "/?tab=quiz",
+      "description": "Проверить свои слова"
+    },
+    {
+      "name": "Мои слова",
+      "url": "/?tab=words",
+      "description": "Личный словарь"
+    },
+    {
+      "name": "Прогресс",
+      "url": "/?tab=profile",
+      "description": "Уровни, серии и достижения"
+    }
   ]
 }

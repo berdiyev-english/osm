@@ -3600,9 +3600,23 @@
         #feed-container .meme-img-wrap { flex: 1 1 0; min-height: 0; }
         #feed-container .img-error { max-height: 100%; overflow-y: auto; }
 
+        /* Текст: высота ровно N строк — клип по границе строки,
+           без «полстрок» даже если line-clamp в движке не сработал */
+        #feed-container .meme-text {
+            line-height: 1.45;
+            max-height: calc(3 * 1.45em + 24px); /* 3 строки + padding 12+12 */
+        }
+
+        /* Рейл к самому краю карточки, но не впритык к обрезу */
+        .reels-rail { right: 6px; }
+
+        /* Нижнее меню: иконки крупнее (бейджи убраны из разметки) */
+        .nav-item i { font-size: 20px; }
+        .nav-item { font-size: 10.5px; gap: 3px; }
+
         /* Низкие экраны (ландшафт): компактнее, чтобы мем оставался целиком */
         @media (max-height: 520px) {
-            #feed-container .meme-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 13px; padding: 8px 14px; }
+            #feed-container .meme-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 13px; padding: 8px 14px; max-height: calc(2 * 1.45em + 16px); }
             #feed-container .card-header { padding: 8px 14px; }
             .reels-rail { bottom: 16px; gap: 8px; }
             .reel-btn { width: 40px; height: 40px; font-size: 15px; }
@@ -3828,7 +3842,7 @@
         <div class="level-card">
             <div class="level-top">
                 <div class="level-avatar">
-                    <i class="fa-solid fa-user" style="color:#fff;font-size:27px"></i>
+                    <i class="fa-solid fa-arrow-trend-up" style="color:#fff;font-size:26px"></i>
                     <div class="level-badge" id="level-badge" title="Уровень">1</div>
                 </div>
                 <div class="level-info">
@@ -4000,7 +4014,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.9</div>
+                        <div class="profile-link-title">Версия 1.10</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -4018,16 +4032,14 @@
     <button class="nav-item" id="nav-quiz" onclick="switchPage('quiz')">
         <i class="fa-solid fa-graduation-cap"></i>
         Учить
-        <span class="nav-due" id="nav-due-badge" style="display:none">0</span>
     </button>
     <button class="nav-item" id="nav-words" onclick="switchPage('words')">
         <i class="fa-solid fa-book"></i>
         Слова
-        <span class="nav-badge" id="words-badge" style="display:none">0</span>
     </button>
     <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
-        <i class="fa-solid fa-user"></i>
-        Профиль
+        <i class="fa-solid fa-chart-line"></i>
+        Прогресс
     </button>
 </nav>
 
@@ -5433,13 +5445,7 @@ function toggleWord(wordId, memeId, btnEl) {
 }
 
 function updateBadge() {
-    const badge = document.getElementById('words-badge');
-    if (savedWords.size > 0) {
-        badge.style.display = 'flex';
-        badge.textContent = savedWords.size;
-    } else {
-        badge.style.display = 'none';
-    }
+    // Бейджей в нижнем меню больше нет — счётчики живут в профиле и на страницах
     updateDueBadge();
 }
 
@@ -5620,7 +5626,7 @@ function createCard(meme, priority) {
                 <span class="rail-badge">${meme.words.length}</span>
             </button>
             <button class="reel-btn share-btn" title="Поделиться" aria-label="Поделиться мемом">
-                <i class="fa-brands fa-telegram"></i>
+                <i class="fa-solid fa-paper-plane"></i>
             </button>
             <button class="reel-btn speak-btn" title="Прослушать мем" aria-label="Прослушать мем">
                 <i class="fa-solid fa-volume-high"></i>
