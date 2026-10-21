@@ -3579,6 +3579,35 @@
             margin-bottom: 8px;
         }
         .fs-title .diff-badge { margin-left: 6px; }
+
+        /* ═══════════ v1.9: строгая полистность + гарантия «всё влезает» ═══════════ */
+
+        /* Малый свайп дощёлкивает до следующего мема; один свайп = один мем */
+        #feed-container { scroll-snap-type: y mandatory; }
+        #feed-container > .meme-card {
+            height: calc(100% - 14px);
+            min-height: 0;
+            scroll-snap-stop: always;
+        }
+        /* Текст: жёстко 3 строки (pre-line ломал clamp на некоторых движках) */
+        #feed-container .meme-text {
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            white-space: normal;
+            flex-shrink: 0;
+        }
+        /* Картинка: занимает ровно остаток экрана, любая высота влезает (contain) */
+        #feed-container .meme-img-wrap { flex: 1 1 0; min-height: 0; }
+        #feed-container .img-error { max-height: 100%; overflow-y: auto; }
+
+        /* Низкие экраны (ландшафт): компактнее, чтобы мем оставался целиком */
+        @media (max-height: 520px) {
+            #feed-container .meme-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 13px; padding: 8px 14px; }
+            #feed-container .card-header { padding: 8px 14px; }
+            .reels-rail { bottom: 16px; gap: 8px; }
+            .reel-btn { width: 40px; height: 40px; font-size: 15px; }
+            .swipe-hint { padding: 3px 0 5px; }
+        }
     </style>
 </head>
 <body>
@@ -3971,7 +4000,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.8</div>
+                        <div class="profile-link-title">Версия 1.9</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -5591,7 +5620,7 @@ function createCard(meme, priority) {
                 <span class="rail-badge">${meme.words.length}</span>
             </button>
             <button class="reel-btn share-btn" title="Поделиться" aria-label="Поделиться мемом">
-                <i class="fa-solid fa-share-nodes"></i>
+                <i class="fa-brands fa-telegram"></i>
             </button>
             <button class="reel-btn speak-btn" title="Прослушать мем" aria-label="Прослушать мем">
                 <i class="fa-solid fa-volume-high"></i>
@@ -5752,10 +5781,24 @@ function setupInfiniteScroll() {
     container.appendChild(sentinel); // внутри скролл-контейнера (лента-шортс)
 
     scrollObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) loadMore();
-    }, { root: container, rootMargin: '300px' });
+        // ВАЖНО: берём ПОСЛЕДНЮЮ запись. При быстром скролле IO отдаёт пачку
+        // [выход, вход] одним колбэком — entries[0] оказывался устаревшим,
+        // и подгрузка навсегда замолкала (баг «лента не бесконечная»).
+        const e = entries[entries.length - 1];
+        if (e.isIntersecting) loadMore();
+    }, { root: container, rootMargin: '400px' });
 
     scrollObserver.observe(sentinel);
+
+    // Страховка: независимая проверка расстояния до низа на каждом скролле
+    if (!container.dataset.infBound) {
+        container.dataset.infBound = '1';
+        container.addEventListener('scroll', () => {
+            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 700) {
+                loadMore();
+            }
+        }, { passive: true });
+    }
 
     addSwipeHint();
 }
