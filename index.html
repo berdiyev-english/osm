@@ -154,7 +154,7 @@
             --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
             --scrim: rgba(0,0,0,0.85);
-            --nav-h: 65px;
+            --nav-h: 58px;
             --grad-xp: linear-gradient(90deg, #0ea5e9, #38bdf8 55%, #a855f7);
             --grad-level: linear-gradient(135deg, #0ea5e9, #a855f7);
             --grad-fire: linear-gradient(135deg, #f59e0b, #ef4444);
@@ -1706,6 +1706,7 @@
 
         /* ── TOAST ── */
         .toast {
+            z-index: 970;
             position: fixed;
             bottom: calc(var(--nav-h) + 16px);
             left: 50%;
@@ -2050,6 +2051,7 @@
 
         /* Тултип достижения */
         .ach-toast {
+            z-index: 990;
             position: fixed;
             top: 70px;
             left: 50%;
@@ -2084,7 +2086,7 @@
         .ach-toast .at-xp { font-size: 11px; font-weight: 700; color: var(--text3); margin-top: 1px; }
 
         /* ── Конфетти ── */
-        .confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 500; overflow: hidden; }
+        .confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 980; overflow: hidden; }
         .confetti-piece {
             position: absolute;
             width: 9px; height: 14px;
@@ -2101,7 +2103,7 @@
         /* ── Плашка +XP ── */
         .xp-pop {
             position: fixed;
-            z-index: 450;
+            z-index: 985;
             font-size: 15px;
             font-weight: 800;
             color: var(--accent2);
@@ -2415,7 +2417,7 @@
             box-shadow: 0 3px 0 var(--gray-btn-dark);
         }
         .filter-icon-btn i, .theme-toggle i { font-size: 15px; }
-        .theme-toggle:hover { transform: translateY(3px) rotate(14deg); box-shadow: none; color: var(--yellow); }
+        .theme-toggle:hover { color: var(--yellow); border-color: var(--yellow); }
         .filter-icon-btn:active { transform: translateY(3px); box-shadow: none; }
         .filter-icon-btn.open { border-color: var(--accent); color: var(--accent); }
         header > div:last-child { gap: 10px; }
@@ -3607,8 +3609,8 @@
         .reels-rail { right: 6px; }
 
         /* Нижнее меню: иконки крупнее (бейджи убраны из разметки) */
-        .nav-item i { font-size: 20px; }
-        .nav-item { font-size: 10.5px; gap: 3px; }
+        .nav-item i { font-size: 22px; }
+        .nav-item { font-size: 0; gap: 0; }
 
         /* Низкие экраны (ландшафт): компактнее, чтобы мем оставался целиком */
         @media (max-height: 520px) {
@@ -3619,6 +3621,230 @@
             .reel-btn { width: 40px; height: 40px; font-size: 15px; }
             .swipe-hint { padding: 3px 0 5px; }
         }
+
+        /* ═══════════ v1.13: ПОЛНОЭКРАННЫЙ ТРЕНАЖЁР ═══════════ */
+
+        .train-fs {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            background: var(--bg);
+            display: none;
+            flex-direction: column;
+        }
+        .train-fs.show { display: flex; }
+
+        .train-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            padding-top: calc(12px + env(safe-area-inset-top, 0px));
+            border-bottom: 2px solid var(--border);
+            background: var(--card);
+            flex-shrink: 0;
+        }
+        .train-progress {
+            flex: 1;
+            height: 14px;
+            border-radius: 999px;
+            background: var(--card2);
+            border: 2px solid var(--border-strong);
+            overflow: hidden;
+        }
+        .train-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            background: var(--grad-xp);
+            position: relative;
+            transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+        }
+        .train-progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 1px; left: 5px; right: 5px;
+            height: 3px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.35);
+        }
+        .train-counter { font-size: 13px; font-weight: 900; color: var(--text2); min-width: 42px; text-align: right; }
+
+        .train-body {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 18px 14px 150px;
+            display: flex;
+            flex-direction: column;
+        }
+        .train-body .quiz-card { border: none; background: transparent; box-shadow: none; padding: 0; }
+
+        /* Карточка слова в квизе */
+        .q-word-card {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 30px 20px 26px;
+            text-align: center;
+            margin: 6px 0 18px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        .q-label {
+            font-size: 10.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text3);
+            margin-bottom: 10px;
+        }
+        .q-word { font-size: 30px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; }
+        .q-speak {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            border: 2px solid var(--border-strong);
+            background: var(--card2);
+            color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 3px 0 var(--gray-btn-dark);
+            transition: transform 0.07s, box-shadow 0.07s;
+        }
+        .q-speak:active { transform: translateY(3px); box-shadow: none; }
+
+        /* Плашка-уведомление после ответа */
+        .fb-panel {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 16px;
+            padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+            display: none;
+            align-items: center;
+            gap: 13px;
+            border-top: 3px solid transparent;
+            background: var(--card);
+            z-index: 5;
+        }
+        .fb-panel.show { display: flex; animation: fbUp 0.25s cubic-bezier(0.22,1,0.36,1); }
+        @keyframes fbUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+        .fb-panel.correct { background: rgba(34,197,94,0.10); border-top-color: var(--green); }
+        .fb-panel.wrong { background: rgba(239,68,68,0.10); border-top-color: var(--red); }
+        .fb-icon {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: #fff;
+            flex-shrink: 0;
+        }
+        .fb-panel.correct .fb-icon { background: linear-gradient(180deg, #4ade80, #22c55e); box-shadow: 0 4px 0 var(--green-dark); }
+        .fb-panel.wrong .fb-icon { background: linear-gradient(180deg, #f87171, #ef4444); box-shadow: 0 4px 0 var(--red-dark); }
+        .fb-cat {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-strong);
+            flex-shrink: 0;
+        }
+        .fb-panel.correct .fb-cat { animation: catBounce 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+        .fb-panel.wrong .fb-cat { filter: grayscale(0.65); transform: rotate(-8deg); }
+        @keyframes catBounce { 0% { transform: scale(0.6); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        .fb-text { flex: 1; min-width: 0; }
+        .fb-title { font-size: 15px; font-weight: 900; }
+        .fb-panel.correct .fb-title { color: var(--green); }
+        .fb-panel.wrong .fb-title { color: var(--red); }
+        .fb-sub { font-size: 12.5px; font-weight: 700; color: var(--text2); margin-top: 2px; }
+        .fb-continue { padding: 12px 22px !important; font-size: 14px !important; flex-shrink: 0; }
+
+        /* Экран результатов */
+        .res-wrap { text-align: center; padding-top: 8px; }
+        .res-cat {
+            width: 130px; height: 130px;
+            border-radius: 30px;
+            object-fit: cover;
+            border: 3px solid var(--border-strong);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 14px;
+        }
+        .res-cat.happy { animation: catBounce 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+        .res-cat.sad { filter: grayscale(0.6); transform: rotate(-5deg); }
+        .res-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+        .res-sub { font-size: 13.5px; color: var(--text2); font-weight: 700; margin-bottom: 18px; }
+        .res-score {
+            font-size: 40px;
+            font-weight: 900;
+            background: var(--grad-level);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        .res-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .res-stat {
+            background: var(--card);
+            border: 2px solid var(--border-strong);
+            border-radius: 14px;
+            padding: 12px 8px;
+        }
+        .res-stat .rs-v { font-size: 17px; font-weight: 900; color: var(--text); }
+        .res-stat .rs-l { font-size: 9.5px; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+        .res-stat.time .rs-v { color: var(--accent2); }
+        .res-stat.err .rs-v { color: var(--red); }
+        .res-stat.xps .rs-v { color: var(--yellow); }
+        .res-stat.acc .rs-v { color: var(--green); }
+        .res-wrong { text-align: left; margin-bottom: 18px; }
+        .res-wrong-title {
+            font-size: 11px; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 0.8px; color: var(--red); margin-bottom: 8px;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .res-wrong-item {
+            background: var(--card);
+            border: 2px solid rgba(239,68,68,0.3);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            font-size: 13.5px;
+            font-weight: 800;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .res-wrong-item span { color: var(--text2); font-weight: 700; text-align: right; }
+        .res-actions { display: flex; flex-direction: column; gap: 10px; }
+        .res-actions .btn3d { padding: 14px; font-size: 15px; font-family: 'Nunito', sans-serif; }
+
+        /* Диалог выхода */
+        .confirm-sheet {
+            left: 50% !important; right: auto !important; bottom: auto !important; top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: min(360px, calc(100vw - 40px));
+            max-height: none !important;
+            border-radius: 24px !important;
+            border-bottom: 2px solid var(--border-strong) !important;
+        }
+        .confirm-box { padding: 26px 22px; text-align: center; }
+        .confirm-cat {
+            width: 90px; height: 90px;
+            border-radius: 24px;
+            object-fit: cover;
+            border: 3px solid var(--border-strong);
+            margin-bottom: 14px;
+            filter: grayscale(0.3);
+            transform: rotate(-4deg);
+        }
+        .confirm-box h3 { font-size: 19px; font-weight: 900; margin-bottom: 8px; }
+        .confirm-box p { font-size: 13px; color: var(--text2); font-weight: 700; margin-bottom: 18px; line-height: 1.5; }
+        .confirm-box .btn3d { width: 100%; padding: 13px; font-size: 14.5px; font-family: 'Nunito', sans-serif; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -3954,6 +4180,13 @@
         <div class="profile-section">
             <div class="profile-section-title"><i class="fa-solid fa-gear"></i> Настройки</div>
             <div class="settings-row">
+                <div class="settings-row-title"><i class="fa-solid fa-volume-high" style="color:var(--accent)"></i> Звуки</div>
+                <div class="seg-control" id="sound-seg">
+                    <button class="seg-btn" data-sound="on" onclick="setSounds(true)"><i class="fa-solid fa-volume-high"></i> Вкл</button>
+                    <button class="seg-btn" data-sound="off" onclick="setSounds(false)"><i class="fa-solid fa-volume-xmark"></i> Выкл</button>
+                </div>
+            </div>
+            <div class="settings-row">
                 <div class="settings-row-title"><i class="fa-solid fa-palette" style="color:var(--accent)"></i> Тема оформления</div>
                 <div class="seg-control" id="theme-seg">
                     <button class="seg-btn" data-theme-val="light" onclick="setTheme('light')"><i class="fa-solid fa-sun"></i> Светлая</button>
@@ -4011,7 +4244,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.12</div>
+                        <div class="profile-link-title">Версия 1.13</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -4022,21 +4255,17 @@
 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
-    <button class="nav-item active" id="nav-memes" onclick="switchPage('memes')">
+    <button class="nav-item active" id="nav-memes" onclick="switchPage('memes')" aria-label="Мемы">
         <i class="fa-solid fa-table-cells"></i>
-        Мемы
     </button>
-    <button class="nav-item" id="nav-quiz" onclick="switchPage('quiz')">
+    <button class="nav-item" id="nav-quiz" onclick="switchPage('quiz')" aria-label="Учить">
         <i class="fa-solid fa-graduation-cap"></i>
-        Учить
     </button>
-    <button class="nav-item" id="nav-words" onclick="switchPage('words')">
+    <button class="nav-item" id="nav-words" onclick="switchPage('words')" aria-label="Слова">
         <i class="fa-solid fa-book"></i>
-        Слова
     </button>
-    <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+    <button class="nav-item" id="nav-profile" onclick="switchPage('profile')" aria-label="Прогресс">
         <i class="fa-solid fa-chart-line"></i>
-        Прогресс
     </button>
 </nav>
 
@@ -4111,6 +4340,36 @@
             </button>
         </div>
         <div class="fs-body" id="meme-sheet-body"></div>
+    </div>
+</div>
+
+<!-- ПОЛНОЭКРАННЫЙ ТРЕНАЖЁР -->
+<div class="train-fs" id="train-fs">
+    <div class="train-top">
+        <button class="fs-close" id="train-exit" aria-label="Выйти из упражнения">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="train-progress"><div class="train-progress-fill" id="train-fill"></div></div>
+        <div class="train-counter" id="train-counter">0/0</div>
+    </div>
+    <div class="train-body" id="train-body"></div>
+    <div class="fb-panel" id="fb-panel"></div>
+</div>
+
+<!-- Подтверждение выхода -->
+<div class="fs-overlay" id="train-exit-confirm" style="z-index:950" onclick="fsOverlayClick(event, 'train-exit-confirm')">
+    <div class="fs-sheet confirm-sheet">
+        <div class="confirm-box">
+            <img src="/bemem-404.png" class="confirm-cat" alt="">
+            <h3>Выйти из упражнения?</h3>
+            <p>Весь XP и алмазы, заработанные<br>в этом раунде, сгорят.</p>
+            <button class="btn3d red" id="confirm-exit-yes">
+                <span><i class="fa-solid fa-door-open"></i> Выйти</span>
+            </button>
+            <button class="btn3d sky" id="confirm-exit-no">
+                <span><i class="fa-solid fa-graduation-cap"></i> Остаться</span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -4707,9 +4966,20 @@ function fsOverlayClick(e, id) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.fs-overlay.show').forEach(o => closeFsPopup(o.id));
-    }
+    if (e.key !== 'Escape') return;
+    const conf = document.getElementById('train-exit-confirm');
+    if (conf && conf.classList.contains('show')) { conf.classList.remove('show'); return; }
+    const tf = document.getElementById('train-fs');
+    if (tf && tf.classList.contains('show')) { requestTrainExit(); return; }
+    document.querySelectorAll('.fs-overlay.show').forEach(o => closeFsPopup(o.id));
+});
+
+// Кнопки выхода из тренажёра
+document.getElementById('train-exit').addEventListener('click', requestTrainExit);
+document.getElementById('confirm-exit-yes').addEventListener('click', confirmTrainExit);
+document.getElementById('confirm-exit-no').addEventListener('click', () => {
+    sfx.click();
+    document.getElementById('train-exit-confirm').classList.remove('show');
 });
 
 // ── Карточка серии: огонь/лёд, неделя, алмазы, заморозки ──
@@ -4956,6 +5226,9 @@ function handleOverlayClick(e) {
 
 // ── NAVIGATION ──
 function switchPage(page) {
+    // Если открыт полноэкранный тренажёр — закрываем (тесты/программные переходы)
+    const tf = document.getElementById('train-fs');
+    if (tf && tf.classList.contains('show')) hideTrainFs();
     currentPage = page;
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -4970,7 +5243,7 @@ function switchPage(page) {
 
     if (page === 'words') renderSavedWords();
     if (page === 'quiz') { renderQuizStart(); updateDueBadge(); }
-    if (page === 'profile') { updateProfile(); renderGameUI(); }
+    if (page === 'profile') { updateProfile(); renderGameUI(); syncSoundUI(); }
     updateFeedLayout();
     const filterWrap = document.getElementById('filter-wrap');
     if (filterWrap) {
@@ -5970,6 +6243,231 @@ function totalCorrect() {
 }
 
 // ── QUIZ ──
+// ══════════ ЗВУКИ: синтез WebAudio (без файлов, работает офлайн) ══════════
+const sfx = {
+    ctx: null,
+    enabled: true,
+    ensure() {
+        if (!this.enabled) return null;
+        try {
+            if (!this.ctx) {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return null;
+                this.ctx = new AC();
+            }
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            return this.ctx;
+        } catch (e) { return null; }
+    },
+    tone(freq, dur, type, delay, vol, slide) {
+        const ctx = this.ensure();
+        if (!ctx) return;
+        try {
+            const t0 = ctx.currentTime + (delay || 0);
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = type || 'sine';
+            osc.frequency.setValueAtTime(freq, t0);
+            if (slide) osc.frequency.exponentialRampToValueAtTime(slide, t0 + dur);
+            g.gain.setValueAtTime(0.0001, t0);
+            g.gain.exponentialRampToValueAtTime(vol || 0.16, t0 + 0.015);
+            g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(t0);
+            osc.stop(t0 + dur + 0.05);
+        } catch (e) {}
+    },
+    correct() { this.tone(784, 0.12, 'sine', 0, 0.16); this.tone(1175, 0.22, 'sine', 0.09, 0.16); },
+    wrong()   { this.tone(233, 0.16, 'square', 0, 0.06); this.tone(180, 0.22, 'square', 0.12, 0.06); },
+    click()   { this.tone(640, 0.05, 'triangle', 0, 0.08); },
+    gem()     { this.tone(1568, 0.07, 'triangle', 0, 0.1); this.tone(2093, 0.12, 'triangle', 0.06, 0.1); },
+    finish()  { [523, 659, 784, 1047].forEach((f, i) => this.tone(f, 0.18, 'sine', i * 0.11, 0.16)); },
+    fail()    { [392, 311, 262].forEach((f, i) => this.tone(f, 0.22, 'sine', i * 0.14, 0.12)); }
+};
+try { sfx.enabled = localStorage.getItem('bemem_sounds') !== 'off'; } catch (e) {}
+
+function setSounds(on) {
+    sfx.enabled = !!on;
+    try { localStorage.setItem('bemem_sounds', on ? 'on' : 'off'); } catch (e) {}
+    syncSoundUI();
+    if (on) sfx.click();
+}
+function syncSoundUI() {
+    document.querySelectorAll('#sound-seg .seg-btn').forEach(b =>
+        b.classList.toggle('active', (b.dataset.sound === 'on') === sfx.enabled));
+}
+
+// ══════════ СЕССИЯ УПРАЖНЕНИЯ (fullscreen) ══════════
+let sessionXP = 0, sessionGems = 0, sessionWrong = [], sessionStart = 0, sessionMode = '';
+
+function beginSession(mode) {
+    sessionMode = mode;
+    sessionXP = 0;
+    sessionGems = 0;
+    sessionWrong = [];
+    sessionStart = Date.now();
+    document.getElementById('train-fs').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    hideFeedback();
+    sfx.ensure();
+    sfx.click();
+}
+
+function hideTrainFs() {
+    document.getElementById('train-fs').classList.remove('show');
+    hideFeedback();
+    if (!document.querySelector('.fs-overlay.show')) document.body.style.overflow = '';
+    updateFeedLayout();
+}
+
+// Награда в рамках сессии (учитывается для «сгорает при выходе»)
+function sessionAward(xp, gems, el, opts) {
+    sessionXP += xp || 0;
+    sessionGems += gems || 0;
+    if (xp) awardXP(xp, el, opts);
+    if (gems) {
+        game.gems += gems;
+        saveGame();
+        showGemPop(gems, el);
+        sfx.gem();
+    }
+}
+
+function setTrainProgress(cur, total) {
+    const fill = document.getElementById('train-fill');
+    const cnt = document.getElementById('train-counter');
+    if (fill) fill.style.width = (total ? Math.round(cur / total * 100) : 0) + '%';
+    if (cnt) cnt.textContent = cur + '/' + total;
+}
+
+function fmtTime(ms) {
+    const sec = Math.max(0, Math.round(ms / 1000));
+    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+}
+
+// ── Выход из упражнения ──
+function requestTrainExit() {
+    if (sessionXP > 0 || sessionGems > 0) {
+        document.getElementById('train-exit-confirm').classList.add('show');
+    } else {
+        hideTrainFs();
+        renderQuizStart();
+    }
+}
+function confirmTrainExit() {
+    if (sessionXP) game.xp = Math.max(0, game.xp - sessionXP);
+    if (sessionGems) game.gems = Math.max(0, game.gems - sessionGems);
+    saveGame();
+    document.getElementById('train-exit-confirm').classList.remove('show');
+    hideTrainFs();
+    renderQuizStart();
+    updateProfile();
+    showToast('Раунд прерван — XP и алмазы за него сгорели');
+}
+
+// ── Плашка-уведомление после ответа ──
+let fbNext = null;
+function showFeedback(correct, title, sub, onNext) {
+    const p = document.getElementById('fb-panel');
+    fbNext = onNext || null;
+    p.className = 'fb-panel show ' + (correct ? 'correct' : 'wrong');
+    p.innerHTML =
+        '<div class="fb-icon"><i class="fa-solid ' + (correct ? 'fa-check' : 'fa-xmark') + '"></i></div>' +
+        '<img src="/bemem-404.png" class="fb-cat" alt="">' +
+        '<div class="fb-text"><div class="fb-title">' + title + '</div>' +
+        (sub ? '<div class="fb-sub">' + sub + '</div>' : '') + '</div>' +
+        '<button class="btn3d ' + (correct ? 'green' : 'red') + ' fb-continue"><span>Дальше</span></button>';
+    p.querySelector('.fb-continue').addEventListener('click', () => {
+        sfx.click();
+        const f = fbNext;   // сохраняем ДО hideFeedback (он сбрасывает fbNext)
+        hideFeedback();
+        if (f) f();
+    });
+    if (correct) sfx.correct(); else sfx.wrong();
+}
+
+function showFlash(correct, title) {
+    const p = document.getElementById('fb-panel');
+    p.className = 'fb-panel show ' + (correct ? 'correct' : 'wrong');
+    p.innerHTML = '<div class="fb-icon"><i class="fa-solid ' + (correct ? 'fa-check' : 'fa-xmark') + '"></i></div>' +
+        '<div class="fb-text"><div class="fb-title">' + title + '</div></div>';
+    if (correct) sfx.correct(); else sfx.wrong();
+    setTimeout(() => {
+        if (p.classList.contains('show') && !fbNext) hideFeedback();
+    }, 800);
+}
+
+function hideFeedback() {
+    const p = document.getElementById('fb-panel');
+    p.className = 'fb-panel';
+    p.innerHTML = '';
+    fbNext = null;
+}
+
+// ── Полноэкранный результат: время, ошибки, кот ──
+function renderTrainResults(mode) {
+    const container = document.getElementById('train-body');
+    hideFeedback();
+    let total, score;
+    if (mode === 'quiz') { total = quizWords.length; score = quizScore; }
+    else if (mode === 'spell') { total = spellWords.length; score = spellScore; }
+    else { total = matchPairs.length; score = matchDone; }
+    const percent = total ? Math.round(score / total * 100) : 0;
+    const elapsed = fmtTime(Date.now() - sessionStart);
+    const wrongCount = mode === 'match' ? matchMisses : sessionWrong.length;
+
+    // Награды за раунд
+    const gems = GEMS_QUIZ + (percent === 100 ? GEMS_PERFECT : 0);
+    sessionAward(15 + (percent >= 80 ? 10 : 0), gems, null, { silent: true });
+
+    if (mode === 'quiz') { game.quiz.played++; if (percent === 100 && total >= 5) game.quiz.perfect++; }
+    if (mode === 'spell') game.spell.played++;
+    if (mode === 'match') { game.match.played++; game.match.pairs += total; game.match.misses += matchMisses; }
+    saveGame();
+    setTrainProgress(total, total);
+    checkAchievements();
+
+    if (percent >= 80) setTimeout(() => launchConfetti(90), 250);
+    setTimeout(() => { if (percent >= 60) sfx.finish(); else sfx.fail(); }, 150);
+
+    const modeNames = { quiz: 'Квиз переводов', spell: 'Собери слово', match: 'Пары' };
+    container.innerHTML = `
+        <div class="res-wrap">
+            <img src="/bemem-404.png" class="res-cat ${percent >= 60 ? 'happy' : 'sad'}" alt="">
+            <div class="res-title">${percent >= 80 ? 'Блестяще!' : percent >= 60 ? 'Хорошая работа!' : 'Тренируйся ещё!'}</div>
+            <div class="res-sub">${modeNames[mode]} · ${percent}% верно</div>
+            <div class="res-score">${score}/${total}</div>
+            <div class="res-stats">
+                <div class="res-stat time"><div class="rs-v">${elapsed}</div><div class="rs-l">Время</div></div>
+                <div class="res-stat err"><div class="rs-v">${wrongCount}</div><div class="rs-l">Ошибок</div></div>
+                <div class="res-stat acc"><div class="rs-v">${percent}%</div><div class="rs-l">Точность</div></div>
+                <div class="res-stat xps"><div class="rs-v">+${sessionXP} XP · +${sessionGems} <i class="fa-solid fa-gem"></i></div><div class="rs-l">За раунд</div></div>
+            </div>
+            ${sessionWrong.length ? `
+            <div class="res-wrong">
+                <div class="res-wrong-title"><i class="fa-solid fa-triangle-exclamation"></i> Поработай над словами</div>
+                ${sessionWrong.slice(0, 8).map(w => `<div class="res-wrong-item">${escapeHtml(w.en)}<span>${escapeHtml(w.ru)}</span></div>`).join('')}
+            </div>` : ''}
+            <div class="res-actions">
+                <button class="btn3d sky" id="res-again"><span><i class="fa-solid fa-rotate-right"></i> Ещё раз</span></button>
+                <button class="btn3d gray" id="res-menu"><span><i class="fa-solid fa-graduation-cap"></i> К упражнениям</span></button>
+            </div>
+        </div>`;
+    container.querySelector('#res-again').addEventListener('click', () => {
+        sfx.click();
+        if (mode === 'quiz') startQuiz();
+        else if (mode === 'spell') startSpell();
+        else startMatch();
+    });
+    container.querySelector('#res-menu').addEventListener('click', () => {
+        sfx.click();
+        hideTrainFs();
+        renderQuizStart();
+    });
+    updateProfile();
+}
+
 function renderQuizStart() {
     const container = document.getElementById('quiz-container');
 
@@ -6069,23 +6567,19 @@ function startQuiz() {
     quizWords = pickStudyWords(QUIZ_LENGTH);
     quizIndex = 0;
     quizScore = 0;
+    beginSession('quiz');
     renderQuizQuestion();
 }
 
 function renderQuizQuestion() {
-    if (quizIndex >= quizWords.length) {
-        renderQuizResult();
-        return;
-    }
-
-    const container = document.getElementById('quiz-container');
+    if (quizIndex >= quizWords.length) { renderTrainResults('quiz'); return; }
+    const container = document.getElementById('train-body');
     const word = quizWords[quizIndex];
-    const progress = (quizIndex / quizWords.length * 100).toFixed(0);
+    setTrainProgress(quizIndex, quizWords.length);
 
-    // Неправильные варианты — только с УНИКАЛЬНЫМИ переводами,
-    // иначе может быть два «правильных» ответа (был баг)
+    // Неправильные варианты — только с УНИКАЛЬНЫМИ переводами
     const allWords = [...savedWords.values()];
-    const norm = (s) => String(s).trim().toLowerCase();
+    const norm = (x) => String(x).trim().toLowerCase();
     const seenRu = new Set([norm(word.ru)]);
     const wrongOptions = [];
     for (const w of shuffleArray(allWords.filter(x => String(x.id) !== String(word.id)))) {
@@ -6099,41 +6593,27 @@ function renderQuizQuestion() {
 
     container.innerHTML = `
         <div class="quiz-card">
-            <div class="quiz-progress">
-                <span class="quiz-progress-text">Вопрос ${quizIndex + 1} из ${quizWords.length}</span>
-                <span class="quiz-score">✅ ${quizScore}</span>
-            </div>
-            <div class="quiz-progress-bar">
-                <div class="quiz-progress-fill" style="width:${progress}%"></div>
-            </div>
-            <div class="quiz-question">
-                <div class="quiz-question-label">Переведи слово</div>
-                <div class="quiz-word">${escapeHtml(word.en)}</div>
+            <div class="q-word-card">
+                <button class="q-speak" id="q-speak-btn" aria-label="Прослушать слово">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <div class="q-label">Переведи слово</div>
+                <div class="q-word">${escapeHtml(word.en)}</div>
             </div>
             <div class="quiz-options" id="quiz-opts"></div>
-            <div class="quiz-xp-hint"><i class="fa-solid fa-bolt" style="color:var(--yellow)"></i> За правильный ответ: <b>+10 XP</b></div>
-        </div>
-        <div class="support-banner">
-            <div class="support-banner-left">
-                <div class="support-banner-icon">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-                <div>
-                    <p>Помочь проекту</p>
-                    <small>Это возможность развивать BeMem</small>
-                </div>
-            </div>
-            <button class="support-btn btn3d red" onclick="openDonatePopup()"><i class="fa-solid fa-heart"></i><span>Помочь</span></button>
         </div>`;
 
-    // Кнопки ответов через addEventListener
-    const optsContainer = document.getElementById('quiz-opts');
+    container.querySelector('#q-speak-btn').addEventListener('click', function () {
+        speakWord(word.en, this);
+    });
+
+    const optsContainer = container.querySelector('#quiz-opts');
     options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'quiz-option';
         btn.textContent = opt.ru;
         btn.dataset.id = String(opt.id);
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             checkAnswer(String(opt.id), String(word.id), this);
         });
         optsContainer.appendChild(btn);
@@ -6141,10 +6621,11 @@ function renderQuizQuestion() {
 }
 
 function checkAnswer(selectedId, correctId, btn) {
+    // Защита от повторных кликов, пока открыта плашка ответа
+    if (document.getElementById('fb-panel').classList.contains('show')) return;
     const options = document.querySelectorAll('.quiz-option');
     options.forEach(opt => opt.disabled = true);
 
-    // Статистика квизов + интервальное повторение
     game.quiz.answered++;
     const ok = selectedId === correctId;
     const target = savedWords.get(String(correctId))
@@ -6156,77 +6637,17 @@ function checkAnswer(selectedId, correctId, btn) {
         quizScore++;
         game.quiz.correct++;
         saveGame();
-        awardXP(10, btn);
-        showToast('✅ Правильно! +10 XP');
+        sessionAward(10, 0, btn);
+        showFeedback(true, 'Правильно! +10 XP', '', () => { quizIndex++; renderQuizQuestion(); });
     } else {
         btn.classList.add('wrong');
-        options.forEach(opt => {
-            if (opt.dataset.id === correctId) opt.classList.add('correct');
-        });
+        options.forEach(opt => { if (opt.dataset.id === correctId) opt.classList.add('correct'); });
         saveGame();
-        showToast('❌ Неправильно');
+        if (target) sessionWrong.push({ en: target.en, ru: target.ru });
+        showFeedback(false, 'Неправильно',
+            target ? 'Верно: ' + escapeHtml(target.en) + ' — ' + escapeHtml(target.ru) : '',
+            () => { quizIndex++; renderQuizQuestion(); });
     }
-
-    setTimeout(() => {
-        quizIndex++;
-        renderQuizQuestion();
-    }, 1200);
-}
-
-function renderQuizResult() {
-    const container = document.getElementById('quiz-container');
-    const total = quizWords.length || 1;
-    const percent = Math.round(quizScore / total * 100);
-    let emoji = '😅', msg = 'Нужно больше практики!';
-    if (percent >= 80) { emoji = '🔥'; msg = 'Отличный результат!'; }
-    else if (percent >= 60) { emoji = '👍'; msg = 'Хороший результат!'; }
-
-    // Достижения, статистика и алмазы за раунд
-    game.quiz.played++;
-    if (percent === 100 && quizWords.length >= 5) game.quiz.perfect++;
-    if (quizScore > (game.quiz.bestScore || 0)) game.quiz.bestScore = quizScore;
-    const quizGems = GEMS_QUIZ + (percent === 100 ? GEMS_PERFECT : 0);
-    game.gems += quizGems;
-    saveGame();
-    checkAchievements();
-    awardXP(15 + (percent >= 80 ? 10 : 0), null, { silent: true });
-
-    const earned = quizScore * 10 + 15 + (percent >= 80 ? 10 : 0);
-    if (percent === 100) setTimeout(() => launchConfetti(80), 300);
-
-    container.innerHTML = `
-        <div class="quiz-card">
-            <div class="quiz-result">
-                <div style="font-size:48px;margin-bottom:8px">${emoji}</div>
-                <h2>${msg}</h2>
-                <div class="quiz-result-score">${quizScore}/${quizWords.length}</div>
-                <p>${percent}% правильных ответов</p>
-                <div class="quiz-xp-hint" style="margin-bottom:16px">
-                    Заработано за раунд: <b>+${earned} XP</b> · <b><i class="fa-solid fa-gem" style="color:var(--accent2)"></i> +${quizGems}</b>
-                </div>
-                <button class="quiz-restart-btn" onclick="startQuiz()"><span><i class="fa-solid fa-rotate-right"></i> Ещё раз</span></button>
-                <button class="quiz-again-btn" onclick="renderQuizStart()"><span><i class="fa-solid fa-graduation-cap"></i> К упражнениям</span></button>
-            </div>
-        </div>
-        <div class="bewords-banner">
-            <div>
-                <p>Хочешь выучить больше слов?</p>
-                <small>Переходи в BeWords →</small>
-            </div>
-            <a href="https://bewords.ru/download-app.html" target="_blank" rel="noopener" class="bewords-btn"><span>BeWords <i class="fa-solid fa-arrow-right"></i></span></a>
-        </div>
-        <div class="support-banner">
-            <div class="support-banner-left">
-                <div class="support-banner-icon">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-                <div>
-                    <p>Помочь проекту</p>
-                    <small>Это возможность развивать BeMem</small>
-                </div>
-            </div>
-            <button class="support-btn btn3d red" onclick="openDonatePopup()"><i class="fa-solid fa-heart"></i><span>Помочь</span></button>
-        </div>`;
 }
 
 // ══════════ УПРАЖНЕНИЕ «СОБЕРИ СЛОВО» ══════════
@@ -6244,11 +6665,12 @@ function startSpell() {
     spellWords = candidates.slice(0, SPELL_LENGTH);
     spellIndex = 0;
     spellScore = 0;
+    beginSession('spell');
     renderSpellQuestion();
 }
 
 function renderSpellQuestion() {
-    if (spellIndex >= spellWords.length) { renderSpellResult(); return; }
+    if (spellIndex >= spellWords.length) { renderTrainResults('spell'); return; }
     const word = spellWords[spellIndex];
     const letters = String(word.en).trim().toLowerCase().split('');
     const extraCount = letters.length <= 4 ? 3 : 4;
@@ -6262,7 +6684,8 @@ function renderSpellQuestion() {
 
 function drawSpell() {
     const st = spellState;
-    const container = document.getElementById('quiz-container');
+    const container = document.getElementById('train-body');
+    setTrainProgress(spellIndex, spellWords.length);
     const progress = (spellIndex / spellWords.length * 100).toFixed(0);
     container.innerHTML = `
         <div class="quiz-card">
@@ -6346,6 +6769,7 @@ function spellUnpick(slotIdx) {
 function spellCheck() {
     const st = spellState;
     if (!st || st.slots.some(x => x === null)) return;
+    if (document.getElementById('fb-panel').classList.contains('show')) return;
     const answer = st.slots.map(i => st.pool[i].ch).join('');
     const correct = answer.toLowerCase() === String(st.word.en).trim().toLowerCase();
 
@@ -6361,48 +6785,16 @@ function spellCheck() {
         game.spell.correct++;
         saveGame();
         if (slotsEl) slotsEl.classList.add('correct');
-        awardXP(10, slotsEl);
-        showToast('✅ Верно! +10 XP');
+        sessionAward(10, 0, slotsEl);
+        showFeedback(true, 'Верно! +10 XP', '', () => { spellIndex++; renderSpellQuestion(); });
     } else {
         saveGame();
         if (slotsEl) slotsEl.classList.add('wrong');
-        const cw = document.getElementById('spell-correct-word');
-        if (cw) cw.innerHTML = 'Правильно: <b>' + escapeHtml(st.word.en) + '</b>';
-        showToast('❌ Верно: ' + st.word.en);
+        sessionWrong.push({ en: st.word.en, ru: st.word.ru });
+        showFeedback(false, 'Неправильно',
+            'Верно: ' + escapeHtml(st.word.en) + ' — ' + escapeHtml(st.word.ru),
+            () => { spellIndex++; renderSpellQuestion(); });
     }
-
-    setTimeout(() => { spellIndex++; renderSpellQuestion(); }, correct ? 1100 : 2000);
-}
-
-function renderSpellResult() {
-    const container = document.getElementById('quiz-container');
-    const total = spellWords.length || 1;
-    const percent = Math.round(spellScore / total * 100);
-    game.spell.played++;
-    const gems = GEMS_QUIZ + (percent === 100 ? GEMS_PERFECT : 0);
-    game.gems += gems;
-    saveGame();
-    checkAchievements();
-    awardXP(15 + (percent >= 80 ? 10 : 0), null, { silent: true });
-    const earned = spellScore * 10 + 15 + (percent >= 80 ? 10 : 0);
-    let emoji = '😅', msg = 'Тренируйся ещё!';
-    if (percent >= 80) { emoji = '🔥'; msg = 'Отлично!'; }
-    else if (percent >= 60) { emoji = '👍'; msg = 'Хорошо!'; }
-    if (percent === 100) setTimeout(() => launchConfetti(80), 300);
-    container.innerHTML = `
-        <div class="quiz-card">
-            <div class="quiz-result">
-                <div style="font-size:48px;margin-bottom:8px">${emoji}</div>
-                <h2>${msg}</h2>
-                <div class="quiz-result-score">${spellScore}/${spellWords.length}</div>
-                <p>${percent}% слов собрано верно</p>
-                <div class="quiz-xp-hint" style="margin-bottom:16px">
-                    Заработано: <b>+${earned} XP</b> · <b><i class="fa-solid fa-gem" style="color:var(--accent2)"></i> +${gems}</b>
-                </div>
-                <button class="quiz-restart-btn" onclick="startSpell()"><span><i class="fa-solid fa-rotate-right"></i> Ещё раз</span></button>
-                <button class="quiz-again-btn" onclick="renderQuizStart()"><span><i class="fa-solid fa-graduation-cap"></i> К упражнениям</span></button>
-            </div>
-        </div>`;
 }
 
 // ══════════ УПРАЖНЕНИЕ «ПАРЫ» ══════════
@@ -6416,22 +6808,17 @@ function startMatch() {
     matchDone = 0;
     matchMisses = 0;
     matchMissed = new Set();
+    beginSession('match');
     renderMatch();
 }
 
 function renderMatch() {
-    const container = document.getElementById('quiz-container');
+    const container = document.getElementById('train-body');
+    setTrainProgress(0, matchPairs.length);
     const en = shuffleArray(matchPairs);
     const ru = shuffleArray(matchPairs);
     container.innerHTML = `
         <div class="quiz-card">
-            <div class="quiz-progress">
-                <span class="quiz-progress-text">Соедини слова с переводом</span>
-                <span class="quiz-score" id="match-score">✅ 0/${matchPairs.length}</span>
-            </div>
-            <div class="quiz-progress-bar">
-                <div class="quiz-progress-fill" id="match-fill" style="width:0%"></div>
-            </div>
             <div class="match-cols">
                 <div class="match-col">
                     ${en.map(w => `<button class="match-item" type="button" data-side="en" data-id="${w.id}">${escapeHtml(w.en)}</button>`).join('')}
@@ -6476,17 +6863,18 @@ function matchTap(el) {
         el.classList.add('matched');
         matchDone++;
         srsReview(savedWords.get(id), !matchMissed.has(id));
-        awardXP(5, el, { silent: true });
-        const sc = document.getElementById('match-score');
-        if (sc) sc.textContent = '✅ ' + matchDone + '/' + matchPairs.length;
-        const fill = document.getElementById('match-fill');
-        if (fill) fill.style.width = (matchDone / matchPairs.length * 100) + '%';
-        if (matchDone === matchPairs.length) setTimeout(renderMatchResult, 700);
+        sessionAward(5, 0, el, { silent: true });
+        setTrainProgress(matchDone, matchPairs.length);
+        showFlash(true, 'Пара! +5 XP');
+        if (matchDone === matchPairs.length) setTimeout(() => renderTrainResults('match'), 800);
     } else {
         // Мимо
         matchMisses++;
         matchMissed.add(id);
         matchMissed.add(matchSel.id);
+        const wEn = savedWords.get(matchSel.id);
+        if (wEn) sessionWrong.push({ en: wEn.en, ru: wEn.ru });
+        showFlash(false, 'Мимо!');
         const prev = matchSel.el;
         matchSel = null;
         prev.classList.remove('selected');
@@ -6497,34 +6885,6 @@ function matchTap(el) {
             el.classList.remove('wrong');
         }, 550);
     }
-}
-
-function renderMatchResult() {
-    const container = document.getElementById('quiz-container');
-    game.match.played++;
-    game.match.pairs += matchPairs.length;
-    game.match.misses += matchMisses;
-    const gems = GEMS_QUIZ + (matchMisses === 0 ? GEMS_PERFECT : 0);
-    game.gems += gems;
-    saveGame();
-    checkAchievements();
-    awardXP(15, null, { silent: true });
-    const earned = matchPairs.length * 5 + 15;
-    if (matchMisses === 0) setTimeout(() => launchConfetti(80), 300);
-    container.innerHTML = `
-        <div class="quiz-card">
-            <div class="quiz-result">
-                <div style="font-size:48px;margin-bottom:8px">${matchMisses === 0 ? '🔥' : '👍'}</div>
-                <h2>${matchMisses === 0 ? 'Без единой ошибки!' : 'Все пары найдены!'}</h2>
-                <div class="quiz-result-score">${matchPairs.length}/${matchPairs.length}</div>
-                <p>Ошибок: ${matchMisses}</p>
-                <div class="quiz-xp-hint" style="margin-bottom:16px">
-                    Заработано: <b>+${earned} XP</b> · <b><i class="fa-solid fa-gem" style="color:var(--accent2)"></i> +${gems}</b>
-                </div>
-                <button class="quiz-restart-btn" onclick="startMatch()"><span><i class="fa-solid fa-rotate-right"></i> Ещё раз</span></button>
-                <button class="quiz-again-btn" onclick="renderQuizStart()"><span><i class="fa-solid fa-graduation-cap"></i> К упражнениям</span></button>
-            </div>
-        </div>`;
 }
 
 // ── ОЗВУЧКА СЛОВ ──
@@ -6715,6 +7075,7 @@ async function initApp() {
 // ── СТАРТ ──
 initApp();
 setupBannerCollapse();
+syncSoundUI();
 
 // Переход из offline-страницы и шер-ссылок: /?tab=quiz и т.п.
 (function () {
