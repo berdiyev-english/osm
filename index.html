@@ -3600,11 +3600,13 @@
         #feed-container .meme-img-wrap { flex: 1 1 0; min-height: 0; }
         #feed-container .img-error { max-height: 100%; overflow-y: auto; }
 
-        /* Текст: высота ровно N строк — клип по границе строки,
-           без «полстрок» даже если line-clamp в движке не сработал */
+        /* Текст: высота ровно 3 строки в ПИКСЕЛЯХ (22px межстрочный + padding 12+12).
+           Без em и calc — некоторые Safari historically глотают em внутри calc(max-height).
+           Обрез всегда по границе строки; где line-clamp работает — ещё и многоточие. */
         #feed-container .meme-text {
-            line-height: 1.45;
-            max-height: calc(3 * 1.45em + 24px); /* 3 строки + padding 12+12 */
+            line-height: 22px;
+            max-height: 90px;
+            flex: 0 0 auto;
         }
 
         /* Рейл к самому краю карточки, но не впритык к обрезу */
@@ -3616,7 +3618,7 @@
 
         /* Низкие экраны (ландшафт): компактнее, чтобы мем оставался целиком */
         @media (max-height: 520px) {
-            #feed-container .meme-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 13px; padding: 8px 14px; max-height: calc(2 * 1.45em + 16px); }
+            #feed-container .meme-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 13px; padding: 8px 14px; line-height: 19px; max-height: 54px; }
             #feed-container .card-header { padding: 8px 14px; }
             .reels-rail { bottom: 16px; gap: 8px; }
             .reel-btn { width: 40px; height: 40px; font-size: 15px; }
@@ -4014,7 +4016,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.10</div>
+                        <div class="profile-link-title">Версия 1.11</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -5660,8 +5662,44 @@ function createCard(meme, priority) {
 
     document.getElementById('feed-container').appendChild(card);
 
+    // Страховка от «полстрок»: меряем и обрезаем текст по факту рендера
+    fitMemeText(card.querySelector('.meme-text'), memeTextMaxLines());
+
     // Просмотр засчитываем, когда карточку реально увидели на экране
     getViewObserver().observe(card);
+}
+
+// ── Гарантированное влезание текста мема в N строк ──
+// CSS-clamp на некоторых движках (iOS Safari) не срабатывает, поэтому меряем
+// по факту и обрезаем по словам. Работает везде, полный текст — в шторке.
+function fitMemeText(el, maxLines) {
+    if (!el) return;
+    // Короткие тексты влезают всегда — не дёргаем layout/computed styles вовсе
+    const raw = el.textContent || '';
+    if (raw.length <= 80) return;
+    const cs = getComputedStyle(el); // один вызов — дорого на слабых движках
+    let lh = parseFloat(cs.lineHeight);
+    if (!lh || isNaN(lh)) lh = (parseFloat(cs.fontSize) || 15) * 1.45;
+    const padV = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+    const max = lh * maxLines + 1;
+    if (el.scrollHeight - padV <= max) return; // влезает — не трогаем (сохраняем <br>)
+    const words = (el.textContent || '').split(/\s+/).filter(Boolean);
+    if (words.length <= 1) return;
+    const setN = (n) => { el.textContent = words.slice(0, n).join(' ') + '…'; };
+    let lo = 1, hi = words.length, best = 1;
+    while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        setN(mid);
+        if (el.scrollHeight - padV <= max) { best = mid; lo = mid + 1; }
+        else { hi = mid - 1; }
+    }
+    setN(best);
+}
+
+function memeTextMaxLines() {
+    try {
+        return window.matchMedia('(max-height: 520px)').matches ? 2 : 3;
+    } catch (e) { return 3; }
 }
 
 // ── Строка слова (общая для шторки мема) ──
