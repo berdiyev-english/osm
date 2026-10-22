@@ -154,7 +154,7 @@
             --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
             --scrim: rgba(0,0,0,0.85);
-            --nav-h: 58px;
+            --nav-h: 66px;
             --grad-xp: linear-gradient(90deg, #0ea5e9, #38bdf8 55%, #a855f7);
             --grad-level: linear-gradient(135deg, #0ea5e9, #a855f7);
             --grad-fire: linear-gradient(135deg, #f59e0b, #ef4444);
@@ -2614,18 +2614,24 @@
         .quiz-progress-bar { border-radius: 999px; border: 2px solid var(--border-strong); height: 14px; }
         .quiz-start-icon { box-shadow: 0 5px 0 var(--accent-dark), 0 10px 22px rgba(14,165,233,0.3); }
 
-        /* Нижняя навигация: объёмные кнопки */
+        /* Нижняя навигация: объёмные компактные «чанки» */
         .bottom-nav {
             border-top: 2px solid var(--border-strong);
-            gap: 6px;
-            padding: 7px 8px;
-            padding-bottom: calc(7px + env(safe-area-inset-bottom, 0px));
+            gap: 8px;
+            padding: 9px 12px;
+            padding-bottom: calc(9px + env(safe-area-inset-bottom, 0px));
             height: auto;
             min-height: var(--nav-h);
+            justify-content: space-around;
         }
         .nav-item {
-            flex: 1;
-            border-radius: 14px;
+            flex: 0 1 auto;
+            width: 62px;
+            max-width: 78px;
+            min-width: 52px;
+            height: 48px;
+            margin: 0 auto;
+            border-radius: 16px;
             background: var(--card2);
             border: 2px solid var(--border-strong);
             box-shadow: 0 3px 0 var(--gray-btn-dark);
@@ -2636,7 +2642,7 @@
                         background 0.2s, color 0.2s, border-color 0.2s;
         }
         .nav-item::before { display: none; }
-        .nav-item i { font-size: 17px; }
+        .nav-item i { font-size: 23px; }
         .nav-item:active { transform: translateY(3px); box-shadow: none; }
         .nav-item.active {
             background: var(--accent-soft);
@@ -3452,26 +3458,13 @@
         .toast { bottom: calc(var(--nav-h) + 16px); }
         .ach-toast { top: calc(70px + env(safe-area-inset-top, 0px)); }
 
-        /* Баннер BeWords: виден только на первом меме, при скролле сворачивается */
-        .bewords-banner {
-            max-height: 160px;
-            overflow: hidden;
-            transition: max-height 0.32s ease, opacity 0.24s ease, margin-bottom 0.32s ease,
-                        padding 0.32s ease, border-width 0.32s ease;
-        }
-        /* Полностью обнуляем box: иначе border+padding оставляют видимую полоску */
-        .bewords-banner.collapsed {
-            max-height: 0 !important;
-            height: 0 !important;
-            min-height: 0 !important;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            border-top-width: 0 !important;
-            border-bottom-width: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-            opacity: 0;
-            pointer-events: none;
+        /* Баннер BeWords живёт ВНУТРИ первой карточки: уезжает при скролле
+           вместе с ней и возвращается при возврате к первому мему.
+           Никаких анимаций высоты → ноль скачков ленты. */
+        .meme-card > .bewords-banner {
+            margin: 10px 10px 0;
+            flex-shrink: 0;
+            border-radius: 14px;
         }
 
         /* ═══════════ v1.8: REELS-ЛЕНТА ═══════════ */
@@ -3608,8 +3601,7 @@
         /* Рейл к самому краю карточки, но не впритык к обрезу */
         .reels-rail { right: 6px; }
 
-        /* Нижнее меню: иконки крупнее (бейджи убраны из разметки) */
-        .nav-item i { font-size: 22px; }
+        /* Нижнее меню: только иконки (подписи убраны в v1.13) */
         .nav-item { font-size: 0; gap: 0; }
 
         /* Низкие экраны (ландшафт): компактнее, чтобы мем оставался целиком */
@@ -4244,7 +4236,7 @@
                         <i class="fa-solid fa-star" style="color:#a855f7"></i>
                     </div>
                     <div>
-                        <div class="profile-link-title">Версия 1.13</div>
+                        <div class="profile-link-title">Версия 1.14</div>
                         <div class="profile-link-sub" id="profile-meme-count">300 мемов • 1500+ слов</div>
                     </div>
                 </div>
@@ -6134,6 +6126,7 @@ function setupInfiniteScroll() {
     }
 
     addSwipeHint();
+    placeBeWordsBanner();
 }
 
 // Подсказка «Листай вверх» — только на первой карточке
@@ -6160,15 +6153,12 @@ function updateFeedLayout() {
     document.body.classList.toggle('feed-locked', currentPage === 'memes');
 }
 
-// Баннер BeWords: показан на первом меме, скрывается при скролле ленты
-function setupBannerCollapse() {
-    const c = document.getElementById('feed-container');
-    const b = document.querySelector('.bewords-banner');
-    if (!c || !b || b.dataset.collapseBound) return;
-    b.dataset.collapseBound = '1';
-    c.addEventListener('scroll', () => {
-        b.classList.toggle('collapsed', c.scrollTop > 40);
-    }, { passive: true });
+// Баннер BeWords переезжает внутрь первой карточки мема
+function placeBeWordsBanner() {
+    const banner = document.querySelector('.bewords-banner');
+    const firstCard = document.querySelector('#feed-container .meme-card');
+    if (!banner || !firstCard) return;
+    if (banner.parentElement !== firstCard) firstCard.prepend(banner);
 }
 window.addEventListener('resize', updateFeedLayout);
 window.addEventListener('load', updateFeedLayout);
@@ -7074,7 +7064,6 @@ async function initApp() {
 
 // ── СТАРТ ──
 initApp();
-setupBannerCollapse();
 syncSoundUI();
 
 // Переход из offline-страницы и шер-ссылок: /?tab=quiz и т.п.
